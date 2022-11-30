@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascripts</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="colour.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Inconsolata', monospace;
+        font-size: 14px;
+      }
+
+      code {
+        background-color: #eee;
+        color: #666;
+        font-family: 'Inconsolata', monospace;
+      }
+
+      .bookmarklet::before,
+      .red {
+        content: "*";
+        color: #c4172a;
+      }
+
+      a:link {
+        border-radius: 2px;
+        color: #0086dd;
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: #9a4fd7;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a:active {
+        color: #c4172a;
+      }
+
+      :focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 134, 221, 0.3);
+      }
+    </style>
+    </body>
+    <p>
+      <span>*</span> = a bookmarklet; drag the links into your browser's bookmarks/favourites bar to use these on most webpages.
+    </p>
+    <p>
+      <a href="javascript:var s=document.createElement('script');s.type='text/javascript';s.src='Javascript/HiddableWindow.js';document.body.appendChild(s);void(0);" class="bookmarklet">HiddableWindow.js </a>- Click on it to make appear a hiddable window-browser. Click again to close. - (Change your zoom to 80%)
+    <p>
+  <body>
+</html>
