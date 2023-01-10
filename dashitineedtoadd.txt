@@ -1,0 +1,13 @@
+<body light-mode="dark">
+    <div id="animated_div">
+        <div id="animated_div">
+            <div class="topnav" id="navBar">
+                <a href="https://phene.dev" class="active">Home</a>
+                <a href="mailto:phene@phene.dev">Contact</a>
+                <a href="about/">About</a>
+                <a href="https://blog.phene.dev">Blog</a>
+                <a href="https://github.com/MikaHacks/mikahacks.github.io">Open Source</a>
+                <a href="#" aria-label="Expand or collapse menu" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i></a>
+                    </div>
+                    
