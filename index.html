@@ -1,8 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <title>michael</title>
   <head>
     <meta charset="UTF-8">
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2023 by anonymous (http://jsbin.com/biluwitode/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="loading.png">
     <script src="script.js"></script>
@@ -16,7 +26,267 @@
         text-align: center;
       }
     </style>
-  </head>
+  
+<style id="jsbin-css">
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeOut {
+    30%{
+        color: rgb(0, 0, 0);
+    }
+    50%{
+        color: rgba(255, 255, 255, 0);
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fadeOut-darkmode {
+    30%{
+        color: rgb(255, 255, 255);
+    }
+    50%{
+        color: rgba(255, 255, 255, 0);
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform:translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeOutFromTop {
+    0% {
+        opacity: 1;
+        transform:translateY(0);
+        height: 100%;
+    }
+    80%{
+        height: 0;
+    }
+    100% {
+        opacity: 0;
+        transform:translateY(-5px)}
+}
+
+@keyframes fadeOutFromBottom {
+    from {
+        opacity: 1;
+        transform:translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform:translateY(10px);
+    }
+}
+
+:root{
+    --color: #fff;
+    --backgroundColor: #fff;
+    --textColor: #fff;
+    --dTextColor: #fff;
+    --k_txt: #91b998;
+    --k_background: #f3fff5;
+}
+
+::selection{
+    background-color: var(--color);
+    color: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 105%;
+    color: #000;
+    text-decoration: none;
+    background-color: #fff;
+    transition: 150ms;
+}
+
+*.darkmode{
+    background-color: #20262b;
+    transition: 150ms;
+    color: #fff;
+}
+
+.color{
+    color: var(--color);
+}
+
+#proj ul li a:hover.darkmode{
+    color: rgb(201, 184, 184);
+}
+
+.loader.darkmode{
+    background-color: #20262b;
+    color: #fff;
+}
+
+.loader.darkmode.hidden {
+    animation: fadeOut-darkmode 1000ms;
+    animation-fill-mode: forwards
+}
+
+
+}
+
+
+.loader{
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    font-family: 'Roboto Mono', monospace;
+    z-index: 99;
+    color: #000;
+}
+
+.loader.hidden {
+    animation: fadeOut 1000ms;
+    animation-fill-mode: forwards
+}
+
+img{
+    background: var(--backgroundColor);
+}
+
+img.darkmode{
+    background-color: var(--backgroundColor);
+}
+
+.show-info{
+    opacity: 1;
+    height: 1;
+    animation: 500ms ease-in-out 0s 1 fadeInFromTop;
+}
+
+.hide-info{
+    opacity: 0;
+    height: 0;
+    animation: 100ms ease-in-out 0s 1 fadeOutFromTop;
+}
+
+.link{
+    color: var(--textColor);
+    position: relative;
+}
+
+.link.darkmode{
+    color: var(--backgroundColor);
+}
+
+.link::after{
+    content: "";
+    background-color: var(--textColor);
+    height: 2px;
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform-origin: left;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+
+.link.darkmode::after{
+    background-color: var(--backgroundColor);
+}
+
+.link:hover::after{
+    width: 100%;
+}
+
+.ui-background{
+    position: fixed;
+    background-color: rgb(0, 0, 0, 0.05);
+    width: 100%;
+    height: 110vh;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto Mono', monospace;
+    z-index: 99;
+    color: #000;
+}
+
+.ui.darkmode{
+    background-color: #20262b ;
+}
+
+.ui-background.darkmode{
+    background-color: rgb(0, 0, 0, 0.2);
+    height: 110vh;
+}
+
+.ui{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    top: -5vh;
+    margin: 10%;
+    animation: fadeInFromTop 200ms ease-in-out;
+}
+
+.ui-header{
+    display: flex;
+    position: relative;
+}
+
+.ui-header div{
+    position: absolute;
+    right: -10px;
+    top: -17px;
+    transform: rotate(45deg);
+    user-select: none;
+}
+
+#submit{
+    color: var(--k_txt);
+    font-weight: bold;
+    font-size: 80%;
+    transition-duration: 100ms;
+    margin-top: 10px;
+}
+
+#submit:hover{
+    color: #b6d6bc;
+    cursor: pointer;
+</style>
+</head>
   <body oncontextmenu="return false">
     <div class="loader "></div>
     <p>
@@ -46,5 +316,47 @@
       <div>
         <a href=https://mikahacks.github.io/Projects/ </a>Things
       </div>
-  </body>
+  <script>
+window.onload = (e) => {
+    const loader = document.querySelector(".loader");
+    loader.className += "hidden";
+
+    //Theme toggle
+    let darkmode = localStorage.getItem('darkmode');
+    const enableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+            e.classList.add('darkmode')
+        });
+
+        localStorage.setItem('darkmode', 'enabled');
+        document.getElementById('theme-toggle').innerHTML = 'Light';
+    }
+
+    const dissableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+            e.classList.remove('darkmode')
+        });
+
+        localStorage.setItem('darkmode', 'dissabled');
+        document.getElementById('theme-toggle').innerHTML = 'Dark';
+    }
+
+    if (darkmode === 'enabled') {
+        enableDarkmode();
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+        darkmode = localStorage.getItem('darkmode');
+        if (darkmode !== 'enabled') {
+            enableDarkmode();
+        } else {
+            dissableDarkmode();
+        }
+    })
+}
+</script>
+
+</script>
+
+</body>
 </html>
