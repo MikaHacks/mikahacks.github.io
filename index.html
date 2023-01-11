@@ -21,8 +21,63 @@
         text-align: center;
         font-family: 'Inconsolata';
         font-size: 100px;
+         
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+
+		color: #000; font-weight:bold; font-size:3em;
+		
+		animation-name: text-shadow-multicolor;
+		animation-duration: 1s;
+		animation-timing-function: ease;
+		animation-delay: 0s;
+		animation-iteration-count: infinite;
+		animation-direction: normal;
+		animation-fill-mode: none;
+	}
+	@keyframes text-shadow-multicolor {
+			
+		0% {
+			text-shadow:0 0px 15px #f0f;
+		}
+		33% {
+			text-shadow:0 0px 15px #0ff;
+		}
+		66% {
+			text-shadow:0 0px 10px #0f0;
+		}
+		100% {
+			text-shadow:0 0px 10px #ff0;
+		}
+	}
+    
       }
     </style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <style id="DL">
       @keyframes fadeIn {
         from {
