@@ -1,83 +1,368 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <title>michael</title>
   <head>
-      
-    <title>Things</title>
     <meta charset="UTF-8">
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-    <link rel="shortcut icon" type="image/jpg" href="loading.png"/>
- 
-  <style>
-body {
-  background-image: url('lebackground.jpeg');
-}
-  </style>
+
+<meta name="robots" content="noindex">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="loading.png">
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <style>
-      body {
-        font-family: 'Inconsolata', monospace;
-        font-size: 14px;
+      p {
+        text-align: right;
       }
 
-      code {
-        background-color: #eee;
-        color: #666;
-        font-family: 'Inconsolata', monospace;
+      .ThingsDiv {
+        text-align: center;
       }
-
-      .bookmarklet::before,
-      .red {
-        content: "*";
-        color: #c4172a;
-      }
-
-      a:link {
-        border-radius: 2px;
-        color: #0086dd;
-        text-decoration: none;
-      }
-
-      a:visited {
-        color: #9a4fd7;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      a:active {
-        color: #c4172a;
-      }
-
-      :focus {
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(0, 134, 221, 0.3);
-      }
+      
+      .IntroductionDiv {
+          text-align:center
+          font-size: ;
+      } 
     </style>
-  </head>
-  <body>
-    <a href="https://mikahacks.github.io">back</a>
-    <div>
-      <div>
-        <p>
-        <p>
-          <span class="red">*</span> = a bookmarklet; drag the links into your browser's bookmarks/favourites bar to use these on most webpages.
-        </p>
-         <p><a href="javascript:(function()%7Bvar%20MALD_2022%3B%0A(function()%20%7B%0A%20%20%20%20'use%20strict'%3B%0A%20%20%20%20if%20(MALD_2022)%20%7B%0A%20%20%20%20%20%20%20%20MALD_2022()%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20function%20applyStyles(elem%2C%20obj)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20prop%20in%20obj)%20elem.style%5Bprop%5D%20%3D%20obj%5Bprop%5D%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20var%20wrapper%20%3D%20document.createElement(%22div%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20frame%20%3D%20document.createElement(%22iframe%22)%3B%0A%20%20%20%20%20%20%20%20frame.src%20%3D%20%22https%3A%2F%2Fterbium.ga%22%3B%0A%20%20%20%20%20%20%20%20frame.width%20%3D%20700%3B%20%2F%2F%20additional%2030px%20to%20hide%20scrollbars%0A%20%20%20%20%20%20%20%20frame.height%20%3D%20835%3B%0A%20%20%20%20%20%20%20%20frame.scrolling%20%3D%20%22yes%22%3B%0A%20%20%20%20%20%20%20%20applyStyles(frame%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20'absolute'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20top%3A%20'0px'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20'0px'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20border%3A%20%22none%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20applyStyles(wrapper%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20%22fixed%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20zIndex%3A%202147483647%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20%22block%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bottom%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20%22700px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20%22835px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20overflow%3A%20%22hidden%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transition%3A%20%22opacity%200.1s%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20borderRadius%3A%20%226px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transform%3A%20%22scale(1)%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20wrapper.appendChild(frame)%3B%0A%20%20%20%20%20%20%20%20document.body.parentNode.appendChild(wrapper)%3B%0A%0A%20%20%20%20%20%20%20%20function%20enter()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper.style.opacity%20%3D%20%221%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20function%20leave()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper.style.opacity%20%3D%20%220%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20frame.blur()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20wrapper.addEventListener(%22mouseenter%22%2C%20enter%2C%20false)%3B%0A%20%20%20%20%20%20%20%20wrapper.addEventListener(%22mouseleave%22%2C%20leave%2C%20false)%3B%0A%20%20%20%20%20%20%20%20MALD_2022%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper.removeEventListener(%22mouseenter%22%2C%20enter%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper.removeEventListener(%22mouseleave%22%2C%20leave%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper.parentNode.removeChild(wrapper)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20frame%20%3D%20null%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20wrapper%20%3D%20null%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20MALD_2022%20%3D%20undefined%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20script%20of%20document.querySelectorAll())%20script.parentNode.removeChild(script)%3B%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%0A%7D())%3B%7D)()%3B" class="bookmarklet">HiddableWindow.js</a> - Click on it to make appear a hiddable window-browser. Click again to close. - (Change your zoom to 80%)</p>
-         <p><a href="javascript:(function()%7Bvar%20a%3Dwindow.location.href%2Cb%3Dwindow.location.href%3B0%3C%3Da.indexOf(%22youtube%22)%26%26(a%3Da.split(%22%3D%22)%5B1%5D)%3B0%3C%3Da.indexOf(%22https%3A%2F%2Fyoutu.be%2F%22)%26%26(a%3Da.split(%22%2F%22)%5B3%5D)%3B0%3C%3Da.indexOf(%22http%3A%2F%2Fyoutu.be%2F%22)%26%26(a%3Da.split(%22%2F%22)%5B3%5D)%3B0%3C%3Da.indexOf(%22youtu.be%2F%22)%26%26(a%3Da.split(%22%2F%22)%5B3%5D)%3Ba%3Da.match(%2F.%7B1%2C11%7D%2Fg)%3Bb%3Db.split(%22%26%22)%3Bb.splice(0%2C1)%3Bvar%20c%3D%22%3F%22%2Bb%5B0%5D%3Bb.splice(0%2C1)%3Bfor(i%3D0%3Bi%3Cb.length%3Bi%2B%2B)c%2B%3D%22%26%22%2Cc%2B%3Db%5Bi%5D%3Bwindow.location.href%3D%22https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2F%22%2Ba%5B0%5D%2Bc%2B%22%26autoplay%3D1%22%7D)()%3Bvoid+0"class="bookmarklet">RestrictedYtBp.js</a> - A way to bp restricted YT videos using third-party website. --> Click on it when on the restricted YT video.</p>
-         <p><a href="javascript:(function(){var iframe = document.createElement(`iframe`);iframe.src=`https://watch.pokemon.com/en-us/#/%60;iframe.width=window.innerWidth;iframe.height=window.innerHeight;document.body.appendChild(iframe);})();"class="bookmarklet">ScrollDown.js</a> - Thing.</p>
-         <p><a href="javascript:(function()%7Bfunction%20gcloak()%7Bvar%20e%3Ddocument.querySelector(%22link%5Brel*%3D'icon'%5D%22)%7C%7Cdocument.createElement(%22link%22)%3Be.type%3D%22image%2Fx-icon%22%2Ce.rel%3D%22shortcut%20icon%22%2Ce.href%3D%22https%3A%2F%2Fssl.gstatic.com%2Fclassroom%2Ffavicon.png%22%2Cdocument.title%3D%22%20Cours%22%2Cconsole.log(document.title)%2Cdocument.getElementsByTagName(%22head%22)%5B0%5D.appendChild(e)%7Dgcloak()%2CsetInterval(gcloak%2C1e3)%7D)()" class="bookmarklet">CS-Disguse.js</a> - A simple javascript code to disguise your curent window's logo and name to look like Google Classroom. Refresh page to reset.</p>
+  
 
-        
-        
-          <p><a href="pong.html">pong.html</a> - Pong</p>
-          <p><a href="stack.html">stack.html</a> - A simple stack game in html.</p>
-          <p><a href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement rayane.</p>
-          <p><a href="ClickerGame.html">ClickerGame.html</a> - A simple clicker game.</p>
-          <p><a href="VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.</p>
-          <p><a href="maze.html">maze.html</a> - A maze builder. (10x10, 20x20,  30x30, 50x50, 100x100)</p>
-          <p><a href="EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with the help of Eaglercraft  - Credits to @LAX1DUDE</p>
-        </script>
-  </body>
+  
+ 
+  
+  
+    
+  
+  
+  
+<style id="jsbin-css">
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeOut {
+    30%{
+        color: rgb(0, 0, 0);
+    }
+    50%{
+        color: rgba(255, 255, 255, 0);
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fadeOut-darkmode {
+    30%{
+        color: rgb(255, 255, 255);
+    }
+    50%{
+        color: rgba(255, 255, 255, 0);
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        visibility: hidden;
+        color: rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform:translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeOutFromTop {
+    0% {
+        opacity: 1;
+        transform:translateY(0);
+        height: 100%;
+    }
+    80%{
+        height: 0;
+    }
+    100% {
+        opacity: 0;
+        transform:translateY(-5px)}
+}
+
+@keyframes fadeOutFromBottom {
+    from {
+        opacity: 1;
+        transform:translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform:translateY(10px);
+    }
+}
+
+:root{
+    --color: #fff;
+    --backgroundColor: #fff;
+    --textColor: #fff;
+    --dTextColor: #fff;
+    --k_txt: #91b998;
+    --k_background: #f3fff5;
+}
+
+::selection{
+    background-color: var(--color);
+    color: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inconsolata', monospace;
+    font-size: 105%;
+    color: #000;
+    text-decoration: none;
+    background-color: #fff;
+    transition: 150ms;
+}
+
+*.darkmode{
+    background-color: #20262b;
+    transition: 150ms;
+    color: #fff;
+}
+
+.color{
+    color: var(--color);
+}
+
+#proj ul li a:hover.darkmode{
+    color: rgb(201, 184, 184);
+}
+
+.loader.darkmode{
+    background-color: #20262b;
+    color: #fff;
+}
+
+.loader.darkmode.hidden {
+    animation: fadeOut-darkmode 1000ms;
+    animation-fill-mode: forwards
+}
+
+
+}
+
+
+.loader{
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+    font-family: 'Inconsolata', monospace;
+    z-index: 99;
+    color: #000;
+}
+
+.loader.hidden {
+    animation: fadeOut 1000ms;
+    animation-fill-mode: forwards
+}
+
+img{
+    background: var(--backgroundColor);
+}
+
+img.darkmode{
+    background-color: var(--backgroundColor);
+}
+
+.show-info{
+    opacity: 1;
+    height: 1;
+    animation: 500ms ease-in-out 0s 1 fadeInFromTop;
+}
+
+.hide-info{
+    opacity: 0;
+    height: 0;
+    animation: 100ms ease-in-out 0s 1 fadeOutFromTop;
+}
+
+.link{
+    color: var(--textColor);
+    position: relative;
+}
+
+.link.darkmode{
+    color: var(--backgroundColor);
+}
+
+.link::after{
+    content: "";
+    background-color: var(--textColor);
+    height: 2px;
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform-origin: left;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+
+.link.darkmode::after{
+    background-color: var(--backgroundColor);
+}
+
+.link:hover::after{
+    width: 100%;
+}
+
+.ui-background{
+    position: fixed;
+    background-color: rgb(0, 0, 0, 0.05);
+    width: 100%;
+    height: 110vh;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inconsolata', monospace;
+    z-index: 99;
+    color: #000;
+}
+
+.ui.darkmode{
+    background-color: #20262b ;
+}
+
+.ui-background.darkmode{
+    background-color: rgb(0, 0, 0, 0.2);
+    height: 110vh;
+}
+
+.ui{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    top: -5vh;
+    margin: 10%;
+    animation: fadeInFromTop 200ms ease-in-out;
+}
+
+.ui-header{
+    display: flex;
+    position: relative;
+}
+
+.ui-header div{
+    position: absolute;
+    right: -10px;
+    top: -17px;
+    transform: rotate(45deg);
+    user-select: none;
+}
+
+#submit{
+    color: var(--k_txt);
+    font-weight: bold;
+    font-size: 80%;
+    transition-duration: 100ms;
+    margin-top: 10px;
+}
+
+#submit:hover{
+    color: #b6d6bc;
+    cursor: pointer;
+</style>
+</head>
+ 
+
+  <body oncontextmenu="return false">
+    <div class="loader "></div>
+    <p>
+      <a id="theme-toggle">Dark</a>
+    </p>
+       
+    
+
+ 
+    
+    
+   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><b/><br/><br/><br/><br/><br/>
+    
+    
+    <h5>
+      <div class="ThingsDiv">
+        <a href=https://mikahacks.github.io/Projects/ </a>Things
+      </div>
+
+
+
+
+
+
+  <script>
+window.onload = (e) => {
+    const loader = document.querySelector(".loader");
+    loader.className += "hidden";
+
+    //Theme toggle
+    let darkmode = localStorage.getItem('darkmode');
+    const enableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+            e.classList.add('darkmode')
+        });
+
+        localStorage.setItem('darkmode', 'enabled');
+        document.getElementById('theme-toggle').innerHTML = 'Light';
+    }
+
+    const dissableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+            e.classList.remove('darkmode')
+        });
+
+        localStorage.setItem('darkmode', 'dissabled');
+        document.getElementById('theme-toggle').innerHTML = 'Dark';
+    }
+
+    if (darkmode === 'enabled') {
+        enableDarkmode();
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+        darkmode = localStorage.getItem('darkmode');
+        if (darkmode !== 'enabled') {
+            enableDarkmode();
+        } else {
+            dissableDarkmode();
+        }
+    })
+}
+</script>
+
+</script>
+
+</body>
 </html>
