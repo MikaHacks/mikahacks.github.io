@@ -3,12 +3,8 @@
   <title>michael</title>
   <head>
     <meta charset="UTF-8">
-    
     <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
     <link rel="icon" href="loading.png">
-
-    
-    
     <style>
       p {
         text-align: right;
@@ -16,61 +12,46 @@
 
       .ThingsDiv {
         text-align: center;
-     
       }
 
       .IntroDiv {
         text-align: center;
         font-family: 'Inconsolata';
-        
-         
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-		font-size:120px;
-		color: #000; font-weight:bold; 
-		
-		animation-name: text-shadow-multicolor;
-		animation-duration: 24s;
-		animation-timing-function: ease;
-		animation-delay: 0s;
-		animation-iteration-count: infinite;
-		animation-direction: normal;
-		animation-fill-mode: none;
-	}
-	@keyframes text-shadow-multicolor {
-			
-		0% {
-			text-shadow:0 0px 15px #f0f;
-		}
-		33% {
-			text-shadow:0 0px 15px #0ff;
-		}
-		66% {
-			text-shadow:0 0px 10px #0f0;
-		}
-		100% {
-			text-shadow:0 0px 10px #ff0;
-		}
-	}
-    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 120px;
+        color: #000;
+        font-weight: bold;
+        animation-name: text-shadow-multicolor;
+        animation-duration: 24s;
+        animation-timing-function: ease;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+        animation-fill-mode: none;
+      }
+
+      @keyframes text-shadow-multicolor {
+        0% {
+          text-shadow: 0 0px 15px #f0f;
+        }
+
+        33% {
+          text-shadow: 0 0px 15px #0ff;
+        }
+
+        66% {
+          text-shadow: 0 0px 10px #0f0;
+        }
+
+        100% {
+          text-shadow: 0 0px 10px #ff0;
+        }
+      }
       }
     </style>
-    
-      
-
-    
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <style id="DL">
       @keyframes fadeIn {
         from {
@@ -161,7 +142,6 @@
           opacity: 0;
           transform: translateY(10px);
         }
-
       }
 
       * {
@@ -185,10 +165,6 @@
         color: var(--color);
       }
 
-
-
-
-
       img {
         background: var(--backgroundColor);
       }
@@ -197,80 +173,71 @@
         background-color: var(--backgroundColor);
       }
 
-
       .link {
         color: var(--textColor);
         position: relative;
       }
 
-      
       #theme-toggle {
-      cursor: pointer;
-      font-size: 15px;
-      
-      
-      
+        cursor: pointer;
+        font-size: 15px;
     </style>
   </head>
- 
-    <div class="loader "></div>
-    <p>
-      <a id="theme-toggle">Dark Mode</a>
-    </p>
-      <script>
-          window.onload = (e) => {
-            const loader = document.querySelector(".loader");
-            loader.className += "hidden";
-            let darkmode = localStorage.getItem('darkmode');
-            const enableDarkmode = () => {
-              document.querySelectorAll('*').forEach((e) => {
-                e.classList.add('darkmode')
-              });
-              localStorage.setItem('darkmode', 'enabled');
-              document.getElementById('theme-toggle').innerHTML = 'Light Mode';
-            }
-            const dissableDarkmode = () => {
-              document.querySelectorAll('*').forEach((e) => {
-                e.classList.remove('darkmode')
-              });
-              localStorage.setItem('darkmode', 'dissabled');
-              document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
-            }
-            if (darkmode === 'enabled') {
-              enableDarkmode();
-            }
-            document.getElementById('theme-toggle').addEventListener('click', function() {
-              darkmode = localStorage.getItem('darkmode');
-              if (darkmode !== 'enabled') {
-                enableDarkmode();
-              } else {
-                dissableDarkmode();
-              }
-            })
-          }
-        </script>
-        
-        
-        
-      <div class="IntroDiv"> Hello </div>
-      
-      
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br /><br /><br /><br /><br /><br /><br /><br />
-  
-        <div class="ThingsDiv">
-          <a href=https://mikahacks.github.io/Projects/ </a> Things
-        </div>
-       
-        
-
-      
-        </script>
+  <div class="loader "></div>
+  <p>
+    <a id="theme-toggle">Dark Mode</a>
+  </p>
+  <script>
+    window.onload = (e) => {
+      const loader = document.querySelector(".loader");
+      loader.className += "hidden";
+      let darkmode = localStorage.getItem('darkmode');
+      const enableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+          e.classList.add('darkmode')
+        });
+        localStorage.setItem('darkmode', 'enabled');
+        document.getElementById('theme-toggle').innerHTML = 'Light Mode';
+      }
+      const dissableDarkmode = () => {
+        document.querySelectorAll('*').forEach((e) => {
+          e.classList.remove('darkmode')
+        });
+        localStorage.setItem('darkmode', 'dissabled');
+        document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
+      }
+      if (darkmode === 'enabled') {
+        enableDarkmode();
+      }
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        darkmode = localStorage.getItem('darkmode');
+        if (darkmode !== 'enabled') {
+          enableDarkmode();
+        } else {
+          dissableDarkmode();
+        }
+      })
+    }
+  </script>
+  <div class="IntroDiv"> Hello </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <div class="ThingsDiv">
+    <a href=https://mikahacks.github.io/Projects/ </a> Things
+  </div>
+  </script>
   </body>
 </html>
