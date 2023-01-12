@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <title>michael</title>
@@ -58,17 +59,8 @@
       }
     </style>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      
+
     
  
     
@@ -170,20 +162,7 @@
           opacity: 0;
           transform: translateY(10px);
         }
-      }
 
-      :root {
-        --color: #fff;
-        --backgroundColor: #fff;
-        --textColor: #fff;
-        --dTextColor: #fff;
-        --k_txt: #91b998;
-        --k_background: #f3fff5;
-      }
-
-      ::selection {
-        background-color: var(--color);
-        color: #fff;
       }
 
       * {
@@ -263,16 +242,19 @@
       
       #theme-toggle {
       cursor: pointer;
+      font-size: 15px;
       
     </style>
   </head>
  
     <div class="loader "></div>
     <p>
-      <a id="theme-toggle">Dark</a>
+      <a id="theme-toggle">Dark Mode</a>
     </p>
     <h1>
       <div class="IntroDiv"> Hello </div>
+      
+      
       <br />
       <br />
       <br />
@@ -289,11 +271,19 @@
       <br />
       <br />
       <br />
-
+      <br />
+      <br />
+      <br />
+      <br />
+      
+      
       <h5>
         <div class="ThingsDiv">
           <a href=https://mikahacks.github.io/Projects/ </a>Things
         </div>
+        
+        
+
         <script>
           window.onload = (e) => {
             const loader = document.querySelector(".loader");
@@ -304,14 +294,14 @@
                 e.classList.add('darkmode')
               });
               localStorage.setItem('darkmode', 'enabled');
-              document.getElementById('theme-toggle').innerHTML = 'Light';
+              document.getElementById('theme-toggle').innerHTML = 'Light Mode';
             }
             const dissableDarkmode = () => {
               document.querySelectorAll('*').forEach((e) => {
                 e.classList.remove('darkmode')
               });
               localStorage.setItem('darkmode', 'dissabled');
-              document.getElementById('theme-toggle').innerHTML = 'Dark';
+              document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
             }
             if (darkmode === 'enabled') {
               enableDarkmode();
