@@ -1,280 +1,280 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <title>michael</title>
-  <head>
+<title>michael</title>
+
+<head>
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
     <link rel="icon" href="loading.png">
     <style>
-      p {
-        text-align: right;
-      }
+        p {
+            text-align: right;
+        }
 
-      .ThingsDiv {
-        text-align: center;
-      }
+        .ThingsDiv {
+            text-align: center;
+        }
 
-      .IntroDiv {
-        text-align: center;
-        font-family: 'Inconsolata';
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        font-size: 120px;
-        color: #000;
-        font-weight: bold;
-        animation-name: text-shadow-multicolor;
-        animation-duration: 6s;
-        animation-timing-function: ease;
-        animation-delay: 0s;
-        animation-iteration-count: infinite;
-        animation-direction: normal;
-        animation-fill-mode: none;
-      }
+        .IntroDiv {
+            text-align: center;
+            font-family: 'Inconsolata';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 120px;
+            color: #000;
+            font-weight: bold;
+            animation-name: text-shadow-multicolor;
+            animation-duration: 6s;
+            animation-timing-function: ease;
+            animation-delay: 0s;
+            animation-iteration-count: infinite;
+            animation-direction: normal;
+            animation-fill-mode: none;
+        }
 
-      @keyframes text-shadow-multicolor {
-        0% {
-          text-shadow: 0 0px 15px #f0f;
+        @keyframes text-shadow-multicolor {
+            0% {
+                text-shadow: 0 0px 15px #f0f;
+            }
+            25% {
+                text-shadow: 0 0px 15px #0ff;
+            }
+            50% {
+                text-shadow: 0 0px 10px #0f0;
+            }
+            75% {
+                text-shadow: 0 0px 10px #ff0;
+            }
+            100% {
+                text-shadow: 0 0px 15px #f0f;
+            }
         }
-        25% {
-          text-shadow: 0 0px 15px #0ff;
-        }
-        50% {
-          text-shadow: 0 0px 10px #0f0;
-        }
- 	    75% {
-          text-shadow: 0 0px 10px #ff0;
-        }
-        100% {
-          text-shadow: 0 0px 15px #f0f;
-        }
-      }
-      
     </style>
-    
- 
-    
+
+
+
     <style id="DL">
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
-        to {
-          opacity: 1;
-        }
-      }
+        @keyframes fadeOut {
+            30% {
+                color: rgb(0, 0, 0);
+            }
 
-      @keyframes fadeOut {
-        30% {
-          color: rgb(0, 0, 0);
-        }
+            50% {
+                color: rgba(255, 255, 255, 0);
+            }
 
-        50% {
-          color: rgba(255, 255, 255, 0);
-        }
+            60% {
+                opacity: 1;
+            }
 
-        60% {
-          opacity: 1;
-        }
-
-        100% {
-          opacity: 0;
-          visibility: hidden;
-          color: rgba(255, 255, 255, 0);
-        }
-      }
-
-      @keyframes fadeOut-darkmode {
-        30% {
-          color: rgb(255, 255, 255);
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                color: rgba(255, 255, 255, 0);
+            }
         }
 
-        50% {
-          color: rgba(255, 255, 255, 0);
+        @keyframes fadeOut-darkmode {
+            30% {
+                color: rgb(255, 255, 255);
+            }
+
+            50% {
+                color: rgba(255, 255, 255, 0);
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+                color: rgba(255, 255, 255, 0);
+            }
         }
 
-        60% {
-          opacity: 1;
+        @keyframes fadeInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        100% {
-          opacity: 0;
-          visibility: hidden;
-          color: rgba(255, 255, 255, 0);
-        }
-      }
+        @keyframes fadeOutFromTop {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+                height: 100%;
+            }
 
-      @keyframes fadeInFromTop {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
+            80% {
+                height: 0;
+            }
 
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeOutFromTop {
-        0% {
-          opacity: 1;
-          transform: translateY(0);
-          height: 100%;
+            100% {
+                opacity: 0;
+                transform: translateY(-5px)
+            }
         }
 
-        80% {
-          height: 0;
+        @keyframes fadeOutFromBottom {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(10px);
+            }
         }
 
-        100% {
-          opacity: 0;
-          transform: translateY(-5px)
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'time new romans', monospace;
+            font-size: 105%;
+            color: #000;
+            text-decoration: none;
+            background-color: #fff;
+            transition: 1500ms;
         }
-      }
 
-      @keyframes fadeOutFromBottom {
-        from {
-          opacity: 1;
-          transform: translateY(0);
+        *.darkmode {
+            background-color: #20262b;
+            transition: 1500ms;
+            color: #fff;
         }
 
-        to {
-          opacity: 0;
-          transform: translateY(10px);
+        .color {
+            color: var(--color);
         }
-      }
 
-      * {
-        margin: 0;
-        padding: 0;
-        font-family: 'time new romans', monospace;
-        font-size: 105%;
-        color: #000;
-        text-decoration: none;
-        background-color: #fff;
-        transition: 1500ms;
-      }
+        img {
+            background: var(--backgroundColor);
+        }
 
-      *.darkmode {
-        background-color: #20262b;
-        transition: 1500ms;
-        color: #fff;
-      }
+        img.darkmode {
+            background-color: var(--backgroundColor);
+        }
 
-      .color {
-        color: var(--color);
-      }
+        .link {
+            color: var(--textColor);
+            position: relative;
+        }
 
-      img {
-        background: var(--backgroundColor);
-      }
-
-      img.darkmode {
-        background-color: var(--backgroundColor);
-      }
-
-      .link {
-        color: var(--textColor);
-        position: relative;
-      }
-
-      #theme-toggle {
-        cursor: pointer;
-        font-size: 15px;
+        #theme-toggle {
+            cursor: pointer;
+            font-size: 15px;
     </style>
-  </head>
-  <div class="loader "></div>
-  <p>
+</head>
+<div class="loader "></div>
+<p>
     <a id="theme-toggle">Dark Mode</a>
-  </p>
-  <script>
+</p>
+<script>
     window.onload = (e) => {
-      const loader = document.querySelector(".loader");
-      loader.className += "hidden";
-      let darkmode = localStorage.getItem('darkmode');
-      const enableDarkmode = () => {
-        document.querySelectorAll('*').forEach((e) => {
-          e.classList.add('darkmode')
-        });
-        localStorage.setItem('darkmode', 'enabled');
-        document.getElementById('theme-toggle').innerHTML = 'Light Mode';
-      }
-      const dissableDarkmode = () => {
-        document.querySelectorAll('*').forEach((e) => {
-          e.classList.remove('darkmode')
-        });
-        localStorage.setItem('darkmode', 'dissabled');
-        document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
-      }
-      if (darkmode === 'enabled') {
-        enableDarkmode();
-      }
-      document.getElementById('theme-toggle').addEventListener('click', function() {
-        darkmode = localStorage.getItem('darkmode');
-        if (darkmode !== 'enabled') {
-          enableDarkmode();
-        } else {
-          dissableDarkmode();
+        const loader = document.querySelector(".loader");
+        loader.className += "hidden";
+        let darkmode = localStorage.getItem('darkmode');
+        const enableDarkmode = () => {
+            document.querySelectorAll('*').forEach((e) => {
+                e.classList.add('darkmode')
+            });
+            localStorage.setItem('darkmode', 'enabled');
+            document.getElementById('theme-toggle').innerHTML = 'Light Mode';
         }
-      })
+        const dissableDarkmode = () => {
+            document.querySelectorAll('*').forEach((e) => {
+                e.classList.remove('darkmode')
+            });
+            localStorage.setItem('darkmode', 'dissabled');
+            document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
+        }
+        if (darkmode === 'enabled') {
+            enableDarkmode();
+        }
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            darkmode = localStorage.getItem('darkmode');
+            if (darkmode !== 'enabled') {
+                enableDarkmode();
+            } else {
+                dissableDarkmode();
+            }
+        })
     }
-  </script>
-  
-  <style>
-  
-  		.IntroText {
+</script>
+
+<style>
+    .IntroText {
         font-size: 20px;
-      
-    
-      }
-   
-      
-      .Intro1 {
-      font-size: 10px;
-     
-    
-   </style>
-   
 
-  
-  <div class="IntroDiv"> Hello </div>
-  
-  
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <div class="IntroText">
-  MAIS NIQUE TA MÈRE SALE ENCULÉ DE TA RACE, J'AI BAISÉ TON PÈRE TELLEMENT FORT QUE C'EST LA DEUXIÈME RAISON QU'IL S'EST CASSÉ À TA NAISSANCE. LA PREMIÈRE ÉTANT TOI. DE PLUS, JE TE CONSEILLE DE BIEN ALLER TE FAIRE FOUTRE AVANT QUE JE VIENNE TE NIQUER. EN ADDITION, SALE GARAGE À BITES NAZE, JE TE SOUHAITE UNE AGRÉABLE ET HEUREUSE ANNÉE
-  <br/>
-  <br/>
-  <br/>
 
-<div class="Intro1"><li>(La mère porte l’enfant dont la naissance transforme le couple en famille, cellule de base de la société. « Nique Ta Mère » signifie donc clairement : « Nique La Société ».
-— (Michel Gillet, Un flic parle: 30 années dans les CRS, Éditions Cheminements, 2002, p.141))</div>
- 
-  
-  
-  
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  
-  <div class="ThingsDiv">
-    <a href=https://mikahacks.github.io/Projects/ </a> Things
-  </div>
-  
-  </script>
-  </body>
+    }
+
+
+    .Intro1 {
+        font-size: 10px;
+</style>
+
+
+
+<div class="IntroDiv"> Hello </div>
+
+<br />
+
+<center><IFRAME SRC="https://uqload.org/embed-sde9wpztpxdg.html" FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=640 HEIGHT=360 allowfullscreen ></IFRAME></center> 
+
+<br />
+<br />
+<br />
+<div class="IntroText">
+    MAIS NIQUE TA MÈRE SALE ENCULÉ DE TA RACE, J'AI BAISÉ TON PÈRE TELLEMENT FORT QUE C'EST LA DEUXIÈME RAISON QU'IL S'EST CASSÉ À TA NAISSANCE. LA PREMIÈRE ÉTANT TOI. DE PLUS, JE TE CONSEILLE DE BIEN ALLER TE FAIRE FOUTRE AVANT QUE JE VIENNE TE NIQUER. EN ADDITION, SALE GARAGE À BITES NAZE, JE TE SOUHAITE UNE AGRÉABLE ET HEUREUSE ANNÉE
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="Intro1">
+        <li>(La mère porte l’enfant dont la naissance transforme le couple en famille, cellule de base de la société. « Nique Ta Mère » signifie donc clairement : « Nique La Société ». — (Michel Gillet, Un flic parle: 30 années dans les CRS, Éditions Cheminements, 2002, p.141))</div>
+
+
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="ThingsDiv">
+        <a href=https://mikahacks.github.io/Projects/ </a> Things
+    </div>
+
+    </script>
+    </body>
+
 </html>
