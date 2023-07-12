@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <style>
-        * {
+          * {
             box-sizing: border-box;
         }
 
@@ -182,12 +182,23 @@
                 opacity: 0;
             }
         }
+
+        /* Responsive Styles */
+
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .logo {
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="logo animation">Hello</h1>
+            <h1 class="logo animation">:D</h1>
             <div class="toggle-container">
                 <span class="toggle-label">Dark Mode</span>
                 <label class="toggle-switch">
