@@ -5,8 +5,8 @@
     <title>orange-space-guacamole</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
-    <div class="visitor-count">Total Goofy People: 0</div>
     <style>
+<style>
         * {
             box-sizing: border-box;
         }
@@ -306,6 +306,7 @@
             font-weight: bold;
         }
     </style>
+    </style>
 </head>
 <body>
 <div class="container">
@@ -399,38 +400,6 @@
     logo.addEventListener('mouseout', () => {
         logo.style.animationPlayState = 'running';
     });
-</script>
-<script>
-    // Function to increment the visitor count
-    function incrementVisitorCount() {
-        const countElement = document.querySelector('.visitor-count');
-        const currentCount = parseInt(countElement.innerText.replace(/[^0-9]/g, '')); // Extract the current count value
-        const newCount = currentCount + 1;
-        countElement.innerText = `Total Visitors: ${newCount}`;
-    }
-
-    // Function to check and increment the visitor count on page load
-    function checkVisitorCount() {
-        const countElement = document.querySelector('.visitor-count');
-        const currentCount = parseInt(countElement.innerText.replace(/[^0-9]/g, '')); // Extract the current count value
-        const storedCount = localStorage.getItem('visitorCount');
-
-        if (storedCount) {
-            const parsedCount = parseInt(storedCount);
-            if (!isNaN(parsedCount)) {
-                countElement.innerText = `Total Goofy People: ${parsedCount}`;
-                localStorage.setItem('visitorCount', parsedCount);
-            }
-        } else {
-            localStorage.setItem('visitorCount', currentCount);
-        }
-    }
-
-    // Call the checkVisitorCount function on page load
-    document.addEventListener('DOMContentLoaded', checkVisitorCount);
-
-    // Call the incrementVisitorCount function to increment the count
-    incrementVisitorCount();
 </script>
 </body>
 </html>
