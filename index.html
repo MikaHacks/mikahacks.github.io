@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>orange-space-guacamole</title>
-      <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <style>
         * {
@@ -130,12 +130,64 @@
         .dark-mode p {
             color: #f5f5f5;
         }
+
+        /* Additional Cool Features */
+
+        .logo {
+            font-size: 48px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .animation {
+            animation-name: rotate-animation;
+            animation-duration: 5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes rotate-animation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .funni {
+            font-size: 24px;
+            color: #ff69b4;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-top: 20px;
+            animation-name: fade-animation;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-delay: 2s;
+            animation-iteration-count: infinite;
+            opacity: 0;
+        }
+
+        @keyframes fade-animation {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>hello</h1>
+            <h1 class="logo animation">Hello</h1>
             <div class="toggle-container">
                 <span class="toggle-label">Dark Mode</span>
                 <label class="toggle-switch">
@@ -145,9 +197,10 @@
             </div>
         </div>
         <div class="content">
-            <h2>you forgor the funni</h2>
+            <h2>You forgot the funni</h2>
             <p>lmao</p>
             <p>ezezezez</p>
+            <div class="funni">Haha, that's funny!</div>
         </div>
     </div>
 
