@@ -5,7 +5,7 @@
     <title>orange-space-guacamole</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
-    <div class="visitor-count">Total Visitors: 0</div>
+    <div class="visitor-count">Total Goofy People: 0</div>
     <style>
         * {
             box-sizing: border-box;
@@ -418,7 +418,7 @@
         if (storedCount) {
             const parsedCount = parseInt(storedCount);
             if (!isNaN(parsedCount)) {
-                countElement.innerText = `Total Visitors: ${parsedCount}`;
+                countElement.innerText = `Total Goofy People: ${parsedCount}`;
                 localStorage.setItem('visitorCount', parsedCount);
             }
         } else {
