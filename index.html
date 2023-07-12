@@ -3,168 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <title>orange-space-guacamole</title>
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Inconsolata', monospace;
-            font-size: 105%;
-            color: #000;
-            text-decoration: none;
-            background-color: #fff;
-            transition: 1500ms;
+            font-family: 'Inconsolata', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease;
         }
 
-        body.darkmode {
-            background-color: #20262b;
-            color: #fff;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
         }
 
-        .loader {
-            /* Add your loader styles here */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
         }
 
-        .hidden {
-            /* Add your hidden loader styles here */
-        }
-
-        .IntroDiv {
+        .toggle-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: 'Inconsolata';
-            font-size: 120px;
-            font-weight: bold;
-            color: #000;
-            animation-name: text-shadow-multicolor;
-            animation-duration: 6s;
-            animation-timing-function: ease;
-            animation-delay: 0s;
-            animation-iteration-count: infinite;
-            animation-direction: normal;
-            animation-fill-mode: none;
         }
 
-        @keyframes text-shadow-multicolor {
-            0% {
-                text-shadow: 0 0px 15px #f0f;
-            }
-            25% {
-                text-shadow: 0 0px 15px #0ff;
-            }
-            50% {
-                text-shadow: 0 0px 10px #0f0;
-            }
-            75% {
-                text-shadow: 0 0px 10px #ff0;
-            }
-            100% {
-                text-shadow: 0 0px 15px #f0f;
-            }
+        .toggle-label {
+            margin-right: 10px;
         }
 
-        #theme-toggle {
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .IntroText {
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .ThingsDiv {
-            text-align: center;
-        }
-
-        .link {
-            color: #000;
+        .toggle-switch {
             position: relative;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
         }
 
-        .link:hover {
-            color: #f0f;
+        .toggle-switch input {
+            display: none;
         }
 
-        .link::before {
-            content: '';
+        .toggle-slider {
             position: absolute;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #f0f;
-            transform: scaleX(0);
-            transition: transform 0.3s ease-in-out;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 26px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .link:hover::before {
-            transform: scaleX(1);
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        input:checked ~ .content {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: #f5f5f5;
+        }
+
+        .dark-mode .header {
+            color: #f5f5f5;
+        }
+
+        .dark-mode .toggle-slider {
+            background-color: #666;
+        }
+
+        .dark-mode input:checked + .toggle-slider {
+            background-color: #5c8b87;
+        }
+
+        .dark-mode .content {
+            background-color: #444;
+            color: #f5f5f5;
+        }
+
+        .dark-mode h1,
+        .dark-mode p {
+            color: #f5f5f5;
         }
     </style>
 </head>
 <body>
-    <div class="loader hidden"></div>
-    <p>
-        <a id="theme-toggle">Dark Mode</a>
-    </p>
-    <script>
-        window.onload = () => {
-            const loader = document.querySelector(".loader");
-            loader.className += " hidden";
-            let darkmode = localStorage.getItem('darkmode');
-            const enableDarkmode = () => {
-                document.body.classList.add('darkmode');
-                localStorage.setItem('darkmode', 'enabled');
-                document.getElementById('theme-toggle').innerHTML = 'Light Mode';
-            };
-            const disableDarkmode = () => {
-                document.body.classList.remove('darkmode');
-                localStorage.setItem('darkmode', 'disabled');
-                document.getElementById('theme-toggle').innerHTML = 'Dark Mode';
-            };
-            if (darkmode === 'enabled') {
-                enableDarkmode();
-            }
-            document.getElementById('theme-toggle').addEventListener('click', function() {
-                darkmode = localStorage.getItem('darkmode');
-                if (darkmode !== 'enabled') {
-                    enableDarkmode();
-                } else {
-                    disableDarkmode();
-                }
-            });
-        };
-    </script>
-    <div class="IntroDiv">Hello</div>
-    <br />
-    <br />
-    <br />
-    <div class="IntroText">
-        <br />
-        <br />
-        <br />
-        <div class="ThingsDiv">
-            <a class="link" href="https://crouton.net/">Crouton</a>
+    <div class="container">
+        <div class="header">
+            <h1>hello</h1>
+            <div class="toggle-container">
+                <span class="toggle-label">Dark Mode</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="ThingsDiv">
-            <a class="link" href="https://mikahacks.github.io/Things/">Things</a>
+        <div class="content">
+            <h2>you forgor the funni</h2>
+            <p>lmao</p>
+            <p>ezezezez</p>
         </div>
     </div>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+        }
+    </script>
 </body>
 </html>
