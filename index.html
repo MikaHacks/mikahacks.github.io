@@ -5,6 +5,7 @@
     <title>orange-space-guacamole</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
+    <div class="visitor-count">Total Visitors: 0</div>
     <style>
         * {
             box-sizing: border-box;
@@ -158,33 +159,6 @@
             }
             100% {
                 transform: rotate(360deg);
-            }
-        }
-
-        .funni {
-            font-size: 24px;
-            color: #ff69b4;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
-            margin-top: 20px;
-            animation-name: fade-animation;
-            animation-duration: 2s;
-            animation-timing-function: ease-in-out;
-            animation-delay: 2s;
-            animation-iteration-count: infinite;
-            opacity: 0;
-        }
-
-        @keyframes fade-animation {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
             }
         }
 
@@ -349,7 +323,6 @@
         <h2>you forgot the funni💀</h2>
         <p>lmao</p>
         <p>ezezezez</p>
-        <div class="funni">Haha, that's funny!</div>
         <button class="popup-button" onclick="openPopup()">do not click me</button>
     </div>
 </div>
@@ -417,6 +390,47 @@
     function preventClose(event) {
         event.stopPropagation();
     }
+
+    // Additional effect: Rotate the logo animation on hover
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('mouseover', () => {
+        logo.style.animationPlayState = 'paused';
+    });
+    logo.addEventListener('mouseout', () => {
+        logo.style.animationPlayState = 'running';
+    });
+</script>
+<script>
+    // Function to increment the visitor count
+    function incrementVisitorCount() {
+        const countElement = document.querySelector('.visitor-count');
+        const currentCount = parseInt(countElement.innerText.replace(/[^0-9]/g, '')); // Extract the current count value
+        const newCount = currentCount + 1;
+        countElement.innerText = `Total Visitors: ${newCount}`;
+    }
+
+    // Function to check and increment the visitor count on page load
+    function checkVisitorCount() {
+        const countElement = document.querySelector('.visitor-count');
+        const currentCount = parseInt(countElement.innerText.replace(/[^0-9]/g, '')); // Extract the current count value
+        const storedCount = localStorage.getItem('visitorCount');
+
+        if (storedCount) {
+            const parsedCount = parseInt(storedCount);
+            if (!isNaN(parsedCount)) {
+                countElement.innerText = `Total Visitors: ${parsedCount}`;
+                localStorage.setItem('visitorCount', parsedCount);
+            }
+        } else {
+            localStorage.setItem('visitorCount', currentCount);
+        }
+    }
+
+    // Call the checkVisitorCount function on page load
+    document.addEventListener('DOMContentLoaded', checkVisitorCount);
+
+    // Call the incrementVisitorCount function to increment the count
+    incrementVisitorCount();
 </script>
 </body>
 </html>
