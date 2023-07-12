@@ -254,10 +254,14 @@
             right: 10px;
             color: #999;
             cursor: pointer;
+            border: 1px solid #999;
+            padding: 6px 12px;
+            border-radius: 4px;
         }
 
         .popup-close:hover {
             color: #666;
+            border-color: #666;
         }
 
         /* Styles for Light Mode */
@@ -343,14 +347,14 @@
     </div>
 </div>
 
-<div class="popup-overlay" id="popup-overlay" onclick="closePopup()">
-    <div class="popup-content">
+<div class="popup-overlay" id="popup-overlay" onclick="closePopup(event)">
+    <div class="popup-content" onclick="preventClose(event)">
         <h3> > Things < </h3>
         <p>Here</p>
         <p>Project 1: <a href="https://crouton.com">Project 1 Link</a></p>
         <p>Project 2: <a href="https://bit.ly/CollègeReineMarie">Project 2 Link</a></p>
         <p>Project 3: fuck you bitch</p>
-        <span class="popup-close" onclick="closePopup()">Close</span>
+        <span class="popup-close" onclick="closePopup(event)">Close</span>
     </div>
 </div>
 
@@ -391,10 +395,20 @@
     }
 
     // Function to close the popup
-    function closePopup() {
+    function closePopup(event) {
         const popupOverlay = document.getElementById('popup-overlay');
-        popupOverlay.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Enable scrolling when popup is closed
+        const targetElement = event.target;
+        const isPopupClose = targetElement.classList.contains('popup-close');
+
+        if (isPopupClose) {
+            popupOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scrolling when popup is closed
+        }
+    }
+
+    // Function to prevent closing the popup when clicking inside the popup content
+    function preventClose(event) {
+        event.stopPropagation();
     }
 </script>
 </body>
