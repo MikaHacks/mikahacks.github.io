@@ -1,250 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>orange-space-guacamole</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <style>
- * {
-            box-sizing: border-box;
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inconsolata', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        transition: background-color 1s ease;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .toggle-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle-label {
+        margin-right: 10px;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
+
+      .toggle-switch input {
+        display: none;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 26px;
+        cursor: pointer;
+        transition: background-color 1s ease;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+
+      input:checked+.toggle-slider {
+        background-color: #4CAF50;
+      }
+
+      input:checked+.toggle-slider:before {
+        transform: translateX(24px);
+      }
+
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+      }
+
+      input:checked~.content {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      .dark-mode {
+        background-color: #333;
+        color: #f5f5f5;
+      }
+
+      .dark-mode .header {
+        color: #f5f5f5;
+      }
+
+      .dark-mode .toggle-slider {
+        background-color: #666;
+      }
+
+      .dark-mode input:checked+.toggle-slider {
+        background-color: #5c8b87;
+      }
+
+      .dark-mode .content {
+        background-color: #444;
+        color: #f5f5f5;
+      }
+
+      .dark-mode h1,
+      .dark-mode p {
+        color: #f5f5f5;
+      }
+
+      .logo {
+        font-size: 48px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .animation {
+        animation-name: rotate-animation;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes rotate-animation {
+        0% {
+          transform: rotate(0deg);
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inconsolata', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            transition: background-color 1s ease;
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .funni {
+        font-size: 24px;
+        color: #ff69b4;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: center;
+        margin-top: 20px;
+        animation-name: fade-animation;
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-delay: 2s;
+        animation-iteration-count: infinite;
+        opacity: 0;
+      }
+
+      @keyframes fade-animation {
+        0% {
+          opacity: 0;
         }
 
+        50% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+        }
+      }
+
+      /* Responsive Styles */
+      @media screen and (max-width: 600px) {
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
+          padding: 20px;
         }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .toggle-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .toggle-label {
-            margin-right: 10px;
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-
-        .toggle-switch input {
-            display: none;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            border-radius: 26px;
-            cursor: pointer;
-            transition: background-color 1s ease;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        input:checked + .toggle-slider {
-            background-color: #4CAF50;
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-
-        .content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
-
-        input:checked ~ .content {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin-bottom: 20px;
-        }
-
-        p {
-            margin-bottom: 10px;
-        }
-
-        .dark-mode {
-            background-color: #333;
-            color: #f5f5f5;
-        }
-
-        .dark-mode .header {
-            color: #f5f5f5;
-        }
-
-        .dark-mode .toggle-slider {
-            background-color: #666;
-        }
-
-        .dark-mode input:checked + .toggle-slider {
-            background-color: #5c8b87;
-        }
-
-        .dark-mode .content {
-            background-color: #444;
-            color: #f5f5f5;
-        }
-
-        .dark-mode h1,
-        .dark-mode p {
-            color: #f5f5f5;
-        }
-
-        /* Additional Cool Features */
 
         .logo {
-            font-size: 48px;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+          font-size: 36px;
         }
+      }
 
-        .animation {
-            animation-name: rotate-animation;
-            animation-duration: 5s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
+      .popup-button {
+        background-color: #333;
+        color: #f5f5f5;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-        @keyframes rotate-animation {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+      .popup-button:hover {
+        background-color: #5c8b87;
+      }
 
-        .funni {
-            font-size: 24px;
-            color: #ff69b4;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
-            margin-top: 20px;
-            animation-name: fade-animation;
-            animation-duration: 2s;
-            animation-timing-function: ease-in-out;
-            animation-delay: 2s;
-            animation-iteration-count: infinite;
-            opacity: 0;
-        }
+      /* Additional styles for the popup */
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        width: 400px;
+        max-width: 90%;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
 
-        @keyframes fade-animation {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
+      .popup h3 {
+        margin-top: 0;
+      }
 
-        /* Responsive Styles */
+      .popup p {
+        margin-bottom: 10px;
+      }
 
-        @media screen and (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            .logo {
-                font-size: 36px;
-            }
-        }
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #999;
+        cursor: pointer;
+      }
+
+      .popup-close:hover {
+        color: #666;
+      }
+
+      .popup-button {
+        background-color: #4CAF50;
+        color: #f5f5f5;
+        font-size: 16px;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .popup-button:hover {
+        background-color: #45a049;
+      }
+
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .popup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        width: 80%;
+        max-width: 800px;
+        height: 80%;
+        max-height: 600px;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+
+      .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #999;
+        cursor: pointer;
+      }
+
+      .popup-close:hover {
+        color: #666;
+      }
+
+      /* Styles for Light Mode */
+      .light-mode .popup-button {
+        background-color: #4CAF50;
+        color: #f5f5f5;
+      }
+
+      .light-mode .popup-button:hover {
+        background-color: #45a049;
+      }
+
+      .light-mode .popup-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .light-mode .popup-content {
+        background-color: #fff;
+        color: #333;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .light-mode .popup-close {
+        color: #999;
+      }
+
+      .light-mode .popup-close:hover {
+        color: #666;
+      }
+
+      /* Styles for Dark Mode */
+      .dark-mode .popup-button {
+        background-color: #5c8b87;
+        color: #f5f5f5;
+      }
+
+      .dark-mode .popup-button:hover {
+        background-color: #45a049;
+      }
+
+      .dark-mode .popup-overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .dark-mode .popup-content {
+        background-color: #444;
+        color: #f5f5f5;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark-mode .popup-close {
+        color: #f5f5f5;
+      }
+
+      .dark-mode .popup-close:hover {
+        color: #ccc;
+      }
+
+      .popup-content a:visited {
+        color: purple;
+        font-weight: bold;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="header">
-            <h1 class="logo animation">:D</h1>
-            <div class="toggle-container">
-                <span class="toggle-label">Dark Mode</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
-                    <span class="toggle-slider"></span>
-                </label>
-            </div>
+      <div class="header">
+        <h1 class="logo animation">:D</h1>
+        <div class="toggle-container">
+          <span class="toggle-label">Dark Mode</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
-        <div class="content">
-            <h2>you forgor the funni💀</h2>
-            <p>lmao</p>
-            <p>ezezezez</p>
-            <div class="funni">Haha, that's funny!</div>
-        </div>
+      </div>
+      <div class="content">
+        <h2>you forgor the funni💀</h2>
+        <p>lmao</p>
+        <p>ezezezez</p>
+        <div class="funni">Haha, that's funny!</div>
+        <button class="popup-button" onclick="openPopup()">do not click me</button>
+      </div>
     </div>
-
+    <div class="popup-overlay" id="popup-overlay" onclick="closePopup()">
+      <div class="popup-content">
+        <h3> > Things < </h3>
+            <p>Here</p>
+            <p>Project 1: <a href="https://project1.com">Project 1 Link</a>
+            </p>
+            <p>Project 2: <a href="https://project2.com">Project 2 Link</a>
+            </p>
+            <p>Project 3: <a href="https://project3.com">Project 3 Link</a>
+            </p>
+            <span class="popup-close" onclick="closePopup()">Close</span>
+      </div>
+    </div>
     <script>
-       
-
-        // Function to toggle dark mode
-        function toggleDarkMode() {
-            const body = document.body;
-            const toggleSwitch = document.getElementById('toggle');
-
-            // Check if dark mode is enabled
-            const isDarkMode = body.classList.contains('dark-mode');
-
-            // Toggle the dark mode class
-            body.classList.toggle('dark-mode');
-
-            // Update the localStorage value to remember the user's preference
-            localStorage.setItem('darkMode', !isDarkMode);
-
-            // Update the toggle switch position based on the current mode
-            toggleSwitch.checked = !isDarkMode;
-        }
-
-        // Check if dark mode was enabled on the last visit
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleSwitch = document.getElementById('toggle');
-            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-
-            // Set the initial mode based on the localStorage value
-            document.body.classList.toggle('dark-mode', darkModeEnabled);
-            toggleSwitch.checked = darkModeEnabled;
-        });
+      // Function to toggle dark mode
+      function toggleDarkMode() {
+        const body = document.body;
+        const toggleSwitch = document.getElementById('toggle');
+        // Check if dark mode is enabled
+        const isDarkMode = body.classList.contains('dark-mode');
+        // Toggle the dark mode class
+        body.classList.toggle('dark-mode');
+        // Update the localStorage value to remember the user's preference
+        localStorage.setItem('darkMode', !isDarkMode);
+        // Update the toggle switch position based on the current mode
+        toggleSwitch.checked = !isDarkMode;
+      }
+      // Check if dark mode was enabled on the last visit
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggleSwitch = document.getElementById('toggle');
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+        // Set the initial mode based on the localStorage value
+        document.body.classList.toggle('dark-mode', darkModeEnabled);
+        toggleSwitch.checked = darkModeEnabled;
+      });
+      // Function to open the popup
+      function openPopup() {
+        const popupOverlay = document.getElementById('popup-overlay');
+        popupOverlay.style.display = 'flex';
+      }
+      // Function to close the popup
+      function closePopup() {
+        const popupOverlay = document.getElementById('popup-overlay');
+        popupOverlay.style.display = 'none';
+      }
     </script>
-</body>
+  </body>
 </html>
