@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -363,9 +364,21 @@
             font-size: 20px;
             color: #777;
         }
+         .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background-color: #4CAF50;
+            z-index: 999;
+            transition: width 0.3s ease;
+        }
+
     </style>
 </head>
 <body>
+<div class="progress-bar" id="progress-bar"></div>
 <div class="container">
     <div class="header">
         <h1 class="logo animation">:D</h1>
@@ -517,6 +530,20 @@
             clearInterval();
         }
     }, 100);
+        // Function to update the progress bar based on scroll position
+    function updateProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (window.pageYOffset / totalHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+
+    // Update the progress bar on page load
+    window.addEventListener('load', updateProgressBar);
+
+    // Update the progress bar on scroll
+    window.addEventListener('scroll', updateProgressBar);
+
 </script>
 </body>
 </html>
