@@ -170,18 +170,6 @@
             .logo {
                 font-size: 48px;
             }
-        
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 5px;
-            background-color: #4CAF50;
-            z-index: 999;
-            transition: width 0.3s ease;
         }
 
         .parallax-section {
@@ -191,7 +179,6 @@
             background-size: cover;
             min-height: 400px;
             padding: 100px 0;
-
         }
 
         /* Typewriter Effect */
@@ -221,10 +208,41 @@
                 border-color: orange;
             }
         }
+
+        /* Complicated Dynamic Effects */
+
+        .logo {
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+        }
+
+        .content {
+            transition: transform 0.5s ease;
+        }
+
+        .content:hover {
+            transform: rotate(5deg);
+        }
+
+        .parallax-section {
+            transition: background-position 0.5s ease;
+        }
+
+        .parallax-section:hover {
+            background-position: center bottom;
+        }
+
+        /* Smooth Scrolling */
+
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
-<div class="progress-bar" id="progress-bar"></div>
 <div class="container">
     <div class="header">
         <h1 class="logo animation">:D</h1>
@@ -239,10 +257,9 @@
     <div class="content">
         <h2>you forgot the funni💀</h2>
         <p>lmao</p>
-        <p class="scroll-reveal">ezezezez</p>
+        <p>ezezezez</p>
     </div>
 </div>
-
 
 
 <div class="parallax-section" style="background-image: url('#####');">
@@ -287,20 +304,6 @@
     logo.addEventListener('mouseout', () => {
         logo.style.animationPlayState = 'running';
     });
-
-    // Function to update the progress bar based on scroll position
-    function updateProgressBar() {
-        const progressBar = document.getElementById('progress-bar');
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (window.pageYOffset / totalHeight) * 100;
-        progressBar.style.width = `${progress}%`;
-    }
-
-    // Update the progress bar on page load
-    window.addEventListener('load', updateProgressBar);
-
-    // Update the progress bar on scroll
-    window.addEventListener('scroll', updateProgressBar);
 
 </script>
 </body>
