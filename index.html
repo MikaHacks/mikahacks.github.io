@@ -240,9 +240,41 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Loading Page */
+        .loading-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
     </style>
 </head>
 <body>
+<div class="loading-page">
+    <div class="loading-spinner"></div>
+</div>
+
 <div class="container">
     <div class="header">
         <h1 class="logo animation">:D</h1>
@@ -294,6 +326,10 @@
         // Set the initial mode based on the localStorage value
         document.body.classList.toggle('dark-mode', darkModeEnabled);
         toggleSwitch.checked = darkModeEnabled;
+
+        // Hide the loading page
+        const loadingPage = document.querySelector('.loading-page');
+        loadingPage.style.display = 'none';
     });
 
     // Additional effect: Rotate the logo animation on hover
