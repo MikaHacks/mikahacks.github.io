@@ -170,148 +170,7 @@
             .logo {
                 font-size: 48px;
             }
-        }
-
-        .popup-button {
-            background-color: #4CAF50;
-            color: #f5f5f5;
-            font-size: 16px;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .popup-button:hover {
-            background-color: #45a049;
-        }
-
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        .popup-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f5f5;
-            width: 80%;
-            max-width: 600px;
-            height: auto;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-            position: relative;
-            animation: popup-animation 0.5s ease;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #999;
-            cursor: pointer;
-            border: 1px solid #999;
-            padding: 6px 12px;
-            border-radius: 4px;
-        }
-
-        .popup-close:hover {
-            color: #666;
-            border-color: #666;
-        }
-
-        /* Styles for Light Mode */
-        .light-mode .popup-button {
-            background-color: #4CAF50;
-            color: #f5f5f5;
-        }
-
-        .light-mode .popup-button:hover {
-            background-color: #45a049;
-        }
-
-        .light-mode .popup-overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .light-mode .popup-content {
-            background-color: #fff;
-            color: #333;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .light-mode .popup-close {
-            color: #999;
-        }
-
-        .light-mode .popup-close:hover {
-            color: #666;
-        }
-
-        /* Styles for Dark Mode */
-        .dark-mode .popup-button {
-            background-color: #5c8b87;
-            color: #f5f5f5;
-        }
-
-        .dark-mode .popup-button:hover {
-            background-color: #45a049;
-        }
-
-        .dark-mode .popup-overlay {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .dark-mode .popup-content {
-            background-color: #444;
-            color: #f5f5f5;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .dark-mode .popup-close {
-            color: #f5f5f5;
-        }
-
-        .dark-mode .popup-close:hover {
-            color: #ccc;
-        }
-
-        .popup-content a:visited {
-            color: purple;
-            font-weight: bold;
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            width: 40px;
-            height: 40px;
-            background-color: #4CAF50;
-            color: #f5f5f5;
-            font-size: 20px;
-            text-align: center;
-            line-height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 999;
-            transition: opacity 0.3s ease;
-        }
-
-        .back-to-top:hover {
-            background-color: #45a049;
+        
         }
 
         .progress-bar {
@@ -332,24 +191,35 @@
             background-size: cover;
             min-height: 400px;
             padding: 100px 0;
-        }
-        .animated-counter {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
+
         }
 
-        .counter {
-            font-size: 40px;
-            font-weight: bold;
-            margin: 0 10px;
-            transition: color 0.3s ease;
+        /* Typewriter Effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid orange;
+            white-space: nowrap;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
         }
 
-        .counter-label {
-            font-size: 20px;
-            color: #777;
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+            from,
+            to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: orange;
+            }
         }
     </style>
 </head>
@@ -369,45 +239,15 @@
     <div class="content">
         <h2>you forgot the funni💀</h2>
         <p>lmao</p>
-        <p>ezezezez</p>
-        <button class="popup-button" onclick="openPopup()">do not click me</button>
+        <p class="scroll-reveal">ezezezez</p>
     </div>
 </div>
 
-<div class="popup-overlay" id="popup-overlay" onclick="closePopup(event)">
-    <div class="popup-content" onclick="preventClose(event)">
-        <h3> > Things < </h3>
-        <p>Here are some things:</p>
-        <ul>
-            <li><a href="https://crouton.com">Project 1 Link</a></li>
-            <li><a href="https://bit.ly/CollègeReineMarie">Project 2 Link</a></li>
-            <li>Project 3: fuck you bitch</li>
-        </ul>
-        <span class="popup-close" onclick="closePopup(event)">Close</span>
-    </div>
-</div>
 
-<a class="back-to-top" href="#top">&#8679;</a>
-<div class="progress-bar"></div>
 
-<div class="parallax-section" style="background-image: url('https://a.pinatafarm.com/574x1002/8ba0745820/megamind-peeking.jpg');">
-    <p><h1>No balls ?</h1>
+<div class="parallax-section" style="background-image: url('#####');">
+    <p><h1 class="typewriter">No balls ?</h1>
     </p>
-</div>
-
-<div class="animated-counter">
-    <div class="counter">
-        <span id="counter1">0</span>
-        <span class="counter-label">Goofy People</span>
-    </div>
-    <div class="counter">
-        <span id="counter2">0</span>
-        <span class="counter-label">Slaves Sold</span>
-    </div>
-    <div class="counter">
-        <span id="counter3">0</span>
-        <span class="counter-label">Years of Experience</span>
-    </div>
 </div>
 
 <script>
@@ -439,30 +279,6 @@
         toggleSwitch.checked = darkModeEnabled;
     });
 
-    // Function to open the popup
-    function openPopup() {
-        const popupOverlay = document.getElementById('popup-overlay');
-        popupOverlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
-    }
-
-    // Function to close the popup
-    function closePopup(event) {
-        const popupOverlay = document.getElementById('popup-overlay');
-        const targetElement = event.target;
-        const isPopupClose = targetElement.classList.contains('popup-close');
-
-        if (isPopupClose) {
-            popupOverlay.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Enable scrolling when popup is closed
-        }
-    }
-
-    // Function to prevent closing the popup when clicking inside the popup content
-    function preventClose(event) {
-        event.stopPropagation();
-    }
-
     // Additional effect: Rotate the logo animation on hover
     const logo = document.querySelector('.logo');
     logo.addEventListener('mouseover', () => {
@@ -471,42 +287,6 @@
     logo.addEventListener('mouseout', () => {
         logo.style.animationPlayState = 'running';
     });
-
-    // Counter Animation
-    const counter1 = document.getElementById('counter1');
-    const counter2 = document.getElementById('counter2');
-    const counter3 = document.getElementById('counter3');
-    const target1 = 100;
-    const target2 = 500;
-    const target3 = 10;
-
-    let count1 = 0;
-    let count2 = 0;
-    let count3 = 0;
-
-    setInterval(() => {
-        count1++;
-        counter1.innerText = count1;
-        if (count1 === target1) {
-            clearInterval();
-        }
-    }, 10);
-
-    setInterval(() => {
-        count2++;
-        counter2.innerText = count2;
-        if (count2 === target2) {
-            clearInterval();
-        }
-    }, 5);
-
-    setInterval(() => {
-        count3++;
-        counter3.innerText = count3;
-        if (count3 === target3) {
-            clearInterval();
-        }
-    }, 100);
 
     // Function to update the progress bar based on scroll position
     function updateProgressBar() {
