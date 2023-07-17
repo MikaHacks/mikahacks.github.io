@@ -1,473 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>orange-space-guacamole</title>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <style>
-        * {
-            box-sizing: border-box;
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inconsolata', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        transition: background-color 1s ease;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .toggle-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .toggle-label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
+
+      .toggle-switch input {
+        display: none;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 26px;
+        cursor: pointer;
+        transition: background-color 1s ease;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+
+      input:checked+.toggle-slider {
+        background-color: #4CAF50;
+      }
+
+      input:checked+.toggle-slider:before {
+        transform: translateX(24px);
+      }
+
+      .content {
+        background-color: #fff;
+        padding: 40px;
+        border: 2px solid #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        text-align: center;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+
+      input:checked~.content {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        color: #555;
+        font-size: 40px;
+        text-align: center;
+      }
+
+      p {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .dark-mode {
+        background-color: #333;
+        color: #f5f5f5;
+      }
+
+      .dark-mode .header {
+        color: #f5f5f5;
+      }
+
+      .dark-mode .toggle-slider {
+        background-color: #666;
+      }
+
+      .dark-mode input:checked+.toggle-slider {
+        background-color: #f5f5f5;
+      }
+
+      .dark-mode .content {
+        background-color: #444;
+        color: #f5f5f5;
+        border: 2px solid #f7f7f7;
+      }
+
+      .dark-mode h1,
+      .dark-mode p {
+        color: #f5f5f5;
+      }
+
+      .dark-mode .hidden-section {
+        background-color: #333;
+        color: #f5f5f5;
+      }
+
+      .dark-mode .hidden-section h2,
+      .dark-mode .hidden-section p {
+        color: #f5f5f5;
+      }
+
+      .logo {
+        font-size: 60px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.2);
+      }
+
+      .content {
+        transition: transform 0.5s ease;
+      }
+
+      .content:hover {
+        transform: rotate(1.2deg);
+      }
+
+      /* Smooth Scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .hidden-section {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        transition: opacity 0.3s ease;
+      }
+
+      .hidden-section.hidden {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .content {
+        text-align: center;
+        /* Center the button */
+      }
+
+      .content button {
+        padding: 10px 20px;
+        /* Add padding for a better button appearance */
+        background-color: #333;
+        /* Change button background color */
+        color: #f5f5f5;
+        /* Change button text color */
+        border: none;
+        /* Remove button border */
+        border-radius: 4px;
+        /* Add button border radius */
+        font-size: 16px;
+        /* Adjust button font size */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .content:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .sidebar {
+        width: 130px;
+        background-color: #f5f5f5;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: calc(100% - 420px);
+        overflow-y: auto;
+        padding: 20px;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease;
+      }
+
+      .dark-mode .sidebar {
+        background-color: #333;
+        color: #f5f5f5;
+        transition: background-color 0.3s ease;
+      }
+
+      .sidebar-item {
+        margin-bottom: 10px;
+      }
+
+      .sidebar-item a {
+        display: block;
+        color: #333;
+        /* Update text color */
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+
+      .dark-mode .sidebar-item a {
+        color: #f5f5f5;
+        /* Update text color for dark mode */
+      }
+
+      canvas {
+        border: 2px solid #333;
+        margin-top: 20px;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        transition: background-color 1s ease;
+      }
+
+      .dark-mode canvas {
+        border-color: #f5f5f5;
+        background-color: #333;
+      }
+
+      .parallax-section {
+        background-attachment: initial;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 600px;
+        padding: 100px 0;
+      }
+
+      .parallax-section:hover {
+        background-position: center bottom;
+      }
+
+      /* Typewriter Effect */
+      .typewriter {
+        overflow: hidden;
+        border-right: 0.15em solid orange;
+        white-space: nowrap;
+        letter-spacing: 0.15em;
+        animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inconsolata', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-            transition: background-color 1s ease;
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+
+        from,
+        to {
+          border-color: transparent;
         }
 
+        50% {
+          border-color: orange;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .toggle-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .toggle-label {
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-
-        .toggle-switch input {
-            display: none;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            border-radius: 26px;
-            cursor: pointer;
-            transition: background-color 1s ease;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        input:checked + .toggle-slider {
-            background-color: #4CAF50;
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-
-.content {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-        input:checked ~ .content {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            color: #555;
-            font-size: 40px;
-            text-align: center;
-        }
-
-        p {
-            margin-bottom: 10px;
-            line-height: 1.5;
-            text-align: center;
-        }
-
-        .dark-mode {
-            background-color: #333;
-            color: #f5f5f5;
-        }
-
-        .dark-mode .header {
-            color: #f5f5f5;
-        }
-
-        .dark-mode .toggle-slider {
-            background-color: #666;
-        }
-
-        .dark-mode input:checked + .toggle-slider {
-            background-color: #5c8b87;
-        }
-.dark-mode .content {
-    background-color: #444;
-    color: #f5f5f5;
-}
-
-
-        .dark-mode h1,
-        .dark-mode p {
-            color: #f5f5f5;
-        }
-
-        .dark-mode .hidden-section {
-            background-color: #333;
-            color: #f5f5f5;
-        }
-
-        .dark-mode .hidden-section h2,
-        .dark-mode .hidden-section p {
-            color: #f5f5f5;
+          padding: 20px;
         }
 
         .logo {
-            font-size: 60px;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            transition: transform 0.5s ease;
+          font-size: 48px;
         }
-
-        .logo:hover {
-            transform: scale(1.2);
-        }
-
-        .content {
-            transition: transform 0.5s ease;
-        }
-
-        .content:hover {
-            transform: rotate(1.2deg);
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .hidden-section {
-            background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            transition: opacity 0.3s ease;
-        }
-
-        .hidden-section.hidden {
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .content {
-            text-align: center; /* Center the button */
-        }
-
-        .content button {
-            padding: 10px 20px; /* Add padding for a better button appearance */
-            background-color: #333; /* Change button background color */
-            color: #f5f5f5; /* Change button text color */
-            border: none; /* Remove button border */
-            border-radius: 4px; /* Add button border radius */
-            font-size: 16px; /* Adjust button font size */
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-.content:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
-
-        .sidebar {
-          width: 130px;
-          background-color: #f5f5f5;
-          position: fixed;
-          left: 0;
-          top: 0;
-          height: calc(100% - 420px);
-          overflow-y: auto;
-          padding: 20px;
-          box-sizing: border-box;
-          transition: background-color 0.3s ease;
-        }
-
-        .dark-mode .sidebar {
-          background-color: #333;
-          color: #f5f5f5;
-          transition: background-color 0.3s ease;
-        }
-
-        .sidebar-item {
-            margin-bottom: 10px;
-        }
-
-        .sidebar-item a {
-          display: block;
-          color: #333; /* Update text color */
-          text-decoration: none;
-          padding: 10px;
-          border-radius: 4px;
-          transition: background-color 0.3s ease;
-        }
-
-        .dark-mode .sidebar-item a {
-          color: #f5f5f5; /* Update text color for dark mode */
-        }
-
-        canvas {
-            border: 2px solid #333;
-            margin-top: 20px;
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-            transition: background-color 1s ease;
-        }
-
-        .dark-mode canvas {
-            border-color: #f5f5f5;
-            background-color: #333;
-        }
-
-        .parallax-section {
-            background-attachment: initial;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 600px;
-            padding: 100px 0;
-        }
-
-        .parallax-section:hover {
-            background-position: center bottom;
-        }
-
-        /* Typewriter Effect */
-        .typewriter {
-            overflow: hidden;
-            border-right: 0.15em solid orange;
-            white-space: nowrap;
-            letter-spacing: 0.15em;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        @keyframes blink-caret {
-            from,
-            to {
-                border-color: transparent;
-            }
-            50% {
-                border-color: orange;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            .logo {
-                font-size: 48px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="sidebar">
-        <div class="sidebar-item">
-            <a href="#home">Home</a>
-        </div>
-        <div class="sidebar-item">
-            <a href="#about">About</a>
-        </div>
-        <div class="sidebar-item">
-            <a href="#services">Things</a>
-        </div>
-        <div class="sidebar-item">
-            <a href="#contact">Contact</a>
-        </div>
+      <div class="sidebar-item">
+        <a href="#home">Home</a>
+      </div>
+      <div class="sidebar-item">
+        <a href="#about">About</a>
+      </div>
+      <div class="sidebar-item">
+        <a href="#services">Things</a>
+      </div>
+      <div class="sidebar-item">
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-
     <div class="main-content">
-        <div class="container">
-            <div class="header">
-                <h1 class="logo animation">+</h1>
-                <div class="toggle-container">
-                    <span class="toggle-label">Dark Mode</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="content">
-                <h2>hello</h2>
-                <p>im joe</p>
-                <p> >         < </p>
-                <button onclick="toggleSection()">balls section</button>
-                <div id="things" class="hidden-section hidden">
-                    <h2>Things</h2>
-                    <p><a href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replicata of the DSPlayer in case They block it.</p>
-                    <p><a href="Things/schromedino.html">chromedino.html</a> - ChromeDino from chrome.</p>
-                    <p><a href="Things/pong.html">pong.html</a> - Pong</p>
-                    <p><a href="Things/stack.html">stack.html</a> - A simple stack game in HTML.</p>
-                    <p><a href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement rayane.</p>
-                    <p><a href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.</p>
-                    <p><a href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.</p>
-                    <p><a href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)</p>
-                    <p><a href="EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with the help of Eaglercraft - Credits to @LAX1DUDE</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="header">
+          <h1 class="logo animation">+</h1>
+          <div class="toggle-container">
+            <span class="toggle-label">Dark Mode</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
         </div>
+        <div class="content">
+          <h2>hello</h2>
+          <p>im joe</p>
+          <p> >< </p>
+              <button onclick="toggleSection()">balls section</button>
+              <div id="things" class="hidden-section hidden">
+                <h2>Things</h2>
+                <p>
+                  <a href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replicata of the DSPlayer in case They block it.
+                </p>
+                <p>
+                  <a href="Things/schromedino.html">chromedino.html</a> - ChromeDino from chrome.
+                </p>
+                <p>
+                  <a href="Things/pong.html">pong.html</a> - Pong
+                </p>
+                <p>
+                  <a href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
+                </p>
+                <p>
+                  <a href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement rayane.
+                </p>
+                <p>
+                  <a href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
+                </p>
+                <p>
+                  <a href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
+                </p>
+                <p>
+                  <a href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
+                </p>
+                <p>
+                  <a href="EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with the help of Eaglercraft - Credits to @LAX1DUDE
+                </p>
+              </div>
+        </div>
+      </div>
     </div>
-
     <canvas id="gameCanvas" width="400" height="300"></canvas>
-
     <div class="parallax-section">
-        <h1 class="typewriter">No balls?</h1>
+      <h1 class="typewriter">No balls?</h1>
     </div>
-
     <script>
-        // Function to toggle dark mode
-        function toggleDarkMode() {
-            const body = document.body;
-            const toggleSwitch = document.getElementById('toggle');
+      // Function to toggle dark mode
+      function toggleDarkMode() {
+        const body = document.body;
+        const toggleSwitch = document.getElementById('toggle');
+        // Check if dark mode is enabled
+        const isDarkMode = body.classList.contains('dark-mode');
+        // Toggle the dark mode class
+        body.classList.toggle('dark-mode');
+        // Update the localStorage value to remember the user's preference
+        localStorage.setItem('darkMode', !isDarkMode);
+        // Update the toggle switch position based on the current mode
+        toggleSwitch.checked = !isDarkMode;
+      }
+      // Function to toggle section visibility
+      function toggleSection() {
+        const section = document.querySelector('.hidden-section');
+        section.classList.toggle('hidden');
+      }
+      // Check if dark mode was enabled on the last visit
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggleSwitch = document.getElementById('toggle');
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+        // Set the initial mode based on the localStorage value
+        document.body.classList.toggle('dark-mode', darkModeEnabled);
+        toggleSwitch.checked = darkModeEnabled;
+      });
+      // Additional effect: Rotate the logo animation on hover
+      const logo = document.querySelector('.logo');
+      logo.addEventListener('mouseover', () => {
+        logo.style.animationPlayState = 'paused';
+      });
+      logo.addEventListener('mouseout', () => {
+        logo.style.animationPlayState = 'running';
+      });
+      // Smooth scrolling navigation
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.sidebar a');
+        links.forEach(link => {
+          link.addEventListener('click', smoothScroll);
+        });
 
-            // Check if dark mode is enabled
-            const isDarkMode = body.classList.contains('dark-mode');
-
-            // Toggle the dark mode class
-            body.classList.toggle('dark-mode');
-
-            // Update the localStorage value to remember the user's preference
-            localStorage.setItem('darkMode', !isDarkMode);
-
-            // Update the toggle switch position based on the current mode
-            toggleSwitch.checked = !isDarkMode;
+        function smoothScroll(e) {
+          e.preventDefault();
+          const targetId = e.target.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
         }
-
-        // Function to toggle section visibility
-        function toggleSection() {
-            const section = document.querySelector('.hidden-section');
-            section.classList.toggle('hidden');
-        }
-
-        // Check if dark mode was enabled on the last visit
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleSwitch = document.getElementById('toggle');
-            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-
-            // Set the initial mode based on the localStorage value
-            document.body.classList.toggle('dark-mode', darkModeEnabled);
-            toggleSwitch.checked = darkModeEnabled;
-        });
-
-        // Additional effect: Rotate the logo animation on hover
-        const logo = document.querySelector('.logo');
-        logo.addEventListener('mouseover', () => {
-            logo.style.animationPlayState = 'paused';
-        });
-        logo.addEventListener('mouseout', () => {
-            logo.style.animationPlayState = 'running';
-        });
-
-        // Smooth scrolling navigation
-        document.addEventListener('DOMContentLoaded', () => {
-            const links = document.querySelectorAll('.sidebar a');
-            links.forEach(link => {
-                link.addEventListener('click', smoothScroll);
-            });
-
-            function smoothScroll(e) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
+      });
     </script>
-
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        let x = canvas.width / 2;
-        let y = canvas.height - 30;
-        let dx = 2;
-        let dy = -2;
-        const ballRadius = 10;
+      const canvas = document.getElementById('gameCanvas');
+      const ctx = canvas.getContext('2d');
+      let x = canvas.width / 2;
+      let y = canvas.height - 30;
+      let dx = 2;
+      let dy = -2;
+      const ballRadius = 10;
 
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = document.body.classList.contains('dark-mode') ? '#fff' : '#333';
-            ctx.fill();
-            ctx.closePath();
+      function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = document.body.classList.contains('dark-mode') ? '#fff' : '#333';
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
+        // Update the ball position
+        x += dx;
+        y += dy;
+        // Reverse ball direction when it hits the edges of the canvas
+        if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+          dx = -dx;
         }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBall();
-
-            // Update the ball position
-            x += dx;
-            y += dy;
-
-            // Reverse ball direction when it hits the edges of the canvas
-            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-            }
-            if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-                dy = -dy;
-            }
-
-            requestAnimationFrame(draw);
+        if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+          dy = -dy;
         }
-
-        draw();
+        requestAnimationFrame(draw);
+      }
+      draw();
     </script>
-</body>
+  </body>
 </html>
