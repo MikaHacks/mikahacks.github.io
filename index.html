@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -339,6 +340,34 @@
                 font-size: 48px;
             }
         }
+    .link-effect {
+            color: #333;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .link-effect:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: orange;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        .link-effect:hover {
+            color: orange;
+        }
+
+        .link-effect:hover:before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
     </style>
 </head>
 <body>
@@ -374,37 +403,38 @@
                 <p> >< </p>
                 <button onclick="toggleSection()">balls section</button>
                 <div id="things" class="hidden-section hidden">
-                    <h2>Things</h2>
-                    <p>
-                        <a href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replicata of the DSPlayer
-                        in case They block it.
-                    </p>
-                    <p>
-                        <a href="Things/chromedino.html">chromedino.html</a> - ChromeDino from chrome.
-                    </p>
-                    <p>
-                        <a href="Things/pong.html">pong.html</a> - Pong
-                    </p>
-                    <p>
-                        <a href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
-                    </p>
-                    <p>
-                        <a href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement rayane.
-                    </p>
-                    <p>
-                        <a href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
-                    </p>
-                    <p>
-                        <a href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
-                    </p>
-                    <p>
-                        <a href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
-                    </p>
-                    <p>
-                        <a href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft
-                        1.18 running completely in the browser with the help of Eaglercraft - Credits to @LAX1DUDE
-                    </p>
-                </div>
+    <h2>Things</h2>
+    <p>
+        <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replicata of the DSPlayer
+        in case They block it.
+    </p>
+    <p>
+        <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from chrome.
+    </p>
+    <p>
+        <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong
+    </p>
+    <p>
+        <a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
+    </p>
+    <p>
+        <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement rayane.
+    </p>
+    <p>
+        <a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
+    </p>
+    <p>
+        <a class="link-effect" href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
+    </p>
+    <p>
+        <a class="link-effect" href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
+    </p>
+    <p>
+        <a class="link-effect" href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft
+        1.18 running completely in the browser with the help of Eaglercraft - Credits to @LAX1DUDE
+    </p>
+</div>
+
             </div>
         </div>
     </div>
