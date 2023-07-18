@@ -91,7 +91,7 @@
       padding: 40px;
       border: 2px solid #333;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease;
+     transition: box-shadow 0.3s ease;
       text-align: center;
       max-width: 600px;
       margin: 20px auto;
@@ -181,12 +181,15 @@
 
     .content {
       transition: transform 0.5s ease;
-    }
-
+}
     .content:hover {
-      transform: rotate(1.2deg);
-    }
-
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transform: translateY(-10px);
+      
+      }
+      
+      
+}
     /* Smooth Scrolling */
     html {
       scroll-behavior: smooth;
@@ -214,24 +217,53 @@
 
     .content button {
       padding: 10px 20px;
-      /* Add padding for a better button appearance */
       background-color: #333;
-      /* Change button background color */
       color: #f5f5f5;
-      /* Change button text color */
       border: none;
-      /* Remove button border */
       border-radius: 4px;
-      /* Add button border radius */
       font-size: 16px;
-      /* Adjust button font size */
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.5s ease;
+      transform: translateY(0);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .content:hover {
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      transform: translateY(-2px);
+    .dark-mode .content button {
+      background-color: #666;
+      color: #333;
+    }
+
+    .content button:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: skewX(-30deg);
+      z-index: -1;
+      transition: left 1s ease;
+    }
+
+    .dark-mode .content button:before {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .content button:hover {
+      background-color: #333;
+      transform: translateY(-5px);
+    }
+
+    .dark-mode .content button:hover {
+      background-color: #333;
+      color: #f5f5f5;
+    }
+
+    .content button:hover:before {
+      left: 100%;
     }
 
     .sidebar {
@@ -282,6 +314,8 @@
       border-color: #f5f5f5;
       background-color: #333;
     }
+    
+    
 
     .parallax-section {
       background-attachment: initial;
@@ -393,7 +427,7 @@
   <div class="main-content">
     <div class="container">
       <div class="header">
-        <h1 class="logo animation">+</h1>
+        <h1 class="logo">+</h1>
         <div class="toggle-container">
           <span class="toggle-label">Lights Off</span>
           <label class="toggle-switch">
@@ -408,23 +442,23 @@
         <p> - </p>
         <button onclick="toggleSection()">things</button>
         <div id="things" class="hidden-section hidden">
-          <h2>things</h2>
+          <h2>Things</h2>
           <p>
-            <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replicata of the
-            DSPlayer in case They block it.
+            <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replica of the
+            DSPlayer in case they block it.
           </p>
           <p>
-            <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from chrome.
+            <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from Chrome.
           </p>
           <p>
-            <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong
+            <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong game.
           </p>
           <p>
             <a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
           </p>
           <p>
-            <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - c'est litéralement
-            rayane.
+            <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - C'est litéralement
+            Rayane.
           </p>
           <p>
             <a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
@@ -538,6 +572,30 @@
     }
     draw();
   </script>
+  <script>
+const buttons = document.querySelectorAll('.content button');
+buttons.forEach(button => {
+  button.addEventListener('mouseover', () => {
+    const buttonWidth = button.offsetWidth;
+    const buttonHeight = button.offsetHeight;
+    const x = Math.random() * (buttonWidth - 20) + 10;
+    const y = Math.random() * (buttonHeight - 20) + 10;
+    const span = document.createElement('span');
+    span.classList.add('effect');
+    span.style.left = `${x}px`;
+    span.style.top = `${y}px`;
+    button.appendChild(span);
+  });
+
+  button.addEventListener('mouseout', () => {
+    const spans = button.querySelectorAll('.effect');
+    spans.forEach(span => {
+      button.removeChild(span);
+    });
+  });
+});
+
+</script>
 </body>
 
 </html>
