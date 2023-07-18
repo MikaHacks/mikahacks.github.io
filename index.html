@@ -235,14 +235,10 @@
     }
 
     .sidebar {
-      width: 130px;
+      width: fit-content;
+      float: left;
       background-color: #f5f5f5;
-      position: fixed;
-      left: 0;
-      top: 0;
-      height: calc(100% - 420px);
-      overflow-y: auto;
-      padding: 20px;
+      padding: 0;
       box-sizing: border-box;
       transition: background-color 0.3s ease;
     }
@@ -250,7 +246,6 @@
     .dark-mode .sidebar {
       background-color: #333;
       color: #f5f5f5;
-      transition: background-color 0.3s ease;
     }
 
     .sidebar-item {
@@ -383,7 +378,7 @@
 <body>
   <div class="sidebar">
     <div class="sidebar-item">
-      <a href="#home">Home</a>
+      <a href="https://mikahacks.github.io">Home</a>
     </div>
     <div class="sidebar-item">
       <a href="#about">About</a>
