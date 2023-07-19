@@ -91,7 +91,7 @@
       padding: 40px;
       border: 2px solid #333;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease;
       text-align: center;
       max-width: 600px;
       margin: 20px auto;
@@ -181,15 +181,13 @@
 
     .content {
       transition: transform 0.5s ease;
-}
+    }
+
     .content:hover {
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       transform: translateY(-10px);
-      
-      }
-      
-      
-}
+    }
+
     /* Smooth Scrolling */
     html {
       scroll-behavior: smooth;
@@ -217,8 +215,8 @@
 
     .content button {
       padding: 10px 20px;
-      background-color: #333;
-      color: #f5f5f5;
+      background-color: #cfc8c8;
+      color: #444;
       border: none;
       border-radius: 4px;
       font-size: 16px;
@@ -232,7 +230,7 @@
 
     .dark-mode .content button {
       background-color: #666;
-      color: #333;
+      color: #f5f5f5;
     }
 
     .content button:before {
@@ -242,7 +240,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(144, 144, 144, 0.8);
       transform: skewX(-30deg);
       z-index: -1;
       transition: left 1s ease;
@@ -253,7 +251,7 @@
     }
 
     .content button:hover {
-      background-color: #333;
+      background-color: #cfc8c8;
       transform: translateY(-5px);
     }
 
@@ -297,77 +295,6 @@
     .dark-mode .sidebar-item a {
       color: #f5f5f5;
       /* Update text color for dark mode */
-    }
-
-    canvas {
-      border: 2px solid #333;
-      margin-top: 20px;
-      padding-left: 0;
-      padding-right: 0;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      transition: background-color 1s ease;
-    }
-
-    .dark-mode canvas {
-      border-color: #f5f5f5;
-      background-color: #333;
-    }
-    
-    
-
-    .parallax-section {
-      background-attachment: initial;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      min-height: 600px;
-      padding: 100px 0;
-    }
-
-    .parallax-section:hover {
-      background-position: center bottom;
-    }
-
-    /* Typewriter Effect */
-    .typewriter {
-      overflow: hidden;
-      border-right: 0.15em solid orange;
-      white-space: nowrap;
-      letter-spacing: 0.15em;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink-caret {
-      from,
-      to {
-        border-color: transparent;
-      }
-
-      50% {
-        border-color: orange;
-      }
-    }
-
-    @media screen and (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-
-      .logo {
-        font-size: 48px;
-      }
     }
 
     .link-effect {
@@ -478,10 +405,6 @@
       </div>
     </div>
   </div>
-  <canvas id="gameCanvas" width="400" height="300"></canvas>
-  <div class="parallax-section">
-    <h1 class="typewriter">No balls?</h1>
-  </div>
   <script>
     // Function to toggle dark mode
     function toggleDarkMode() {
@@ -512,90 +435,31 @@
       toggleSwitch.checked = darkModeEnabled;
     });
 
-    // Additional effect: Rotate the logo animation on hover
-    const logo = document.querySelector('.logo');
-    logo.addEventListener('mouseover', () => {
-      logo.style.animationPlayState = 'paused';
-    });
-    logo.addEventListener('mouseout', () => {
-      logo.style.animationPlayState = 'running';
-    });
-
-    // Smooth scrolling navigation
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.sidebar a');
-      links.forEach(link => {
-        link.addEventListener('click', smoothScroll);
+  </script>
+  <script>
+    const buttons = document.querySelectorAll('.content button');
+    buttons.forEach(button => {
+      button.addEventListener('mouseover', () => {
+        const buttonWidth = button.offsetWidth;
+        const buttonHeight = button.offsetHeight;
+        const x = Math.random() * (buttonWidth - 20) + 10;
+        const y = Math.random() * (buttonHeight - 20) + 10;
+        const span = document.createElement('span');
+        span.classList.add('effect');
+        span.style.left = `${x}px`;
+        span.style.top = `${y}px`;
+        button.appendChild(span);
       });
 
-      function smoothScroll(e) {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        targetElement.scrollIntoView({
-          behavior: 'smooth'
+      button.addEventListener('mouseout', () => {
+        const spans = button.querySelectorAll('.effect');
+        spans.forEach(span => {
+          button.removeChild(span);
         });
-      }
+      });
     });
+
   </script>
-  <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    let x = canvas.width / 2;
-    let y = canvas.height - 30;
-    let dx = 2;
-    let dy = -2;
-    const ballRadius = 10;
-
-    function drawBall() {
-      ctx.beginPath();
-      ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-      ctx.fillStyle = document.body.classList.contains('dark-mode') ? '#fff' : '#333';
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawBall();
-      // Update the ball position
-      x += dx;
-      y += dy;
-      // Reverse ball direction when it hits the edges of the canvas
-      if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-      }
-      if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
-        dy = -dy;
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  </script>
-  <script>
-const buttons = document.querySelectorAll('.content button');
-buttons.forEach(button => {
-  button.addEventListener('mouseover', () => {
-    const buttonWidth = button.offsetWidth;
-    const buttonHeight = button.offsetHeight;
-    const x = Math.random() * (buttonWidth - 20) + 10;
-    const y = Math.random() * (buttonHeight - 20) + 10;
-    const span = document.createElement('span');
-    span.classList.add('effect');
-    span.style.left = `${x}px`;
-    span.style.top = `${y}px`;
-    button.appendChild(span);
-  });
-
-  button.addEventListener('mouseout', () => {
-    const spans = button.querySelectorAll('.effect');
-    spans.forEach(span => {
-      button.removeChild(span);
-    });
-  });
-});
-
-</script>
 </body>
 
 </html>
