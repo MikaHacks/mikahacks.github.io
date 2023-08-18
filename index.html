@@ -457,27 +457,39 @@
           </p>
     </div>
   </div>
-  <script>
+<script>
+  function toggleDarkMode() {
+    const body = document.body;
+    const toggleSwitch = document.getElementById('toggle');
+    const isDarkMode = body.classList.contains('dark-mode');
+    
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', !isDarkMode);
+    toggleSwitch.checked = !isDarkMode;
+
+    // Update clock color based on dark mode
+    const clock = document.querySelector('.clock');
+    clock.classList.toggle('dark-mode', !isDarkMode);
+  }
+
+  // Initial call to set dark mode based on user preference from localStorage
+  function initializeDarkMode() {
+    const toggleSwitch = document.getElementById('toggle');
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    
+    document.body.classList.toggle('dark-mode', darkModeEnabled);
+    toggleSwitch.checked = darkModeEnabled;
+
+    // Update clock color based on dark mode
+    const clock = document.querySelector('.clock');
+    clock.classList.toggle('dark-mode', darkModeEnabled);
+  }
+
+  // Call the function to initialize dark mode
+  initializeDarkMode();
 
 
-    function toggleDarkMode() {
-      const body = document.body;
-      const isDarkMode = body.classList.contains('dark-mode');
-      
-      body.classList.toggle('dark-mode');
-      updateClockColor(!isDarkMode);
-      updateParticleColors(!isDarkMode);
-    }
-
-    function updateClockColor(isDarkMode) {
-      const clock = document.querySelector('.clock');
-      const clockBackgroundColor = isDarkMode ? '#333' : '#f5f5f5';
-      const clockTextColor = isDarkMode ? '#f5f5f5' : '#333';
-      
-      clock.style.backgroundColor = clockBackgroundColor;
-      clock.style.color = clockTextColor;
-    }
-  </script>
+</script>
   <script>
     const buttons = document.querySelectorAll('.content button');
     buttons.forEach(button => {
