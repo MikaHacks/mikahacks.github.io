@@ -390,6 +390,7 @@
         </p>
       </div>
     </div>
+    
     <script>
       $(document).ready(function() {
         $('#toggle').on('change', function() {
@@ -550,6 +551,13 @@
   // Update clock every second
   setInterval(updateClock, 1000);
 </script>
+<script>
+function toggleSection() {
+  const hiddenSection = document.getElementById('things');
+  hiddenSection.classList.toggle('hidden'); // Toggle the "hidden" class
+}
+</script>
+
 
 
 
