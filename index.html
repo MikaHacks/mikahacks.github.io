@@ -1,627 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>orange-space-guacamole</title>
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-  <link rel="icon" href="loading.png">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Inconsolata', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      transition: background-color 1s ease;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px;
-    }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-    }
-
-    .toggle-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .toggle-label {
-      margin-right: 10px;
-      font-weight: bold;
-    }
-
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-    }
-
-    .toggle-switch input {
-      display: none;
-    }
-
-    .toggle-slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      border-radius: 26px;
-      cursor: pointer;
-      transition: background-color 1s ease;
-    }
-
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      border-radius: 50%;
-      transition: transform 0.3s ease;
-    }
-
-    input:checked+.toggle-slider {
-      background-color: #4CAF50;
-    }
-
-    input:checked+.toggle-slider:before {
-      transform: translateX(24px);
-    }
-
-    .content {
-      background-color: #fff;
-      padding: 40px;
-      border: 2px solid #333;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease;
-      text-align: center;
-      max-width: 600px;
-      margin: 20px auto;
-    }
-
-    input:checked~.content {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      margin-bottom: 20px;
-      color: #555;
-      font-size: 40px;
-      text-align: center;
-    }
-
-    p {
-      margin-bottom: 10px;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    .dark-mode {
-      background-color: #333;
-      color: #f5f5f5;
-    }
-
-    .dark-mode .header {
-      color: #f5f5f5;
-    }
-
-    .dark-mode .toggle-slider {
-      background-color: #666;
-    }
-
-    .dark-mode input:checked+.toggle-slider {
-      background-color: #666;
-    }
-
-    .dark-mode .content {
-      background-color: #444;
-      color: #f5f5f5;
-      border: 2px solid #f7f7f7;
-    }
-
-    .dark-mode h1,
-    .dark-mode p {
-      color: #f5f5f5;
-    }
-
-    .dark-mode .hidden-section {
-      background-color: #333;
-      color: #f5f5f5;
-    }
-
-    .dark-mode .hidden-section h2,
-    .dark-mode .hidden-section p {
-      color: #f5f5f5;
-    }
-
-    .logo {
-      font-size: 60px;
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      transition: transform 0.5s ease;
-      animation-name: rotateLogo;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes rotateLogo {
-      0% {
-        transform: rotate(0deg);
+  <head>
+    <meta charset="UTF-8">
+    <title>orange-space-guacamole</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link rel="icon" href="loading.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
       }
 
-      100% {
-        transform: rotate(360deg);
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inconsolata', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        transition: background-color 1s ease;
       }
-    }
 
-    .logo:hover {
-      transform: scale(1.2);
-      animation-play-state: paused;
-    }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+      }
 
-    .content {
-      transition: transform 0.5s ease;
-    }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
 
-    .content:hover {
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      transform: translateY(-10px);
-    }
+      .toggle-container {
+        display: flex;
+        align-items: center;
+      }
 
-    /* Smooth Scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
+      .toggle-label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
 
-    .hidden-section {
-      background-color: #f5f5f5;
-      padding: 20px;
-      border-radius: 4px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-      transition: opacity 0.3s ease;
-    }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
 
-    .hidden-section.hidden {
-      opacity: 0;
-      height: 0;
-      overflow: hidden;
-    }
+      .toggle-switch input {
+        display: none;
+      }
 
-    .content {
-      text-align: center;
-      /* Center the button */
-    }
+      .toggle-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 26px;
+        cursor: pointer;
+        transition: background-color 1s ease;
+      }
 
-    .content button {
-      padding: 10px 20px;
-      background-color: #cfc8c8;
-      color: #444;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.5s ease;
-      transform: translateY(0);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
 
-    .dark-mode .content button {
-      background-color: #666;
-      color: #f5f5f5;
-    }
+      input:checked+.toggle-slider {
+        background-color: #4CAF50;
+      }
 
-    .content button:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-    background-color: rgba(144, 144, 144, 0.8);
-      transform: skewX(-30deg);
-      z-index: -1;
-      transition: left 1s ease;
-    }
+      input:checked+.toggle-slider:before {
+        transform: translateX(24px);
+      }
 
-    .dark-mode .content button:before {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
+      .content {
+        background-color: #fff;
+        padding: 40px;
+        border: 2px solid #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        text-align: center;
+        max-width: 600px;
+        margin: 20px auto;
+      }
 
-    .content button:hover {
-      background-color: #cfc8c8;
-      transform: translateY(-5px);
-    }
+      input:checked~.content {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
 
-    .dark-mode .content button:hover {
-      background-color: #333;
-      color: #f5f5f5;
-    }
+      h1 {
+        margin-bottom: 20px;
+        color: #555;
+        font-size: 40px;
+        text-align: center;
+      }
 
-    .content button:hover:before {
-      left: 100%;
-    }
+      p {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        text-align: center;
+      }
 
-    .sidebar {
-      width: fit-content;
-      float: left;
-      background-color: #f5f5f5;
-      padding: 0;
-      box-sizing: border-box;
-      transition: background-color 0.3s ease;
-    }
+      .dark-mode {
+        background-color: #333;
+        color: #f5f5f5;
+      }
 
-    .dark-mode .sidebar {
-      background-color: #333;
-      color: #f5f5f5;
-    }
+      .dark-mode .header {
+        color: #f5f5f5;
+      }
 
-    .sidebar-item {
-      margin-bottom: 10px;
-    }
+      .dark-mode .toggle-slider {
+        background-color: #666;
+      }
 
-    .sidebar-item a {
-      display: block;
-      color: #333;
-      /* Update text color */
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
+      .dark-mode input:checked+.toggle-slider {
+        background-color: #666;
+      }
 
-    .dark-mode .sidebar-item a {
-      color: #f5f5f5;
-      /* Update text color for dark mode */
-    }
+      .dark-mode .content {
+        background-color: #444;
+        color: #f5f5f5;
+        border: 2px solid #f7f7f7;
+      }
 
-    .link-effect {
-      color: #333;
-      text-decoration: none;
-      position: relative;
-      transition: color 0.3s ease;
-    }
+      .dark-mode h1,
+      .dark-mode p {
+        color: #f5f5f5;
+      }
 
-    .link-effect:before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background-color: orange;
-      visibility: hidden;
-      transform: scaleX(0);
-      transition: transform 0.3s ease, visibility 0.3s ease;
-    }
+      .dark-mode .hidden-section {
+        background-color: #333;
+        color: #f5f5f5;
+      }
 
-    .link-effect:hover {
-      color: orange;
-    }
+      .dark-mode .hidden-section h2,
+      .dark-mode .hidden-section p {
+        color: #f5f5f5;
+      }
 
-    .link-effect:hover:before {
-      visibility: visible;
-      transform: scaleX(1);
-    }
+      .logo {
+        font-size: 60px;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s ease;
+        animation-name: rotateLogo;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
 
-    .dark-mode .link-effect {
-      color: #f5f5f5;
-    }
+      @keyframes rotateLogo {
+        0% {
+          transform: rotate(0deg);
+        }
 
-    .dark-mode .link-effect:hover {
-      color: orange;
-    }
-    #particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; 
-}
-.clock {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 18px;
-  color: #333;
-  transition: color 0.3s ease, background-color 1s ease; 
-  background-color: #f5f5f5; 
-}
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-.dark-mode .clock {
-  color: #f5f5f5; 
-  background-color: #333; 
-  transition: color 0.3s ease, background-color 1s ease; 
-}
+      .logo:hover {
+        transform: scale(1.2);
+        animation-play-state: paused;
+      }
 
+      .content {
+        transition: transform 0.5s ease;
+      }
 
+      .content:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-10px);
+      }
 
-  </style>
-</head>
+      .hidden-section {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        transition: opacity 0.3s ease;
+      }
+
+      .hidden-section.hidden {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .content {
+        text-align: center;
+        /* Center the button */
+      }
+
+      .content button {
+        padding: 10px 20px;
+        background-color: #cfc8c8;
+        color: #444;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.5s ease;
+        transform: translateY(0);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .dark-mode .content button {
+        background-color: #666;
+        color: #f5f5f5;
+      }
+
+      .content button:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(144, 144, 144, 0.8);
+        transform: skewX(-30deg);
+        z-index: -1;
+        transition: left 1s ease;
+      }
+
+      .dark-mode .content button:before {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .content button:hover {
+        background-color: #cfc8c8;
+        transform: translateY(-5px);
+      }
+
+      .dark-mode .content button:hover {
+        background-color: #333;
+        color: #f5f5f5;
+      }
+
+      .content button:hover:before {
+        left: 100%;
+      }
+
+      .link-effect {
+        color: #333;
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .link-effect:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: orange;
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: transform 0.3s ease, visibility 0.3s ease;
+      }
+
+      .link-effect:hover {
+        color: orange;
+      }
+
+      .link-effect:hover:before {
+        visibility: visible;
+        transform: scaleX(1);
+      }
+
+      .dark-mode .link-effect {
+        color: #f5f5f5;
+      }
+
+      .dark-mode .link-effect:hover {
+        color: orange;
+      }
+
+      #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .clock {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 18px;
+        color: #333;
+        transition: color 0.3s ease, background-color 1s ease;
+        background-color: #f5f5f5;
+      }
+
+      .dark-mode .clock {
+        color: #f5f5f5;
+        background-color: #333;
+        transition: color 0.3s ease, background-color 1s ease;
+      }
+    </style>
+  </head>
   <div class="clock">
     <div id="clock-text"></div>
   </div>
-
-<body>
-
-  <div id="particles-js"></div>
-
-
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-  <div class="main-content">
-    <div class="container">
-      <div class="header">
-        <h1 class="logo">+</h1>
-        <div class="toggle-container">
-          <span class="toggle-label">dark</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
-            <span class="toggle-slider"></span>
-          </label>
+  <body>
+    <div id="particles-js"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <div class="main-content">
+      <div class="container">
+        <div class="header">
+          <h1 class="logo">+</h1>
+          <div class="toggle-container">
+            <span class="toggle-label">dark</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="content">
+          <h2>About</h2>
+          <p>hello</p>
+          <p>blablablablabla </p>
+          <button onclick="toggleSection()">bla</button>
+          <div id="things" class="hidden-section hidden">
+            <h2>blablablabla</h2> blablablablablablablablablablablablav <p>
+              <a class="link-effect" href="http://www.worldslongestwebsite.com/">blablabla</a> - ###############
+            </p>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="container" id="things">
       <div class="content">
-        <h2>About</h2>
-        <p>hello</p>
-        <p>blablablablabla </p>
-        <button onclick="toggleSection()">bla</button>
-        <div id="things" class="hidden-section hidden">
-          <h2>blablablabla</h2>
-          blablablablablablablablablablablablav
-          <p>
-          
-         
-            <a class="link-effect" href="http://www.worldslongestwebsite.com/">blablabla</a> - ###############
-          </p>
-
-        </div>
+        <h2>things</h2>
+        <p> --></p>
+        <p>
+        <p>
+          <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replica of the DSPlayer in case they block it.
+        </p>
+        <p>
+          <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from Chrome.
+        </p>
+        <p>
+          <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong game.
+        </p>
+        <p>
+          <a class="link-effect" href="https://mikahacks.github.io/fonction-graph/">GraphDraw</a> - A fonction drawer thingy
+        </p>
+        <p>
+          <a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
+        </p>
+        <p>
+          <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - C'est litéralement Rayane.
+        </p>
+        <p>
+          <a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
+        </p>
+        <p>
+          <a class="link-effect" href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
+        </p>
+        <p>
+          <a class="link-effect" href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
+        </p>
+        <p>
+          <a class="link-effect" href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with Eaglercraft - @LAX1DUDE
+        </p>
       </div>
     </div>
-  </div>
-  
-  
-
-  <div class="container" id="things">
-    <div class="content">
-      <h2>things</h2>
-      <p>
-      -->
-      </p>
-      
-               <p>
-
-      
-      
-      
-      
-          <p>
-            <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replica of the
-            DSPlayer in case they block it.
-          </p>
-          <p>
-            <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from Chrome.
-          </p>
-          <p>
-            <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong game.
-          </p>
-
- <p>
-            <a class="link-effect" href="https://mikahacks.github.io/fonction-graph/">GraphDraw</a> - A fonction drawer thingy
-          </p>
-      
-          <p>
-            <a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
-          </p>
-          <p>
-            <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - C'est litéralement
-            Rayane.
-          </p>
-          <p>
-            <a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
-          </p>
-          <p>
-            <a class="link-effect" href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
-          </p>
-          <p>
-            <a class="link-effect" href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30,
-            50x50, 100x100)
-          </p>
-          <p>
-            <a class="link-effect" href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a>
-            - Minecraft 1.18 running completely in the browser with Eaglercraft - @LAX1DUDE
-          </p>
-    </div>
-  </div>
-<script>
-  function toggleDarkMode() {
-    const body = document.body;
-    const toggleSwitch = document.getElementById('toggle');
-    const isDarkMode = body.classList.contains('dark-mode');
-    
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', !isDarkMode);
-    toggleSwitch.checked = !isDarkMode;
-
-    // Update clock color based on dark mode
-    const clock = document.querySelector('.clock');
-    clock.classList.toggle('dark-mode', !isDarkMode);
-  }
-
-  // Initial call to set dark mode based on user preference from localStorage
-  function initializeDarkMode() {
-    const toggleSwitch = document.getElementById('toggle');
-    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-    
-    document.body.classList.toggle('dark-mode', darkModeEnabled);
-    toggleSwitch.checked = darkModeEnabled;
-
-    // Update clock color based on dark mode
-    const clock = document.querySelector('.clock');
-    clock.classList.toggle('dark-mode', darkModeEnabled);
-  }
-
-  // Call the function to initialize dark mode
-  initializeDarkMode();
-
-
-</script>
-  <script>
-    const buttons = document.querySelectorAll('.content button');
-    buttons.forEach(button => {
-      button.addEventListener('mouseover', () => {
-        const buttonWidth = button.offsetWidth;
-        const buttonHeight = button.offsetHeight;
-        const x = Math.random() * (buttonWidth - 20) + 10;
-        const y = Math.random() * (buttonHeight - 20) + 10;
-        const span = document.createElement('span');
-        span.classList.add('effect');
-        span.style.left = `${x}px`;
-        span.style.top = `${y}px`;
-        button.appendChild(span);
-      });
-
-      button.addEventListener('mouseout', () => {
-        const spans = button.querySelectorAll('.effect');
-        spans.forEach(span => {
-          button.removeChild(span);
-        });
-      });
-    });
-
-  </script>
-
-
     <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: {
-                    value: 100,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#ffffff"
-                },
-                shape: {
-                    type: "circle",
-                    stroke: {
-                        width: 0,
-                        color: "#000000"
-                    },
-                    polygon: {
-                        nb_sides: 5
-                    }
-                },
-                opacity: {
-                    value: 0.7,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 2,
-                    random: true,
-                    anim: {
-                        enable: false,
-                        speed: 40,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: false,
-                },
-                move: {
-                    enable: true,
-                    speed: 0.5,
-                    direction: "top",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: false,
-                    },
-                    onclick: {
-                        enable: false,
-                    },
-                    resize: true
-                }
-            },
-            retina_detect: true
+      $(document).ready(function() {
+        $('#toggle').on('change', function() {
+          $('body').toggleClass('dark-mode');
+          var isDarkMode = $('body').hasClass('dark-mode');
+          localStorage.setItem('darkMode', isDarkMode);
+          // Update clock color based on dark mode
+          $('.clock').toggleClass('dark-mode', isDarkMode);
         });
+      });
     </script>
-
-
-
-<script>
-  function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const timeString = `${hours}:${minutes}:${seconds}`;
-    document.getElementById('clock-text').textContent = timeString;
-  }
-
-  // Initial call to update clock
-  updateClock();
-
-  // Update clock every second
-  setInterval(updateClock, 1000);
-</script>
-<script>
-  function toggleSection() {
-    const hiddenSection = document.getElementById('things');
-    hiddenSection.classList.toggle('hidden');
-  }
-</script>
-
-
-
-
-</script>
-
-</body>
-
+    <script>
+      const buttons = document.querySelectorAll('.content button');
+      buttons.forEach(button => {
+        button.addEventListener('mouseover', () => {
+          const buttonWidth = button.offsetWidth;
+          const buttonHeight = button.offsetHeight;
+          const x = Math.random() * (buttonWidth - 20) + 10;
+          const y = Math.random() * (buttonHeight - 20) + 10;
+          const span = document.createElement('span');
+          span.classList.add('effect');
+          span.style.left = `${x}px`;
+          span.style.top = `${y}px`;
+          button.appendChild(span);
+        });
+        button.addEventListener('mouseout', () => {
+          const spans = button.querySelectorAll('.effect');
+          spans.forEach(span => {
+            button.removeChild(span);
+          });
+        });
+      });
+    </script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: "#ffffff"
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000"
+            },
+            polygon: {
+              nb_sides: 5
+            }
+          },
+          opacity: {
+            value: 0.7,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 2,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: false,
+          },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "top",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: false,
+            },
+            onclick: {
+              enable: false,
+            },
+            resize: true
+          }
+        },
+        retina_detect: true
+      });
+    </script>
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds}`;
+        document.getElementById('clock-text').textContent = timeString;
+      }
+      // Initial call to update clock
+      updateClock();
+      // Update clock every second
+      setInterval(updateClock, 1000);
+    </script>
+    <script>
+      function toggleSection() {
+        const hiddenSection = document.getElementById('things');
+        hiddenSection.classList.toggle('hidden');
+      }
+    </script>
+  </body>
 </html>
