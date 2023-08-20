@@ -400,7 +400,42 @@
           $('.clock').toggleClass('dark-mode', isDarkMode);
         });
       });
-    </script>
+  $(document).ready(function() {
+    // Check if dark mode preference is stored
+    var isDarkMode = localStorage.getItem('darkMode');
+    
+    if (isDarkMode === 'true') {
+      $('body').addClass('dark-mode');
+    }
+
+    $('#toggle').on('change', function() {
+      $('body').toggleClass('dark-mode');
+      isDarkMode = $('body').hasClass('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      
+      // Update clock color based on dark mode
+      $('.clock').toggleClass('dark-mode', isDarkMode);
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $('#toggle').on('change', function() {
+      $('body').toggleClass('dark-mode');
+      var isDarkMode = $('body').hasClass('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      // Update clock color based on dark mode
+      $('.clock').toggleClass('dark-mode', isDarkMode);
+    });
+    // Restore dark mode preference on page load
+    var isDarkModeStored = localStorage.getItem('darkMode') === 'true';
+    $('body').toggleClass('dark-mode', isDarkModeStored);
+    $('.clock').toggleClass('dark-mode', isDarkModeStored);
+    $('#toggle').prop('checked', isDarkModeStored);
+  });
+</script>
+
+
     <script>
       const buttons = document.querySelectorAll('.content button');
       buttons.forEach(button => {
@@ -499,25 +534,24 @@
         retina_detect: true
       });
     </script>
-    <script>
-      function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const timeString = `${hours}:${minutes}:${seconds}`;
-        document.getElementById('clock-text').textContent = timeString;
-      }
-      // Initial call to update clock
-      updateClock();
-      // Update clock every second
-      setInterval(updateClock, 1000);
-    </script>
-    <script>
-      function toggleSection() {
-        const hiddenSection = document.getElementById('things');
-        hiddenSection.classList.toggle('hidden');
-      }
-    </script>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    $('#clock-text').text(timeString);
+  }
+
+  // Initial call to update clock
+  updateClock();
+
+  // Update clock every second
+  setInterval(updateClock, 1000);
+</script>
+
+
+
   </body>
-</html>
+</html>1
