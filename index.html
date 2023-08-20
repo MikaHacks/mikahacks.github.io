@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <link rel="icon" href="loading.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
       * {
         box-sizing: border-box;
@@ -557,9 +560,55 @@ function toggleSection() {
   hiddenSection.classList.toggle('hidden'); // Toggle the "hidden" class
 }
 </script>
+<div id="threejs-container"></div>
+
+
+
+    <script>
+      // Initialize Three.js
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('threejs-container').appendChild(renderer.domElement);
+
+      // Create a textured sphere
+      const geometry = new THREE.SphereGeometry(2, 32, 32);
+      const textureLoader = new THREE.TextureLoader();
+      const texture = textureLoader.load('https://raw.githubusercontent.com/MikaHacks/mikahacks.github.io/main/IMG_20220428_090224.jpg'); // Replace with your own texture
+      const material = new THREE.MeshPhongMaterial({ map: texture });
+      const sphere = new THREE.Mesh(geometry, material);
+      scene.add(sphere);
+
+      // Position the camera
+      camera.position.z = 5;
+
+      // Add ambient light
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+
+      // Add directional light
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
+      directionalLight.position.set(1, 1, 1);
+      scene.add(directionalLight);
+
+      // Animation loop
+      const animate = () => {
+        requestAnimationFrame(animate);
+
+        // Rotate the sphere
+        sphere.rotation.x += 0.01;
+        sphere.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    </script>
+
 
 
 
 
   </body>
-</html>1
+</html>
