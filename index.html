@@ -437,6 +437,17 @@
           <a class="link-effect bookmarklet" href="javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0" onclick="copy?.js">copy?.js</a> - Copy what you cant highlight_ctrl+c.
     </p>
     
+
+    
+                        <p>
+          <a class="link-effect bookmarklet" href="javascript:(function() {
+  var text = document.body.innerText || document.body.textContent;
+  var wordCount = text.split(/\s+/).length;
+  alert("Word Count: " + wordCount);
+})();
+" onclick="copy?.js">WordCounter.js</a> - Counts how many words there are in a page.
+    </p>
+    
     
                         <p>
           <a class="link-effect bookmarklet" href="javascript:void((function(d)%7Bvar e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://www.typesample.com/assets/typesample.js?r=%27+Math.random()*99999999);d.body.appendChild(e)%7D)(document));" onclick="TypeSample.js">TypeSample.js</a> - hey, whats that font? @JeremiahShoaf
