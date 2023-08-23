@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -428,9 +429,20 @@
           <a class="link-effect bookmarklet" href="javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0" onclick="editable.js">editable.js</a> - Makes the website editable.
     </p>
     
+    
+                        <p>
+          <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A%20(function()%20%7B%0A%20%20var%20selectedTransformation%20%3D%20prompt(%0A%20%20%20%20%22Type%20number%20only%3A%5Cn1.%20Uppercase%5Cn2.%20Lowercase%5Cn3.%20Capitalize%22%0A%20%20)%3B%0A%0A%20%20var%20transformationFunction%3B%0A%20%20switch%20(selectedTransformation)%20%7B%0A%20%20%20%20case%20%221%22%3A%0A%20%20%20%20%20%20transformationFunction%20%3D%20function(text)%20%7B%0A%20%20%20%20%20%20%20%20return%20text.toUpperCase()%3B%0A%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20break%3B%0A%20%20%20%20case%20%222%22%3A%0A%20%20%20%20%20%20transformationFunction%20%3D%20function(text)%20%7B%0A%20%20%20%20%20%20%20%20return%20text.toLowerCase()%3B%0A%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20break%3B%0A%20%20%20%20case%20%223%22%3A%0A%20%20%20%20%20%20transformationFunction%20%3D%20function(text)%20%7B%0A%20%20%20%20%20%20%20%20return%20text.replace(%2F%5Cb%5Cw%2Fg%2C%20function(l)%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20l.toUpperCase()%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%20%20break%3B%0A%20%20%20%20default%3A%0A%20%20%20%20%20%20alert(%22Invalid%20choice.%20No%20transformation%20will%20be%20applied.%22)%3B%0A%20%20%20%20%20%20return%3B%0A%20%20%7D%0A%0A%20%20var%20textInputs%20%3D%20document.querySelectorAll(%22textarea%2C%20input%5Btype%3D'text'%5D%22)%3B%0A%0A%20%20for%20(var%20i%20%3D%200%3B%20i%20%3C%20textInputs.length%3B%20i%2B%2B)%20%7B%0A%20%20%20%20textInputs%5Bi%5D.value%20%3D%20transformationFunction(textInputs%5Bi%5D.value)%3B%0A%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="textstyler.js">textstyler.js</a> - Transforms text into uppercase or lowercase letters. or capitalize all words.
+    </p>
                     <p>
           <a class="link-effect bookmarklet" href="javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0" onclick="copy?.js">copy?.js</a> - Copy what you cant highlight_ctrl+c.
     </p>
+    
+    
+                        <p>
+          <a class="link-effect bookmarklet" href="javascript:void((function(d)%7Bvar e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://www.typesample.com/assets/typesample.js?r=%27+Math.random()*99999999);d.body.appendChild(e)%7D)(document));" onclick="TypeSample.js">TypeSample.js</a> - hey, whats that font? @JeremiahShoaf
+    </p>
+    
+    
     
                 <p>
           <a class="link-effect bookmarklet" href="javascript:(function()%7Bif ( window.AG ) %7Bwindow.AG.reset()%3Bdelete window.AG%3B%7Dvar AutoGame %3D function() %7Bthis.gather_btn %3D %24('%23gatherButton')%3Bthis.traps_btn %3D %24('%23trapsButton')%3Bthis.buildtrap_btn %3D %24('%23build_trap')%3Bthis.buildhut_btn %3D %24('%23build_hut')%3Bthis.gather_timeout %3D null%3Bthis.build_timeout %3D null%3B%7D%3BAutoGame.prototype.start %3D function() %7Bvar self %3D this%3Bthis.gather_timeout %3D window.setInterval(function() %7B%2F* Collect wood *%2Fif ( !self.gather_btn.hasClass('disabled') ) self.gather_btn.click()%3B%2F* Collect traps *%2Fif ( !self.traps_btn.hasClass('disabled') ) self.traps_btn.click()%3B%7D%2C 2000)%3Bthis.build_timeout %3D window.setInterval(function() %7B%2F* Build traps if possible *%2Fif ( !self.buildtrap_btn.hasClass('disabled') )self.buildtrap_btn.click()%3B%2F* Build hut if possible *%2Fif ( !self.buildhut_btn.hasClass('disabled') )self.buildhut_btn.click()%3B%7D%2C 15000)%3B%7D%3BAutoGame.prototype.reset %3D function() %7Bif ( this.gather_timeout )window.clearInterval(this.gather_timeout)%3Bif ( this.build_timeout )window.clearInterval(this.build_timeout)%3B%7D%3Bwindow.AG %3D new AutoGame()%3BAG.start()%7D)()'; void 0" onclick="adr_bot.js">adr_bot.js</a> - A bot for the webgame "A Dark Room". gathers wood, checks trap, builds huts automaticaly.
