@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -459,6 +461,12 @@
 
                         <p>
           <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20canvas%20%3D%20document.createElement('canvas')%3B%0A%20%20canvas.width%20%3D%20window.innerWidth%3B%0A%20%20canvas.height%20%3D%20window.innerHeight%3B%0A%20%20canvas.style.position%20%3D%20'fixed'%3B%0A%20%20canvas.style.top%20%3D%20'0'%3B%0A%20%20canvas.style.left%20%3D%20'0'%3B%0A%20%20canvas.style.pointerEvents%20%3D%20'none'%3B%0A%20%20document.body.appendChild(canvas)%3B%0A%20%20var%20ctx%20%3D%20canvas.getContext('2d')%3B%0A%20%20var%20centerX%20%3D%20canvas.width%20%2F%202%3B%0A%20%20var%20centerY%20%3D%20canvas.height%20%2F%202%3B%0A%20%20var%20angle%20%3D%200%3B%0A%20%20var%20radius%20%3D%2010%3B%0A%20%20var%20lineWidth%20%3D%202%3B%0A%20%20var%20colors%20%3D%20%5B'%23FF5733'%2C%20'%2333FF57'%2C%20'%235733FF'%2C%20'%23FFFF33'%2C%20'%2333FFFF'%5D%3B%0A%20%20var%20colorIndex%20%3D%200%3B%0A%0A%20%20function%20drawSpiral()%20%7B%0A%20%20%20%20ctx.strokeStyle%20%3D%20colors%5BcolorIndex%5D%3B%0A%20%20%20%20ctx.lineWidth%20%3D%20lineWidth%3B%0A%20%20%20%20ctx.beginPath()%3B%0A%20%20%20%20ctx.arc(centerX%2C%20centerY%2C%20radius%2C%200%2C%202%20*%20Math.PI)%3B%0A%20%20%20%20ctx.stroke()%3B%0A%20%20%20%20angle%20%2B%3D%200.1%3B%0A%20%20%20%20radius%20%2B%3D%200.1%3B%0A%20%20%20%20lineWidth%20%2B%3D%200.02%3B%0A%20%20%20%20colorIndex%20%3D%20(colorIndex%20%2B%201)%20%25%20colors.length%3B%0A%20%20%20%20requestAnimationFrame(drawSpiral)%3B%0A%20%20%7D%0A%0A%20%20drawSpiral()%3B%0A%7D)()%3B%7D)()%3B" onclick="roundPTSDthing.js">roundPTSDthing.js</a> - i dont even know.
+    </p>
+    
+    
+    
+                            <p>
+          <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%2F%2F%20Select%20all%20visible%20elements%20on%20the%20page%0A%20%20const%20elements%20%3D%20document.querySelectorAll('*%3Anot(script)%3Anot(style)%3Anot(link)')%3B%0A%0A%20%20%2F%2F%20Set%20the%20rotation%20angle%20for%20each%20element%20in%20the%20spiral%0A%20%20const%20rotationAngle%20%3D%2010%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%0A%20%20let%20currentAngle%20%3D%200%3B%0A%20%20let%20radius%20%3D%2010%3B%0A%0A%20%20%2F%2F%20Apply%20the%20spiral%20layout%20to%20each%20element%0A%20%20elements.forEach((element)%20%3D%3E%20%7B%0A%20%20%20%20const%20x%20%3D%20radius%20*%20Math.cos(currentAngle)%3B%0A%20%20%20%20const%20y%20%3D%20radius%20*%20Math.sin(currentAngle)%3B%0A%0A%20%20%20%20%2F%2F%20Apply%20CSS%20to%20position%20elements%0A%20%20%20%20element.style.transform%20%3D%20%60translate(%24%7Bx%7Dpx%2C%20%24%7By%7Dpx)%20rotate(%24%7BcurrentAngle%7Ddeg)%60%3B%0A%0A%20%20%20%20%2F%2F%20Increment%20the%20angle%20and%20radius%20for%20the%20next%20element%0A%20%20%20%20currentAngle%20%2B%3D%20rotationAngle%3B%0A%20%20%20%20radius%20%2B%3D%205%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%20%20%7D)%3B%0A%7D)()%3B%7D)()%3B" onclick="messmakeer.js">messmaker.js</a> - rotates elements to create a visually appealing spiral effect.
     </p>
 
 </div>
