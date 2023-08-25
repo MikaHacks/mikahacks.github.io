@@ -84,6 +84,9 @@
          text-align: center;
          max-width: 600px;
          margin: 20px auto;
+         border-radius: 10px;
+         transition: transform 0.5s ease;
+         text-align: center;
          }
          input:checked~.content {
          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -152,9 +155,6 @@
          transform: scale(1.2);
          animation-play-state: paused;
          }
-         .content {
-         transition: transform 0.5s ease;
-         }
          .content:hover {
          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
          transform: translateY(-10px);
@@ -166,15 +166,12 @@
          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
          margin-top: 20px;
          transition: opacity 0.3s ease;
+           border: 1px solid #ccc;
          }
          .hidden-section.hidden {
          opacity: 0;
          height: 0;
          overflow: hidden;
-         }
-         .content {
-         text-align: center;
-         /* Center the button */
          }
          .content button {
          padding: 10px 20px;
@@ -401,6 +398,7 @@
             <p>
                <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%2F%2F%20Select%20all%20visible%20elements%20on%20the%20page%0A%20%20const%20elements%20%3D%20document.querySelectorAll('*%3Anot(script)%3Anot(style)%3Anot(link)')%3B%0A%0A%20%20%2F%2F%20Set%20the%20rotation%20angle%20for%20each%20element%20in%20the%20spiral%0A%20%20const%20rotationAngle%20%3D%2010%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%0A%20%20let%20currentAngle%20%3D%200%3B%0A%20%20let%20radius%20%3D%2010%3B%0A%0A%20%20%2F%2F%20Apply%20the%20spiral%20layout%20to%20each%20element%0A%20%20elements.forEach((element)%20%3D%3E%20%7B%0A%20%20%20%20const%20x%20%3D%20radius%20*%20Math.cos(currentAngle)%3B%0A%20%20%20%20const%20y%20%3D%20radius%20*%20Math.sin(currentAngle)%3B%0A%0A%20%20%20%20%2F%2F%20Apply%20CSS%20to%20position%20elements%0A%20%20%20%20element.style.transform%20%3D%20%60translate(%24%7Bx%7Dpx%2C%20%24%7By%7Dpx)%20rotate(%24%7BcurrentAngle%7Ddeg)%60%3B%0A%0A%20%20%20%20%2F%2F%20Increment%20the%20angle%20and%20radius%20for%20the%20next%20element%0A%20%20%20%20currentAngle%20%2B%3D%20rotationAngle%3B%0A%20%20%20%20radius%20%2B%3D%205%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%20%20%7D)%3B%0A%7D)()%3B%7D)()%3B" onclick="messmakeer.js">messmaker.js</a> - rotates elements to create a visually appealing spiral effect.
             </p>
+
          </div>
          <script>
             $(document).ready(function() {
