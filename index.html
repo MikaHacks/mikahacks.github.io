@@ -11,6 +11,7 @@
       <style>
          * {
          box-sizing: border-box;
+         cursor: url('icons8-cursor-241.png'), auto !important;
          }
          body {
          margin: 0;
@@ -607,6 +608,14 @@
             
             animate();
          </script>
+         <script>
+        // Update cursor based on dark mode
+        if (isDarkMode) {
+            $('.custom-cursor').css('cursor', 'url("blue-pointer-dark.png"), auto');
+        } else {
+            $('.custom-cursor').css('cursor', 'url("blue-pointer-light.png"), auto');
+        }
+        </script>
       </div>
    </body>
 </html>
