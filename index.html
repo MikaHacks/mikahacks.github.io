@@ -1,585 +1,623 @@
+<marquee style="color: #f58c62;">dayum i just learnt about this "marquee" thingy. such incredible; miau miau miau miau miau miau miau miau miau miau miau miau miau </marquee>
 
 
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>orange-space-guacamole</title>
-      <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-      <link rel="icon" href="loading.png">
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-      <style>
-         * {
-         box-sizing: border-box;
-         cursor: url('icons8-cursor-241.png'), auto !important;
-         }
-         body {
-         margin: 0;
-         padding: 0;
-         font-family: 'Inconsolata', sans-serif;
-         background-color: #f5f5f5;
-         color: #666;
-         transition: background-color 1s ease;
-         }
-         .container {
-         max-width: 800px;
-         margin: 0 auto;
-         padding: 40px;
-         }
-         .header {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         margin-bottom: 40px;
-         }
-         .toggle-container {
-         display: flex;
-         align-items: center;
-         }
-         .toggle-label {
-         margin-right: 10px;
-         font-weight: bold;
-         }
-         .toggle-switch {
-         position: relative;
-         display: inline-block;
-         width: 50px;
-         height: 26px;
-         }
-         .toggle-switch input {
-         display: none;
-         }
-         .toggle-slider {
-         position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         bottom: 0;
-         background-color: #ccc;
-         border-radius: 26px;
-         cursor: pointer;
-         transition: background-color 1s ease;
-         }
-         .toggle-slider:before {
-         position: absolute;
-         content: "";
-         height: 20px;
-         width: 20px;
-         left: 3px;
-         bottom: 3px;
-         background-color: white;
-         border-radius: 50%;
-         transition: transform 0.3s ease;
-         }
-         input:checked+.toggle-slider {
-         background-color: #4CAF50;
-         }
-         input:checked+.toggle-slider:before {
-         transform: translateX(24px);
-         }
-         .content {
-         background-color: #fff;
-         padding: 40px;
-         border: 2px solid #333;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         transition: box-shadow 0.3s ease;
-         text-align: center;
-         max-width: 1000px;
-         margin: 20px auto;
-         border-radius: 8px;
-         transition: transform 0.5s ease;
-         text-align: center;
-         }
-         input:checked~.content {
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         }
-         h1 {
-         margin-bottom: 20px;
-         color: #555;
-         font-size: 40px;
-         text-align: center;
-         }
-         p {
-         margin-bottom: 10px;
-         line-height: 1.5;
-         text-align: center;
-         }
-         .dark-mode {
-         background-color: #333;
-         color: #f5f5f5;
-         }
-         .dark-mode .header {
-         color: #f5f5f5;
-         }
-         .dark-mode .toggle-slider {
-         background-color: #666;
-         }
-         .dark-mode input:checked+.toggle-slider {
-         background-color: #666;
-         }
-         .dark-mode .content {
-         background-color: #444;
-         color: #f5f5f5;
-         border: 2px solid #f7f7f7;
-         }
-         .dark-mode h1,
-         .dark-mode p {
-         color: #f5f5f5;
-         }
-         .dark-mode .hidden-section {
-         background-color: #333;
-         color: #f5f5f5;
-         }
-         .dark-mode .hidden-section h2,
-         .dark-mode .hidden-section p {
-         color: #f5f5f5;
-         }
-         .logo {
-         font-size: 60px;
-         margin: 0;
-         text-transform: uppercase;
-         letter-spacing: 2px;
-         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-         transition: transform 0.5s ease;
-         animation-name: rotateLogo;
-         animation-duration: 2s;
-         animation-iteration-count: infinite;
-         }
-         @keyframes rotateLogo {
-         0% {
-         transform: rotate(0deg);
-         }
-         100% {
-         transform: rotate(360deg);
-         }
-         }
-         .logo:hover {
-         transform: scale(1.2);
-         animation-play-state: paused;
-         }
-         .content:hover {
-         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-         transform: translateY(-10px);
-         }
-         .hidden-section {
-         background-color: #f5f5f5;
-         padding: 20px;
-         border-radius: 4px;
-         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-         margin-top: 20px;
-         transition: opacity 0.3s ease;
-           border: 1px solid #ccc;
-         }
-         .hidden-section.hidden {
-         opacity: 0;
-         height: 0;
-         overflow: hidden;
-         }
-         .content button {
-         padding: 10px 20px;
-         background-color: #cfc8c8;
-         color: #444;
-         border: none;
-         border-radius: 4px;
-         font-size: 16px;
-         cursor: pointer;
-         transition: background-color 0.3s ease, transform 0.5s ease;
-         transform: translateY(0);
-         position: relative;
-         overflow: hidden;
-         z-index: 1;
-         }
-         .dark-mode .content button {
-         background-color: #666;
-         color: #f5f5f5;
-         }
-         .content button:before {
-         content: "";
-         position: absolute;
-         top: 0;
-         left: -100%;
-         width: 100%;
-         height: 100%;
-         background-color: rgba(144, 144, 144, 0.8);
-         transform: skewX(-30deg);
-         z-index: -1;
-         transition: left 1s ease;
-         }
-         .dark-mode .content button:before {
-         background-color: rgba(0, 0, 0, 0.2);
-         }
-         .content button:hover {
-         background-color: #cfc8c8;
-         transform: translateY(-5px);
-         }
-         .dark-mode .content button:hover {
-         background-color: #333;
-         color: #f5f5f5;
-         }
-         .content button:hover:before {
-         left: 100%;
-         }
-         .link-effect {
-         color: #333;
-         text-decoration: none;
-         position: relative;
-         transition: color 0.3s ease;
-         }
-         .link-effect:before {
-         content: "";
-         position: absolute;
-         width: 100%;
-         height: 2px;
-         bottom: -2px;
-         left: 0;
-         background-color: orange;
-         visibility: hidden;
-         transform: scaleX(0);
-         transition: transform 0.3s ease, visibility 0.3s ease;
-         }
-         .link-effect:hover {
-         color: orange;
-         }
-         .link-effect:hover:before {
-         visibility: visible;
-         transform: scaleX(1);
-         }
-         .dark-mode .link-effect {
-         color: #f5f5f5;
-         }
-         .dark-mode .link-effect:hover {
-         color: orange;
-         }
-         #particles-js {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         z-index: -1;
-         }
-         .clock {
-         position: fixed;
-         top: 20px;
-         left: 20px;
-         font-size: 18px;
-         color: #333;
-         transition: color 0.3s ease, background-color 1s ease;
-         background-color: #f5f5f5;
-         }
-         .dark-mode .clock {
-         color: #f5f5f5;
-         background-color: #333;
-         transition: color 0.3s ease, background-color 1s ease;
-         }
-         .clock {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-      </style>
-   </head>
-   <div class="clock">
-      <div id="clock-text"></div>
-   </div>
-   <body>
-      <div id="particles-js"></div>
-      <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-      <div class="main-content">
-         <div class="container">
-            <div class="header">
-               <h1 class="logo">+</h1>
-               <div class="toggle-container">
-                  <span class="toggle-label">dark</span>
-                  <label class="toggle-switch">
-                  <input type="checkbox" id="toggle" onchange="toggleDarkMode()">
-                  <span class="toggle-slider"></span>
-                  </label>
-               </div>
-            </div>
-            <div class="content">
-               <h2>miau</h2>
-               <p>miau</p>
-      <div class="span4">
-        <h3>miau</h3>
-        <p>miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. </p>
-      </div>
-               <button onclick="toggleSection()">bla</button>
-               <div id="things" class="hidden-section hidden">
-                  <h2>blablablabla</h2>
-                  blablablablablablablablablablablablav 
-                  <p>
-                  
-                     <a class="link-effect" href="http://www.worldslongestwebsite.com/">blablabla</a> - ###############
-                  </p>
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="container" id="things">
-         <div class="content">
-            <h2>things</h2>
-            <p> --></p>
-            <p>
-            <p>
-               <a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replica of the DSPlayer in case they block it.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from Chrome.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/pong.html">pong.html</a> - Pong game.
-            </p>
-            <p>
-               <a class="link-effect" href="https://mikahacks.github.io/fonction-graph/">GraphDraw</a> - A fonction drawer thingy
-            </p>
-            <p>
-               <a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
-            </p>
-            <p>
-               <a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - C'est litéralement Rayane.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
-            </p>
-            <p>
-               <a class="link-effect" href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with Eaglercraft - @LAX1DUDE
-            </p>
-            <p>
-               <a class="link-effect" href="Things/base64.html">base64.html</a> a base64 encoder and decoder.
-            </p>
-            <p>
-               <a class="link-effect" href="Things/imagetoascii.html">imagetoascii.html</a> - Converts an image to ascii art.
-            </p>
-         </div>
-      </div>
-      <div class="container" id="bookmarklets">
-         <div class="content">
-            <h2>bookmarklets</h2>
-            <p><i>a bookmarklet; drag the links into your browser's bookmarks/favourites bar to use these on most webpages.</p>
-            </i>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3Afunction%20gcloak()%20%7B%20var%20link%20%3D%20document.querySelector(%22link%5Brel*%3D'icon'%5D%22)%20%7C%7C%20document.createElement('link')%3Blink.type%20%3D%20'image%2Fx-icon'%3Blink.rel%20%3D%20'shortcut%20icon'%3Blink.href%20%3D%20'https%3A%2F%2Fssl.gstatic.com%2Fclassroom%2Ffavicon.png'%3Bdocument.title%20%3D%20'%20Cours'%3Bconsole.log(document.title)%3Bdocument.getElementsByTagName('head')%5B0%5D.appendChild(link)%20%7D%3Bgcloak()%3BsetInterval(gcloak%2C%201000)%3B%7D)()%3B" onclick="CSDisguise">CSDisguise.js</a> - changes the favicon of the page to GoogleClassroom's. refresh to reset.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bvar%20%24jscomp%20%3D%20%24jscomp%20%7C%7C%20%7B%7D%3B%0A%24jscomp.scope%20%3D%20%7B%7D%3B%0A%0A%24jscomp.arrayIteratorImpl%20%3D%20function%20(b)%20%7B%0A%20%20%20%20var%20d%20%3D%200%3B%0A%20%20%20%20return%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20return%20d%20%3C%20b.length%20%3F%20%7B%20done%3A%20!1%2C%20value%3A%20b%5Bd%2B%2B%5D%20%7D%20%3A%20%7B%20done%3A%20!0%20%7D%3B%0A%20%20%20%20%7D%3B%0A%7D%3B%0A%0A%24jscomp.arrayIterator%20%3D%20function%20(b)%20%7B%0A%20%20%20%20return%20%7B%20next%3A%20%24jscomp.arrayIteratorImpl(b)%20%7D%3B%0A%7D%3B%0A%0A%24jscomp.makeIterator%20%3D%20function%20(b)%20%7B%0A%20%20%20%20var%20d%20%3D%20%22undefined%22%20!%3D%3D%20typeof%20Symbol%20%26%26%20Symbol.iterator%20%26%26%20b%5BSymbol.iterator%5D%3B%0A%20%20%20%20return%20d%20%3F%20d.call(b)%20%3A%20%24jscomp.arrayIterator(b)%3B%0A%7D%3B%0A%0Avar%20MALD_2022%3B%0A(function%20()%20%7B%0A%20%20%20%20if%20(MALD_2022)%20MALD_2022()%3B%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20var%20b%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.style.opacity%20%3D%20%220%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20e.blur()%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20d%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.style.opacity%20%3D%20%221%22%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20h%20%3D%20function%20(f%2C%20c)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20g%20in%20c)%20f.style%5Bg%5D%20%3D%20c%5Bg%5D%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20a%20%3D%20document.createElement(%22div%22)%2C%0A%20%20%20%20%20%20%20%20e%20%3D%20document.createElement(%22iframe%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20e.src%20%3D%20%22https%3A%2F%2Fexample.com%22%3B%0A%20%20%20%20%20%20%20%20e.width%20%3D%20500%3B%0A%20%20%20%20%20%20%20%20e.height%20%3D%20500%3B%0A%20%20%20%20%20%20%20%20e.scrolling%20%3D%20%22yes%22%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20h(e%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20%22absolute%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20top%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20border%3A%20%22none%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20h(a%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20%22fixed%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20zIndex%3A%202147483647%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20%22block%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bottom%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20%22500px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20%22500px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20overflow%3A%20%22hidden%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transition%3A%20%22opacity%200.1s%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20borderRadius%3A%20%226px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transform%3A%20%22scale(1)%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%0A%20%20%20%20%20%20%20%20a.appendChild(e)%3B%0A%20%20%20%20%20%20%20%20document.body.parentNode.appendChild(a)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20a.addEventListener(%22mouseenter%22%2C%20d%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20a.addEventListener(%22mouseleave%22%2C%20b%2C%20!1)%3B%0A%0A%20%20%20%20%20%20%20%20MALD_2022%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.removeEventListener(%22mouseenter%22%2C%20d%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.removeEventListener(%22mouseleave%22%2C%20b%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.parentNode.removeChild(a)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a%20%3D%20e%20%3D%20null%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20MALD_2022%20%3D%20void%200%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20f%20%3D%20%24jscomp.makeIterator(document.querySelectorAll())%2C%20c%20%3D%20f.next()%3B%20!c.done%3B%20c%20%3D%20f.next())%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c%20%3D%20c.value%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c.parentNode.removeChild(c)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="Hidablewindow.js">Hidablewindow.js</a> - Creates a thingy that disapears when not hovered on. Replace "https://example.com" to whatever url.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function(){var iframe = document.createElement(`iframe`);iframe.src=`https://watch.pokemon.com/en-us/#/%60;iframe.width=window.innerWidth;iframe.height=window.innerHeight;document.body.appendChild(iframe);})();" onclick="GoofyAhhPokemonTv">GoofyAhhPokemonTv.js</a> - Scroll down...
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3Avar%20DELAY%20%3D%201%3Bvar%20autoClickerStyleElement%20%3D%20document.createElement(%22style%22)%3BautoClickerStyleElement.innerHTML%3D%22*%7Bcursor%3A%20crosshair%20!important%3B%7D%22%3Bdocument.body.appendChild(autoClickerStyleElement)%3Bfunction%20addClicker(e)%20%7Bif(!e.isTrusted)%20%7Breturn%3B%7Dif(e.target.classList.contains(%22auto-clicker-target%22))%20%7Be.target.classList.remove(%22auto-clicker-target%22)%3B%7D%20else%20%7Be.target.classList.add(%22auto-clicker-target%22)%3B%7Ddocument.body.removeChild(autoClickerStyleElement)%3Bdocument.body.removeEventListener(%22click%22%2C%20addClicker)%3Be.preventDefault()%3BautoClick(e.target)%3B%7Dfunction%20autoClick(element)%20%7Bif(element.classList.contains(%22auto-clicker-target%22))%20%7Belement.click()%3BsetTimeout(function()%7B%20autoClick(element)%3B%20%7D%2C%20DELAY)%3B%7D%7Ddocument.body.addEventListener(%22click%22%2C%20addClicker%2C%200)%3B%7D)()%3B" onclick="Autoclicker.js">Autoclicker.js</a> - An autoclicker that wont work on most pages lmao.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20videoId%20%3D%20extractVideoId(window.location.href)%3B%0A%20%20%0A%20%20if%20(videoId)%20%7B%0A%20%20%20%20var%20otherParams%20%3D%20getOtherParameters(window.location.href)%3B%0A%20%20%20%20var%20customLink%20%3D%20'https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2F'%20%2B%20videoId%20%2B%20otherParams%20%2B%20'%26autoplay%3D1'%3B%0A%20%20%20%20window.location.href%20%3D%20customLink%3B%0A%20%20%7D%20else%20%7B%0A%20%20%20%20alert('This%20does%20not%20appear%20to%20be%20a%20valid%20YouTube%20video%20page.')%3B%0A%20%20%7D%0A%0A%20%20function%20extractVideoId(url)%20%7B%0A%20%20%20%20var%20videoId%20%3D%20''%3B%0A%20%20%20%20%0A%20%20%20%20if%20(url.indexOf('youtube.com%2Fwatch%3Fv%3D')%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20videoId%20%3D%20url.split('v%3D')%5B1%5D.split('%26')%5B0%5D%3B%0A%20%20%20%20%7D%20else%20if%20(url.indexOf('youtu.be%2F')%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20videoId%20%3D%20url.split('youtu.be%2F')%5B1%5D.split('%3F')%5B0%5D%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20return%20videoId%3B%0A%20%20%7D%0A%0A%20%20function%20getOtherParameters(url)%20%7B%0A%20%20%20%20var%20paramsIndex%20%3D%20url.indexOf('%3F')%3B%0A%20%20%20%20if%20(paramsIndex%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20return%20url.substr(paramsIndex)%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="fakyo_restrictedyt">fakyo_restrictedyt.js</a> - Bypasses yt restrictions by using third-party thingy. click on it when youre on the restricted video.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function%20()%20%7B%0A%20%20function%20calculate()%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20var%20expression%20%3D%20prompt(%22Enter%20a%20mathematical%20expression%3A%22)%3B%0A%20%20%20%20%20%20if%20(expression%20%3D%3D%3D%20null)%20return%3B%0A%0A%20%20%20%20%20%20var%20result%20%3D%20eval(expression)%3B%0A%20%20%20%20%20%20if%20(isNaN(result))%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Invalid%20input%22)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Result%3A%20%22%20%2B%20result)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%20catch%20(error)%20%7B%0A%20%20%20%20%20%20alert(%22An%20error%20occurred%3A%20%22%20%2B%20error)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20calculate()%3B%0A%7D)()%3B%7D)()%3B" onclick="calculator.js">calculator.js</a> - We cant always use a physical calculator during exams.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0" onclick="editable.js">editable.js</a> - Makes the website editable.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%20%20var%20styleChoice%20%3D%20prompt(%22Choose%20a%20text-transform%20style%3A%5Cn1.%20Uppercase%5Cn2.%20Lowercase%5Cn3.%20Capitalize%22)%3B%0A%0A%20%20%20%20if%20(styleChoice%20%3D%3D%3D%20%221%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('uppercase')%3B%0A%20%20%20%20%7D%20else%20if%20(styleChoice%20%3D%3D%3D%20%222%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('lowercase')%3B%0A%20%20%20%20%7D%20else%20if%20(styleChoice%20%3D%3D%3D%20%223%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('capitalize')%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Invalid%20choice.%20Please%20choose%201%2C%202%2C%20or%203.%22)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20function%20applyStyle(style)%20%7B%0A%20%20%20%20%20%20%20%20var%20i%2C%20t%2C%20D%20%3D%20document%3B%0A%20%20%20%20%20%20%20%20for%20(i%20%3D%200%3B%20t%20%3D%20D.getElementsByTagName('textarea')%5Bi%5D%3B%20%2B%2Bi)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(style%20%3D%3D%3D%20'uppercase')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.toUpperCase()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(style%20%3D%3D%3D%20'lowercase')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.toLowerCase()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(style%20%3D%3D%3D%20'capitalize')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.replace(%2F%5Cb%5Cw%2Fg%2C%20function(l)%7B%20return%20l.toUpperCase()%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20var%20newSS%2C%20styles%20%3D%20'*%7Btext-transform%3A'%20%2B%20style%20%2B%20'%7Dinput%2Ctextarea%7Btext-transform%3Anone%7D'%3B%0A%20%20%20%20%20%20%20%20if%20(D.createStyleSheet)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20D.createStyleSheet(%22javascript%3A'%22%20%2B%20styles%20%2B%20%22'%22)%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20newSS%20%3D%20D.createElement('link')%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20newSS.rel%20%3D%20'stylesheet'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20newSS.href%20%3D%20'data%3Atext%2Fcss%2C'%20%2B%20escape(styles)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20D.getElementsByTagName(%22head%22)%5B0%5D.appendChild(newSS)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D)()%7D)()%3B" onclick="textstyler.js">textstyler.js</a> - Transforms text into uppercase or lowercase letters. or capitalize all words.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%7Bvar%20overlay%3Ddocument.createElement('div')%3BObject.assign(overlay.style%2C%7Bposition%3A'fixed'%2Ctop%3A0%2Cleft%3A0%2Cwidth%3A'100vw'%2Cheight%3A'100vh'%2CzIndex%3A99999999%2Cbackground%3A'transparent'%2Ccursor%3A'crosshair'%7D)%3Bdocument.body.append(overlay)%3Bfunction%20getElement(event)%7Boverlay.style.pointerEvents%3D'none'%3Bvar%20element%3Ddocument.elementFromPoint(event.clientX%2Cevent.clientY)%3Boverlay.style.pointerEvents%3D'auto'%3Breturn%20element%7D%3Bdocument.addEventListener('mousemove'%2Cfunction(event)%7Bvar%20element%3DgetElement(event)%3Bif(!element)return%3Bvar%20position%3Delement.getBoundingClientRect()%3BObject.assign(overlay.style%2C%7Bbackground%3A'rgba(0%2C%20128%2C%20255%2C%200.25)'%2Coutline%3A'1px%20solid%20rgba(0%2C%20128%2C%20255%2C%200.5)'%2Ctop%3A''%2Bposition.top%2B'px'%2Cleft%3A''%2Bposition.left%2B'px'%2Cwidth%3A''%2Bposition.width%2B'px'%2Cheight%3A''%2Bposition.height%2B'px'%7D)%7D)%3Boverlay.addEventListener('click'%2Cfunction(event)%7Bvar%20element%3DgetElement(event)%3Bvar%20text%3Delement.textContent%7C%7Celement.value%3Btext%3Dtext.replace(%2F%5Cn%5B%20%5Cn%5D%2B%5Cn%2Fg%2C%22%5Cn%22).replace(%2F%5Cn%5Cn%2B%2Fg%2C%22%5Cn%5Cn%22).replace(%2F%5E%5Cn%2B%7C%5Cn%2B%24%2Fg%2C'')%3Bif(!text.match(%22%5Cn%22))text%3Dtext.replace(%2F%5E%20%2B%7C%20%2B%24%2F%2C'')%3Bwindow.prompt('Press%20Ctrl%2BC%20to%20copy'%2Ctext)%3Bdocument.body.removeChild(overlay)%7D)%7D)()%7D)()%3B" onclick="copy?.js">copy?.js</a> - Copy what you cant highlight_ctrl+c.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20text%20%3D%20document.body.innerText%20%7C%7C%20document.body.textContent%3B%0A%20%20var%20wordCount%20%3D%20text.split(%2F%5Cs%2B%2F).length%3B%0A%20%20alert(%22Word%20Count%3A%20%22%20%2B%20wordCount)%3B%0A%7D)()%3B%7D)()%3B" onclick="copy?.js">WordCounter.js</a> - Counts how many words there are in a page.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:void((function(d)%7Bvar e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://www.typesample.com/assets/typesample.js?r=%27+Math.random()*99999999);d.body.appendChild(e)%7D)(document));" onclick="TypeSample.js">TypeSample.js</a> - hey, whats that font? @JeremiahShoaf
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A (function() %7B%0A    if (window.AG) %7B%0A        window.AG.reset()%3B%0A        delete window.AG%3B%0A    %7D%0A    var AutoGame %3D function() %7B%0A        this.gather_btn %3D %24('%23gatherButton')%3B%0A        this.traps_btn %3D %24('%23trapsButton')%3B%0A        this.buildtrap_btn %3D %24('%23build_trap')%3B%0A        this.buildhut_btn %3D %24('%23build_hut')%3B%0A        this.gather_timeout %3D null%3B%0A        this.build_timeout %3D null%3B%0A    %7D%3B%0A    AutoGame.prototype.start %3D function() %7B%0A        var self %3D this%3B%0A        this.gather_timeout %3D window.setInterval(function() %7B%0A%0A            if (!self.gather_btn.hasClass('disabled')) self.gather_btn.click()%3B %0A            if (!self.traps_btn.hasClass('disabled')) self.traps_btn.click()%3B%0A        %7D%2C 2000)%3B%0A        this.build_timeout %3D window.setInterval(function() %7B%0A%0A            if (!self.buildtrap_btn.hasClass('disabled')) self.buildtrap_btn.click()%3B %0A            if (!self.buildhut_btn.hasClass('disabled')) self.buildhut_btn.click()%3B%0A        %7D%2C 15000)%3B%0A    %7D%3B%0A    AutoGame.prototype.reset %3D function() %7B%0A        if (this.gather_timeout) window.clearInterval(this.gather_timeout)%3B%0A        if (this.build_timeout) window.clearInterval(this.build_timeout)%3B%0A    %7D%3B%0A    window.AG %3D new AutoGame()%3B%0A    AG.start()%0A%7D)()%7D)()%3B" onclick="adr_bot.js">adr_bot.js</a> - A bot for the webgame "A Dark Room". gathers wood, checks trap, builds huts automaticaly.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function%20()%20%7B%0A%20%20window.__glitch_runs%20%3D%20window.__glitch_runs%20%3F%20window.__glitch_runs%20%2B%201%20%3A%201%3B%0A%0A%20%20const%20MODES%20%3D%20%7B%0A%20%20%20%20STANDARD%3A%20'STANDARD'%2C%0A%20%20%20%20TURBO%3A%20'TURBO'%0A%20%20%7D%3B%0A%0A%20%20const%20OPTIONS%20%3D%20Object.assign(%0A%20%20%20%20%7B%20G_T%3A%20false%2C%20G_I%3A%20true%2C%20TURBO%3A%20false%20%7D%2C%0A%20%20%20%20%7B%20G_T%3A%20true%20%7D%20%7C%7C%20%7B%7D%0A%20%20)%3B%0A%0A%20%20const%20GLITCH_TEXT%20%3D%20OPTIONS.G_T%3B%0A%20%20const%20GLITCH_IMAGES%20%3D%20OPTIONS.G_I%3B%0A%20%20const%20MODE%20%3D%20OPTIONS.TURBO%20%3F%20MODES.TURBO%20%3A%20MODES.STANDARD%3B%0A%0A%20%20if%20(MODE%20%3D%3D%3D%20MODES.TURBO)%20%7B%0A%20%20%20%20window.__glitch_runs%20%3D%203%3B%0A%20%20%7D%0A%0A%20%20const%20transformTranspose%20%3D%20(header%2C%20input%2C%20gap%20%3D%201)%20%3D%3E%20%7B%0A%20%20%20%20const%20idx%20%3D%20header%20%2B%20Math.floor(Math.random()%20*%20(input.length%20-%20header%20-%20gap))%3B%0A%20%20%20%20const%20tmp%20%3D%20input%5Bidx%5D%3B%0A%20%20%20%20input%5Bidx%5D%20%3D%20input%5Bidx%20%2B%20gap%5D%3B%0A%20%20%20%20input%5Bidx%20%2B%20gap%5D%20%3D%20tmp%3B%0A%20%20%20%20return%20input%3B%0A%20%20%7D%3B%0A%0A%20%20const%20transformSubstitute%20%3D%20(header%2C%20input)%20%3D%3E%20%7B%0A%20%20%20%20const%20by%20%3D%20Math.floor(Math.random()%20*%20256)%3B%0A%20%20%20%20const%20idx%20%3D%20header%20%2B%20Math.floor(Math.random()%20*%20(input.length%20-%20header))%3B%0A%20%20%20%20input%5Bidx%5D%20%3D%20by%3B%0A%20%20%20%20return%20input%3B%0A%20%20%7D%3B%0A%0A%20%20const%20transformText%20%3D%20str%20%3D%3E%20%7B%0A%20%20%20%20let%20bytes%20%3D%20new%20TextEncoder('utf-8').encode(str)%3B%0A%20%20%20%20const%20errors%20%3D%20Math.random()%20*%20(0.05%20*%20str.length)%3B%0A%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%20errors%3B%20i%20%2B%3D%201)%20%7B%0A%20%20%20%20%20%20bytes%20%3D%20Math.random()%20%3E%200.5%0A%20%20%20%20%20%20%20%20%3F%20transformSubstitute(0%2C%20bytes)%0A%20%20%20%20%20%20%20%20%3A%20transformTranspose(0%2C%20bytes%2C%20Math.floor(Math.random()%20*%20str.length%20-%201)%20%2B%201)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20string%20%3D%20new%20TextDecoder('utf-8').decode(bytes)%3B%0A%20%20%20%20return%20string%3B%0A%20%20%7D%3B%0A%0A%20%20const%20glitchImage%20%3D%20image%20%3D%3E%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20image.onload%20%3D%20()%20%3D%3E%20%7B%7D%3B%0A%20%20%20%20%20%20image.style.backgroundColor%20%3D%20'%23262626'%3B%0A%20%20%20%20%20%20const%20canvas%20%3D%20document.createElement('canvas')%3B%0A%20%20%20%20%20%20const%20context%20%3D%20canvas.getContext('2d')%3B%0A%20%20%20%20%20%20canvas.width%20%3D%20image.naturalWidth%3B%0A%20%20%20%20%20%20canvas.height%20%3D%20image.naturalHeight%3B%0A%20%20%20%20%20%20context.drawImage(image%2C%200%2C%200)%3B%0A%0A%20%20%20%20%20%20const%20data%20%3D%20canvas.toBlob(blob%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20const%20fileReader%20%3D%20new%20FileReader()%3B%0A%20%20%20%20%20%20%20%20fileReader.onload%20%3D%20event%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20data%20%3D%20blob.size%20%3D%3D%3D%20event.target.result.byteLength%0A%20%20%20%20%20%20%20%20%20%20%20%20%3F%20new%20Uint8Array(event.target.result)%0A%20%20%20%20%20%20%20%20%20%20%20%20%3A%20null%3B%0A%0A%20%20%20%20%20%20%20%20%20%20image.onerror%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20image.src%20%3D%20URL.createObjectURL(blob)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchOnce%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20errors%20%3D%20Math.random()%20*%2010%20*%20window.__glitch_runs%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20corrupted%20%3D%20data.slice(0)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%20errors%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20corrupted%20%3D%20Math.random()%20%3E%200.5%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3F%20transformTranspose(100%2C%20corrupted)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3A%20transformSubstitute(100%2C%20corrupted)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20corruptBlob%20%3D%20new%20Blob(%5Bcorrupted%5D%2C%20%7B%20type%3A%20'image%2Fpng'%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20corruptSrc%20%3D%20URL.createObjectURL(corruptBlob)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20image.src%20%3D%20corruptSrc%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchImageRaf%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchOnce()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20window.requestAnimationFrame(glitchImageRaf)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchImageTimeout%20%3D%20(max%20%3D%20300)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchOnce()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20window.setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20glitchImageTimeout(max)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%20Math.random()%20*%20max%20%2F%202%20%2B%20Math.random()%20*%20max%20%2F%202)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20if%20(MODE%20%3D%3D%3D%20MODES.STANDARD)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchImageTimeout()%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(MODE%20%3D%3D%3D%20MODES.TURBO)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchImageRaf()%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20fileReader.readAsArrayBuffer(blob)%3B%0A%20%20%20%20%20%20%7D%2C%20'image%2Fjpeg')%3B%0A%20%20%20%20%7D%20catch%20(e)%20%7B%0A%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%7D%0A%20%20%7D%3B%0A%0A%20%20const%20glitchText%20%3D%20n%20%3D%3E%20%7B%0A%20%20%20%20const%20original%20%3D%20n.textContent%3B%0A%0A%20%20%20%20const%20glitchText%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20n.textContent%20%3D%20transformText(original).replace(%2F%EF%BF%BD%2Fg%2C%20'')%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20glitchTextTimeout%20%3D%20(max%20%3D%201000)%20%3D%3E%20%7B%0A%20%20%20%20%20%20glitchText()%3B%0A%20%20%20%20%20%20window.setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20glitchTextTimeout(max)%3B%0A%20%20%20%20%20%20%7D%2C%20Math.random()%20*%20max%20%2F%202%20%2B%20Math.random()%20*%20max%20%2F%202)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20glitchTextRaf%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20glitchText()%3B%0A%20%20%20%20%20%20window.requestAnimationFrame(glitchTextRaf)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20glitchTextTimeout()%3B%0A%20%20%7D%3B%0A%0A%20%20const%20textNodesUnder%20%3D%20el%20%3D%3E%20%7B%0A%20%20%20%20let%20n%3B%0A%20%20%20%20const%20a%20%3D%20%5B%5D%3B%0A%20%20%20%20const%20walk%20%3D%20document.createTreeWalker(%0A%20%20%20%20%20%20el%2C%0A%20%20%20%20%20%20NodeFilter.SHOW_TEXT%2C%0A%20%20%20%20%20%20null%2C%0A%20%20%20%20%20%20false%0A%20%20%20%20)%3B%0A%0A%20%20%20%20while%20((n%20%3D%20walk.nextNode()))%20%7B%0A%20%20%20%20%20%20a.push(n)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20a%3B%0A%20%20%7D%3B%0A%0A%20%20const%20setupGlitch%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20if%20(GLITCH_IMAGES)%20%7B%0A%20%20%20%20%20%20const%20images%20%3D%20document.querySelectorAll('img')%3B%0A%20%20%20%20%20%20images.forEach(i%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20i.complete%0A%20%20%20%20%20%20%20%20%20%20%3F%20glitchImage(i)%0A%20%20%20%20%20%20%20%20%20%20%3A%20(i.onload%20%3D%20event%20%3D%3E%20glitchImage(event.target))%3B%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20if%20(GLITCH_TEXT)%20%7B%0A%20%20%20%20%20%20const%20textNodes%20%3D%20textNodesUnder(document.body).filter(%0A%20%20%20%20%20%20%20%20n%20%3D%3E%20n.textContent%20%26%26%20n.textContent.length%20%3E%200%20%26%26%20n.textContent.trim()%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20textNodes.forEach(glitchText)%3B%0A%20%20%20%20%7D%0A%20%20%7D%3B%0A%0A%20%20if%20(document.readyState%20%3D%3D%3D%20'complete')%20%7B%0A%20%20%20%20setupGlitch()%3B%0A%20%20%7D%20else%20%7B%0A%20%20%20%20document.body.addEventListener('load'%2C%20setupGlitch)%3B%0A%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="glitch.js">glitch.js</a> - Oh lord! Ive been hacked!
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20canvas%20%3D%20document.createElement('canvas')%3B%0A%20%20canvas.width%20%3D%20window.innerWidth%3B%0A%20%20canvas.height%20%3D%20window.innerHeight%3B%0A%20%20canvas.style.position%20%3D%20'fixed'%3B%0A%20%20canvas.style.top%20%3D%20'0'%3B%0A%20%20canvas.style.left%20%3D%20'0'%3B%0A%20%20canvas.style.pointerEvents%20%3D%20'none'%3B%0A%20%20document.body.appendChild(canvas)%3B%0A%20%20var%20ctx%20%3D%20canvas.getContext('2d')%3B%0A%20%20var%20centerX%20%3D%20canvas.width%20%2F%202%3B%0A%20%20var%20centerY%20%3D%20canvas.height%20%2F%202%3B%0A%20%20var%20angle%20%3D%200%3B%0A%20%20var%20radius%20%3D%2010%3B%0A%20%20var%20lineWidth%20%3D%202%3B%0A%20%20var%20colors%20%3D%20%5B'%23FF5733'%2C%20'%2333FF57'%2C%20'%235733FF'%2C%20'%23FFFF33'%2C%20'%2333FFFF'%5D%3B%0A%20%20var%20colorIndex%20%3D%200%3B%0A%0A%20%20function%20drawSpiral()%20%7B%0A%20%20%20%20ctx.strokeStyle%20%3D%20colors%5BcolorIndex%5D%3B%0A%20%20%20%20ctx.lineWidth%20%3D%20lineWidth%3B%0A%20%20%20%20ctx.beginPath()%3B%0A%20%20%20%20ctx.arc(centerX%2C%20centerY%2C%20radius%2C%200%2C%202%20*%20Math.PI)%3B%0A%20%20%20%20ctx.stroke()%3B%0A%20%20%20%20angle%20%2B%3D%200.1%3B%0A%20%20%20%20radius%20%2B%3D%200.1%3B%0A%20%20%20%20lineWidth%20%2B%3D%200.02%3B%0A%20%20%20%20colorIndex%20%3D%20(colorIndex%20%2B%201)%20%25%20colors.length%3B%0A%20%20%20%20requestAnimationFrame(drawSpiral)%3B%0A%20%20%7D%0A%0A%20%20drawSpiral()%3B%0A%7D)()%3B%7D)()%3B" onclick="roundPTSDthing.js">roundPTSDthing.js</a> - i dont even know.
-            </p>
-            <p>
-               <a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%2F%2F%20Select%20all%20visible%20elements%20on%20the%20page%0A%20%20const%20elements%20%3D%20document.querySelectorAll('*%3Anot(script)%3Anot(style)%3Anot(link)')%3B%0A%0A%20%20%2F%2F%20Set%20the%20rotation%20angle%20for%20each%20element%20in%20the%20spiral%0A%20%20const%20rotationAngle%20%3D%2010%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%0A%20%20let%20currentAngle%20%3D%200%3B%0A%20%20let%20radius%20%3D%2010%3B%0A%0A%20%20%2F%2F%20Apply%20the%20spiral%20layout%20to%20each%20element%0A%20%20elements.forEach((element)%20%3D%3E%20%7B%0A%20%20%20%20const%20x%20%3D%20radius%20*%20Math.cos(currentAngle)%3B%0A%20%20%20%20const%20y%20%3D%20radius%20*%20Math.sin(currentAngle)%3B%0A%0A%20%20%20%20%2F%2F%20Apply%20CSS%20to%20position%20elements%0A%20%20%20%20element.style.transform%20%3D%20%60translate(%24%7Bx%7Dpx%2C%20%24%7By%7Dpx)%20rotate(%24%7BcurrentAngle%7Ddeg)%60%3B%0A%0A%20%20%20%20%2F%2F%20Increment%20the%20angle%20and%20radius%20for%20the%20next%20element%0A%20%20%20%20currentAngle%20%2B%3D%20rotationAngle%3B%0A%20%20%20%20radius%20%2B%3D%205%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%20%20%7D)%3B%0A%7D)()%3B%7D)()%3B" onclick="messmakeer.js">messmaker.js</a> - rotates elements to create a visually appealing spiral effect.
-            </p>
+	<head>
+		<meta charset="UTF-8">
+		<title>orange-space-guacamole</title>
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<link rel="icon" href="loading.png">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+		<style>
+			* {
+				box-sizing: border-box;
+				cursor: url('icons8-cursor-241.png'), auto !important;
+			}
 
-         </div>
-         </div>
-         <script>
-            $(document).ready(function() {
-              $('#toggle').on('change', function() {
-                $('body').toggleClass('dark-mode');
-                var isDarkMode = $('body').hasClass('dark-mode');
-                localStorage.setItem('darkMode', isDarkMode);
-                // Update clock color based on dark mode
-                $('.clock').toggleClass('dark-mode', isDarkMode);
-              });
-            });
-            $(document).ready(function() {
-            // Check if dark mode preference is stored
-            var isDarkMode = localStorage.getItem('darkMode');
-            
-            if (isDarkMode === 'true') {
-            $('body').addClass('dark-mode');
-            }
-            
-            $('#toggle').on('change', function() {
-            $('body').toggleClass('dark-mode');
-            isDarkMode = $('body').hasClass('dark-mode');
-            localStorage.setItem('darkMode', isDarkMode);
-            
-            // Update clock color based on dark mode
-            $('.clock').toggleClass('dark-mode', isDarkMode);
-            });
-            });
-         </script>
-         <script>
-            $(document).ready(function() {
-              $('#toggle').on('change', function() {
-                $('body').toggleClass('dark-mode');
-                var isDarkMode = $('body').hasClass('dark-mode');
-                localStorage.setItem('darkMode', isDarkMode);
-                // Update clock color based on dark mode
-                $('.clock').toggleClass('dark-mode', isDarkMode);
-              });
-              // Restore dark mode preference on page load
-              var isDarkModeStored = localStorage.getItem('darkMode') === 'true';
-              $('body').toggleClass('dark-mode', isDarkModeStored);
-              $('.clock').toggleClass('dark-mode', isDarkModeStored);
-              $('#toggle').prop('checked', isDarkModeStored);
-            });
-         </script>
-         <script>
-            const buttons = document.querySelectorAll('.content button');
-            buttons.forEach(button => {
-              button.addEventListener('mouseover', () => {
-                const buttonWidth = button.offsetWidth;
-                const buttonHeight = button.offsetHeight;
-                const x = Math.random() * (buttonWidth - 20) + 10;
-                const y = Math.random() * (buttonHeight - 20) + 10;
-                const span = document.createElement('span');
-                span.classList.add('effect');
-                span.style.left = `${x}px`;
-                span.style.top = `${y}px`;
-                button.appendChild(span);
-              });
-              button.addEventListener('mouseout', () => {
-                const spans = button.querySelectorAll('.effect');
-                spans.forEach(span => {
-                  button.removeChild(span);
-                });
-              });
-            });
-         </script>
-         <script>
-            particlesJS("particles-js", {
-              particles: {
-                number: {
-                  value: 100,
-                  density: {
-                    enable: true,
-                    value_area: 800
-                  }
-                },
-                color: {
-                  value: "#ffffff"
-                },
-                shape: {
-                  type: "circle",
-                  stroke: {
-                    width: 0,
-                    color: "#000000"
-                  },
-                  polygon: {
-                    nb_sides: 5
-                  }
-                },
-                opacity: {
-                  value: 0.7,
-                  random: true,
-                  anim: {
-                    enable: true,
-                    speed: 1,
-                    opacity_min: 0.1,
-                    sync: false
-                  }
-                },
-                size: {
-                  value: 2,
-                  random: true,
-                  anim: {
-                    enable: false,
-                    speed: 40,
-                    size_min: 0.1,
-                    sync: false
-                  }
-                },
-                line_linked: {
-                  enable: false,
-                },
-                move: {
-                  enable: true,
-                  speed: 0.5,
-                  direction: "top",
-                  random: true,
-                  straight: false,
-                  out_mode: "out",
-                  bounce: false,
-                  attract: {
-                    enable: false,
-                    rotateX: 600,
-                    rotateY: 1200
-                  }
-                }
-              },
-              interactivity: {
-                detect_on: "canvas",
-                events: {
-                  onhover: {
-                    enable: false,
-                  },
-                  onclick: {
-                    enable: false,
-                  },
-                  resize: true
-                }
-              },
-              retina_detect: true
-            });
-         </script>
-         <script>
-            function updateClock() {
-              const now = new Date();
-              const hours = String(now.getHours()).padStart(2, '0');
-              const minutes = String(now.getMinutes()).padStart(2, '0');
-              const seconds = String(now.getSeconds()).padStart(2, '0');
-              const timeString = `${hours}:${minutes}:${seconds}`;
-              $('#clock-text').text(timeString);
-            }
-            
-            // Initial call to update clock
-            updateClock();
-            
-            // Update clock every second
-            setInterval(updateClock, 1000);
-         </script>
-         <script>
-            function toggleSection() {
-              const hiddenSection = document.getElementById('things');
-              hiddenSection.classList.toggle('hidden'); // Toggle the "hidden" class
-            }
-         </script>
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Inconsolata', sans-serif;
+				background-color: #f5f5f5;
+				color: #666;
+				transition: background-color 1s ease;
+			}
 
+			.container {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 40px;
+			}
 
-      </div>
-   </body>
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 40px;
+			}
+
+			.toggle-container {
+				display: flex;
+				align-items: center;
+			}
+
+			.toggle-label {
+				margin-right: 10px;
+				font-weight: bold;
+			}
+
+			.toggle-switch {
+				position: relative;
+				display: inline-block;
+				width: 50px;
+				height: 26px;
+			}
+
+			.toggle-switch input {
+				display: none;
+			}
+
+			.toggle-slider {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #ccc;
+				border-radius: 26px;
+				cursor: pointer;
+				transition: background-color 1s ease;
+			}
+
+			.toggle-slider:before {
+				position: absolute;
+				content: "";
+				height: 20px;
+				width: 20px;
+				left: 3px;
+				bottom: 3px;
+				background-color: white;
+				border-radius: 50%;
+				transition: transform 0.3s ease;
+			}
+
+			input:checked+.toggle-slider {
+				background-color: #4CAF50;
+			}
+
+			input:checked+.toggle-slider:before {
+				transform: translateX(24px);
+			}
+
+			.content {
+				background-color: #fff;
+				padding: 40px;
+				border: 2px solid #333;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				transition: box-shadow 0.3s ease;
+				text-align: center;
+				max-width: 1000px;
+				margin: 20px auto;
+				border-radius: 8px;
+				transition: transform 0.5s ease;
+				text-align: center;
+			}
+
+			input:checked~.content {
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			h1 {
+				margin-bottom: 20px;
+				color: #555;
+				font-size: 40px;
+				text-align: center;
+			}
+
+			p {
+				margin-bottom: 10px;
+				line-height: 1.5;
+				text-align: center;
+			}
+
+			.dark-mode {
+				background-color: #333;
+				color: #f5f5f5;
+			}
+
+			.dark-mode .header {
+				color: #f5f5f5;
+			}
+
+			.dark-mode .toggle-slider {
+				background-color: #666;
+			}
+
+			.dark-mode input:checked+.toggle-slider {
+				background-color: #666;
+			}
+
+			.dark-mode .content {
+				background-color: #444;
+				color: #f5f5f5;
+				border: 2px solid #f7f7f7;
+			}
+
+			.dark-mode h1,
+			.dark-mode p {
+				color: #f5f5f5;
+			}
+
+			.dark-mode .hidden-section {
+				background-color: #333;
+				color: #f5f5f5;
+			}
+
+			.dark-mode .hidden-section h2,
+			.dark-mode .hidden-section p {
+				color: #f5f5f5;
+			}
+
+			.logo {
+				font-size: 60px;
+				margin: 0;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+				transition: transform 0.5s ease;
+				animation-name: rotateLogo;
+				animation-duration: 2s;
+				animation-iteration-count: infinite;
+			}
+
+			@keyframes rotateLogo {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			.logo:hover {
+				transform: scale(1.2);
+				animation-play-state: paused;
+			}
+
+			.content:hover {
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+				transform: translateY(-10px);
+			}
+
+			.hidden-section {
+				background-color: #f5f5f5;
+				padding: 20px;
+				border-radius: 4px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				margin-top: 20px;
+				transition: opacity 0.3s ease;
+				border: 1px solid #ccc;
+			}
+
+			.hidden-section.hidden {
+				opacity: 0;
+				height: 0;
+				overflow: hidden;
+			}
+
+			.content button {
+				padding: 10px 20px;
+				background-color: #cfc8c8;
+				color: #444;
+				border: none;
+				border-radius: 4px;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease, transform 0.5s ease;
+				transform: translateY(0);
+				position: relative;
+				overflow: hidden;
+				z-index: 1;
+			}
+
+			.dark-mode .content button {
+				background-color: #666;
+				color: #f5f5f5;
+			}
+
+			.content button:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(144, 144, 144, 0.8);
+				transform: skewX(-30deg);
+				z-index: -1;
+				transition: left 1s ease;
+			}
+
+			.dark-mode .content button:before {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+
+			.content button:hover {
+				background-color: #cfc8c8;
+				transform: translateY(-5px);
+			}
+
+			.dark-mode .content button:hover {
+				background-color: #333;
+				color: #f5f5f5;
+			}
+
+			.content button:hover:before {
+				left: 100%;
+			}
+
+			.link-effect {
+				color: #333;
+				text-decoration: none;
+				position: relative;
+				transition: color 0.3s ease;
+			}
+
+			.link-effect:before {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				bottom: -2px;
+				left: 0;
+				background-color: orange;
+				visibility: hidden;
+				transform: scaleX(0);
+				transition: transform 0.3s ease, visibility 0.3s ease;
+			}
+
+			.link-effect:hover {
+				color: orange;
+			}
+
+			.link-effect:hover:before {
+				visibility: visible;
+				transform: scaleX(1);
+			}
+
+			.dark-mode .link-effect {
+				color: #f5f5f5;
+			}
+
+			.dark-mode .link-effect:hover {
+				color: orange;
+			}
+
+			#particles-js {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+
+			.clock {
+				position: fixed;
+				top: 20px;
+				left: 20px;
+				font-size: 18px;
+				color: #333;
+				transition: color 0.3s ease, background-color 1s ease;
+				background-color: #f5f5f5;
+			}
+
+			.dark-mode .clock {
+				color: #f5f5f5;
+				background-color: #333;
+				transition: color 0.3s ease, background-color 1s ease;
+			}
+
+			.clock {
+				background-color: #fff;
+				padding: 10px;
+				border-radius: 8px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<div class="clock">
+		<div id="clock-text"></div>
+	</div>
+	<body>
+		<div id="particles-js"></div>
+		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<div class="main-content">
+			<div class="container">
+				<div class="header">
+					<h1 class="logo">+</h1>
+					<div class="toggle-container">
+						<span class="toggle-label">dark</span>
+						<label class="toggle-switch">
+							<input type="checkbox" id="toggle" onchange="toggleDarkMode()">
+							<span class="toggle-slider"></span>
+						</label>
+					</div>
+				</div>
+				<div class="content">
+					<h2>miau</h2>
+					<p>miau</p>
+					<div class="span4">
+						<h3>miau</h3>
+						<p>miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. miau. </p>
+					</div>
+					<button onclick="toggleSection()">bla</button>
+					<div id="things" class="hidden-section hidden">
+						<h2>blablablabla</h2> blablablablablablablablablablablablav <p>
+							<a class="link-effect" href="http://www.worldslongestwebsite.com/">blablabla</a> - ###############
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="things">
+			<div class="content">
+				<h2>things</h2>
+				<p> --></p>
+				<p>
+				<p>
+					<a class="link-effect" href="https://mikahacks.github.io/desmume-wasmFork">DsPlayer</a> - Replica of the DSPlayer in case they block it.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/chromedino.html">chromedino.html</a> - ChromeDino from Chrome.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/pong.html">pong.html</a> - Pong game.
+				</p>
+				<p>
+					<a class="link-effect" href="https://mikahacks.github.io/fonction-graph/">GraphDraw</a> - A fonction drawer thingy
+				</p>
+				<p>
+					<a class="link-effect" href="Things/stack.html">stack.html</a> - A simple stack game in HTML.
+				</p>
+				<p>
+					<a class="link-effect" href="https://mikahacks.github.io/ASCII-Art-1/">RAYANE</a> - C'est litéralement Rayane.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/ClickerGame.html">ClickerGame.html</a> - A simple clicker game.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/VideoPlayer.html">VideoPlayer.html</a> - A video player made in HTML.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/maze.html">maze.html</a> - A maze builder. (10x10, 20x20, 30x30, 50x50, 100x100)
+				</p>
+				<p>
+					<a class="link-effect" href="Things/EaglercraftX_1.8_Offline_en_US.html">EaglercraftX_1.8_Offline_en_US.html</a> - Minecraft 1.18 running completely in the browser with Eaglercraft - @LAX1DUDE
+				</p>
+				<p>
+					<a class="link-effect" href="Things/base64.html">base64.html</a> a base64 encoder and decoder.
+				</p>
+				<p>
+					<a class="link-effect" href="Things/imagetoascii.html">imagetoascii.html</a> - Converts an image to ascii art.
+				</p>
+			</div>
+		</div>
+		<div class="container" id="bookmarklets">
+			<div class="content">
+				<h2>bookmarklets</h2>
+				<p>
+					<i>a bookmarklet; drag the links into your browser's bookmarks/favourites bar to use these on most webpages. </i>
+					</i>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3Afunction%20gcloak()%20%7B%20var%20link%20%3D%20document.querySelector(%22link%5Brel*%3D'icon'%5D%22)%20%7C%7C%20document.createElement('link')%3Blink.type%20%3D%20'image%2Fx-icon'%3Blink.rel%20%3D%20'shortcut%20icon'%3Blink.href%20%3D%20'https%3A%2F%2Fssl.gstatic.com%2Fclassroom%2Ffavicon.png'%3Bdocument.title%20%3D%20'%20Cours'%3Bconsole.log(document.title)%3Bdocument.getElementsByTagName('head')%5B0%5D.appendChild(link)%20%7D%3Bgcloak()%3BsetInterval(gcloak%2C%201000)%3B%7D)()%3B" onclick="CSDisguise">CSDisguise.js</a> - changes the favicon of the page to GoogleClassroom's. refresh to reset.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bvar%20%24jscomp%20%3D%20%24jscomp%20%7C%7C%20%7B%7D%3B%0A%24jscomp.scope%20%3D%20%7B%7D%3B%0A%0A%24jscomp.arrayIteratorImpl%20%3D%20function%20(b)%20%7B%0A%20%20%20%20var%20d%20%3D%200%3B%0A%20%20%20%20return%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20return%20d%20%3C%20b.length%20%3F%20%7B%20done%3A%20!1%2C%20value%3A%20b%5Bd%2B%2B%5D%20%7D%20%3A%20%7B%20done%3A%20!0%20%7D%3B%0A%20%20%20%20%7D%3B%0A%7D%3B%0A%0A%24jscomp.arrayIterator%20%3D%20function%20(b)%20%7B%0A%20%20%20%20return%20%7B%20next%3A%20%24jscomp.arrayIteratorImpl(b)%20%7D%3B%0A%7D%3B%0A%0A%24jscomp.makeIterator%20%3D%20function%20(b)%20%7B%0A%20%20%20%20var%20d%20%3D%20%22undefined%22%20!%3D%3D%20typeof%20Symbol%20%26%26%20Symbol.iterator%20%26%26%20b%5BSymbol.iterator%5D%3B%0A%20%20%20%20return%20d%20%3F%20d.call(b)%20%3A%20%24jscomp.arrayIterator(b)%3B%0A%7D%3B%0A%0Avar%20MALD_2022%3B%0A(function%20()%20%7B%0A%20%20%20%20if%20(MALD_2022)%20MALD_2022()%3B%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20var%20b%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.style.opacity%20%3D%20%220%22%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20e.blur()%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20d%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.style.opacity%20%3D%20%221%22%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20h%20%3D%20function%20(f%2C%20c)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20g%20in%20c)%20f.style%5Bg%5D%20%3D%20c%5Bg%5D%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20a%20%3D%20document.createElement(%22div%22)%2C%0A%20%20%20%20%20%20%20%20e%20%3D%20document.createElement(%22iframe%22)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20e.src%20%3D%20%22https%3A%2F%2Fexample.com%22%3B%0A%20%20%20%20%20%20%20%20e.width%20%3D%20500%3B%0A%20%20%20%20%20%20%20%20e.height%20%3D%20500%3B%0A%20%20%20%20%20%20%20%20e.scrolling%20%3D%20%22yes%22%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20h(e%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20%22absolute%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20top%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20border%3A%20%22none%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20h(a%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20position%3A%20%22fixed%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20zIndex%3A%202147483647%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20display%3A%20%22block%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20bottom%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3A%20%220px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20width%3A%20%22500px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20height%3A%20%22500px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20overflow%3A%20%22hidden%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transition%3A%20%22opacity%200.1s%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20borderRadius%3A%20%226px%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20transform%3A%20%22scale(1)%22%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%0A%20%20%20%20%20%20%20%20a.appendChild(e)%3B%0A%20%20%20%20%20%20%20%20document.body.parentNode.appendChild(a)%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20a.addEventListener(%22mouseenter%22%2C%20d%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20a.addEventListener(%22mouseleave%22%2C%20b%2C%20!1)%3B%0A%0A%20%20%20%20%20%20%20%20MALD_2022%20%3D%20function%20()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.removeEventListener(%22mouseenter%22%2C%20d%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.removeEventListener(%22mouseleave%22%2C%20b%2C%20!1)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a.parentNode.removeChild(a)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20a%20%3D%20e%20%3D%20null%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20MALD_2022%20%3D%20void%200%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(var%20f%20%3D%20%24jscomp.makeIterator(document.querySelectorAll())%2C%20c%20%3D%20f.next()%3B%20!c.done%3B%20c%20%3D%20f.next())%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c%20%3D%20c.value%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20c.parentNode.removeChild(c)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%3B%0A%20%20%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="Hidablewindow.js">Hidablewindow.js</a> - Creates a thingy that disapears when not hovered on. Replace "https://example.com" to whatever url.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function(){var iframe = document.createElement(`iframe`);iframe.src=`https://watch.pokemon.com/en-us/#/%60;iframe.width=window.innerWidth;iframe.height=window.innerHeight;document.body.appendChild(iframe);})();" onclick="GoofyAhhPokemonTv">GoofyAhhPokemonTv.js</a> - Scroll down...
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3Avar%20DELAY%20%3D%201%3Bvar%20autoClickerStyleElement%20%3D%20document.createElement(%22style%22)%3BautoClickerStyleElement.innerHTML%3D%22*%7Bcursor%3A%20crosshair%20!important%3B%7D%22%3Bdocument.body.appendChild(autoClickerStyleElement)%3Bfunction%20addClicker(e)%20%7Bif(!e.isTrusted)%20%7Breturn%3B%7Dif(e.target.classList.contains(%22auto-clicker-target%22))%20%7Be.target.classList.remove(%22auto-clicker-target%22)%3B%7D%20else%20%7Be.target.classList.add(%22auto-clicker-target%22)%3B%7Ddocument.body.removeChild(autoClickerStyleElement)%3Bdocument.body.removeEventListener(%22click%22%2C%20addClicker)%3Be.preventDefault()%3BautoClick(e.target)%3B%7Dfunction%20autoClick(element)%20%7Bif(element.classList.contains(%22auto-clicker-target%22))%20%7Belement.click()%3BsetTimeout(function()%7B%20autoClick(element)%3B%20%7D%2C%20DELAY)%3B%7D%7Ddocument.body.addEventListener(%22click%22%2C%20addClicker%2C%200)%3B%7D)()%3B" onclick="Autoclicker.js">Autoclicker.js</a> - An autoclicker that wont work on most pages lmao.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20videoId%20%3D%20extractVideoId(window.location.href)%3B%0A%20%20%0A%20%20if%20(videoId)%20%7B%0A%20%20%20%20var%20otherParams%20%3D%20getOtherParameters(window.location.href)%3B%0A%20%20%20%20var%20customLink%20%3D%20'https%3A%2F%2Fwww.youtube-nocookie.com%2Fembed%2F'%20%2B%20videoId%20%2B%20otherParams%20%2B%20'%26autoplay%3D1'%3B%0A%20%20%20%20window.location.href%20%3D%20customLink%3B%0A%20%20%7D%20else%20%7B%0A%20%20%20%20alert('This%20does%20not%20appear%20to%20be%20a%20valid%20YouTube%20video%20page.')%3B%0A%20%20%7D%0A%0A%20%20function%20extractVideoId(url)%20%7B%0A%20%20%20%20var%20videoId%20%3D%20''%3B%0A%20%20%20%20%0A%20%20%20%20if%20(url.indexOf('youtube.com%2Fwatch%3Fv%3D')%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20videoId%20%3D%20url.split('v%3D')%5B1%5D.split('%26')%5B0%5D%3B%0A%20%20%20%20%7D%20else%20if%20(url.indexOf('youtu.be%2F')%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20videoId%20%3D%20url.split('youtu.be%2F')%5B1%5D.split('%3F')%5B0%5D%3B%0A%20%20%20%20%7D%0A%20%20%20%20%0A%20%20%20%20return%20videoId%3B%0A%20%20%7D%0A%0A%20%20function%20getOtherParameters(url)%20%7B%0A%20%20%20%20var%20paramsIndex%20%3D%20url.indexOf('%3F')%3B%0A%20%20%20%20if%20(paramsIndex%20!%3D%3D%20-1)%20%7B%0A%20%20%20%20%20%20return%20url.substr(paramsIndex)%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="fakyo_restrictedyt">fakyo_restrictedyt.js</a> - Bypasses yt restrictions by using third-party thingy. click on it when youre on the restricted video.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function%20()%20%7B%0A%20%20function%20calculate()%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20var%20expression%20%3D%20prompt(%22Enter%20a%20mathematical%20expression%3A%22)%3B%0A%20%20%20%20%20%20if%20(expression%20%3D%3D%3D%20null)%20return%3B%0A%0A%20%20%20%20%20%20var%20result%20%3D%20eval(expression)%3B%0A%20%20%20%20%20%20if%20(isNaN(result))%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Invalid%20input%22)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Result%3A%20%22%20%2B%20result)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%20catch%20(error)%20%7B%0A%20%20%20%20%20%20alert(%22An%20error%20occurred%3A%20%22%20%2B%20error)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20calculate()%3B%0A%7D)()%3B%7D)()%3B" onclick="calculator.js">calculator.js</a> - We cant always use a physical calculator during exams.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0" onclick="editable.js">editable.js</a> - Makes the website editable.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%20%20var%20styleChoice%20%3D%20prompt(%22Choose%20a%20text-transform%20style%3A%5Cn1.%20Uppercase%5Cn2.%20Lowercase%5Cn3.%20Capitalize%22)%3B%0A%0A%20%20%20%20if%20(styleChoice%20%3D%3D%3D%20%221%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('uppercase')%3B%0A%20%20%20%20%7D%20else%20if%20(styleChoice%20%3D%3D%3D%20%222%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('lowercase')%3B%0A%20%20%20%20%7D%20else%20if%20(styleChoice%20%3D%3D%3D%20%223%22)%20%7B%0A%20%20%20%20%20%20%20%20applyStyle('capitalize')%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20alert(%22Invalid%20choice.%20Please%20choose%201%2C%202%2C%20or%203.%22)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20function%20applyStyle(style)%20%7B%0A%20%20%20%20%20%20%20%20var%20i%2C%20t%2C%20D%20%3D%20document%3B%0A%20%20%20%20%20%20%20%20for%20(i%20%3D%200%3B%20t%20%3D%20D.getElementsByTagName('textarea')%5Bi%5D%3B%20%2B%2Bi)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(style%20%3D%3D%3D%20'uppercase')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.toUpperCase()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(style%20%3D%3D%3D%20'lowercase')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.toLowerCase()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(style%20%3D%3D%3D%20'capitalize')%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20t.value%20%3D%20t.value.replace(%2F%5Cb%5Cw%2Fg%2C%20function(l)%7B%20return%20l.toUpperCase()%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20var%20newSS%2C%20styles%20%3D%20'*%7Btext-transform%3A'%20%2B%20style%20%2B%20'%7Dinput%2Ctextarea%7Btext-transform%3Anone%7D'%3B%0A%20%20%20%20%20%20%20%20if%20(D.createStyleSheet)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20D.createStyleSheet(%22javascript%3A'%22%20%2B%20styles%20%2B%20%22'%22)%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20var%20newSS%20%3D%20D.createElement('link')%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20newSS.rel%20%3D%20'stylesheet'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20newSS.href%20%3D%20'data%3Atext%2Fcss%2C'%20%2B%20escape(styles)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20D.getElementsByTagName(%22head%22)%5B0%5D.appendChild(newSS)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D)()%7D)()%3B" onclick="textstyler.js">textstyler.js</a> - Transforms text into uppercase or lowercase letters. or capitalize all words.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%7Bvar%20overlay%3Ddocument.createElement('div')%3BObject.assign(overlay.style%2C%7Bposition%3A'fixed'%2Ctop%3A0%2Cleft%3A0%2Cwidth%3A'100vw'%2Cheight%3A'100vh'%2CzIndex%3A99999999%2Cbackground%3A'transparent'%2Ccursor%3A'crosshair'%7D)%3Bdocument.body.append(overlay)%3Bfunction%20getElement(event)%7Boverlay.style.pointerEvents%3D'none'%3Bvar%20element%3Ddocument.elementFromPoint(event.clientX%2Cevent.clientY)%3Boverlay.style.pointerEvents%3D'auto'%3Breturn%20element%7D%3Bdocument.addEventListener('mousemove'%2Cfunction(event)%7Bvar%20element%3DgetElement(event)%3Bif(!element)return%3Bvar%20position%3Delement.getBoundingClientRect()%3BObject.assign(overlay.style%2C%7Bbackground%3A'rgba(0%2C%20128%2C%20255%2C%200.25)'%2Coutline%3A'1px%20solid%20rgba(0%2C%20128%2C%20255%2C%200.5)'%2Ctop%3A''%2Bposition.top%2B'px'%2Cleft%3A''%2Bposition.left%2B'px'%2Cwidth%3A''%2Bposition.width%2B'px'%2Cheight%3A''%2Bposition.height%2B'px'%7D)%7D)%3Boverlay.addEventListener('click'%2Cfunction(event)%7Bvar%20element%3DgetElement(event)%3Bvar%20text%3Delement.textContent%7C%7Celement.value%3Btext%3Dtext.replace(%2F%5Cn%5B%20%5Cn%5D%2B%5Cn%2Fg%2C%22%5Cn%22).replace(%2F%5Cn%5Cn%2B%2Fg%2C%22%5Cn%5Cn%22).replace(%2F%5E%5Cn%2B%7C%5Cn%2B%24%2Fg%2C'')%3Bif(!text.match(%22%5Cn%22))text%3Dtext.replace(%2F%5E%20%2B%7C%20%2B%24%2F%2C'')%3Bwindow.prompt('Press%20Ctrl%2BC%20to%20copy'%2Ctext)%3Bdocument.body.removeChild(overlay)%7D)%7D)()%7D)()%3B" onclick="copy?.js">copy?.js</a> - Copy what you cant highlight_ctrl+c.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20text%20%3D%20document.body.innerText%20%7C%7C%20document.body.textContent%3B%0A%20%20var%20wordCount%20%3D%20text.split(%2F%5Cs%2B%2F).length%3B%0A%20%20alert(%22Word%20Count%3A%20%22%20%2B%20wordCount)%3B%0A%7D)()%3B%7D)()%3B" onclick="copy?.js">WordCounter.js</a> - Counts how many words there are in a page.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:void((function(d)%7Bvar e=d.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','https://www.typesample.com/assets/typesample.js?r=%27+Math.random()*99999999);d.body.appendChild(e)%7D)(document));" onclick="TypeSample.js">TypeSample.js</a> - hey, whats that font? @JeremiahShoaf
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A (function() %7B%0A    if (window.AG) %7B%0A        window.AG.reset()%3B%0A        delete window.AG%3B%0A    %7D%0A    var AutoGame %3D function() %7B%0A        this.gather_btn %3D %24('%23gatherButton')%3B%0A        this.traps_btn %3D %24('%23trapsButton')%3B%0A        this.buildtrap_btn %3D %24('%23build_trap')%3B%0A        this.buildhut_btn %3D %24('%23build_hut')%3B%0A        this.gather_timeout %3D null%3B%0A        this.build_timeout %3D null%3B%0A    %7D%3B%0A    AutoGame.prototype.start %3D function() %7B%0A        var self %3D this%3B%0A        this.gather_timeout %3D window.setInterval(function() %7B%0A%0A            if (!self.gather_btn.hasClass('disabled')) self.gather_btn.click()%3B %0A            if (!self.traps_btn.hasClass('disabled')) self.traps_btn.click()%3B%0A        %7D%2C 2000)%3B%0A        this.build_timeout %3D window.setInterval(function() %7B%0A%0A            if (!self.buildtrap_btn.hasClass('disabled')) self.buildtrap_btn.click()%3B %0A            if (!self.buildhut_btn.hasClass('disabled')) self.buildhut_btn.click()%3B%0A        %7D%2C 15000)%3B%0A    %7D%3B%0A    AutoGame.prototype.reset %3D function() %7B%0A        if (this.gather_timeout) window.clearInterval(this.gather_timeout)%3B%0A        if (this.build_timeout) window.clearInterval(this.build_timeout)%3B%0A    %7D%3B%0A    window.AG %3D new AutoGame()%3B%0A    AG.start()%0A%7D)()%7D)()%3B" onclick="adr_bot.js">adr_bot.js</a> - A bot for the webgame "A Dark Room". gathers wood, checks trap, builds huts automaticaly.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function%20()%20%7B%0A%20%20window.__glitch_runs%20%3D%20window.__glitch_runs%20%3F%20window.__glitch_runs%20%2B%201%20%3A%201%3B%0A%0A%20%20const%20MODES%20%3D%20%7B%0A%20%20%20%20STANDARD%3A%20'STANDARD'%2C%0A%20%20%20%20TURBO%3A%20'TURBO'%0A%20%20%7D%3B%0A%0A%20%20const%20OPTIONS%20%3D%20Object.assign(%0A%20%20%20%20%7B%20G_T%3A%20false%2C%20G_I%3A%20true%2C%20TURBO%3A%20false%20%7D%2C%0A%20%20%20%20%7B%20G_T%3A%20true%20%7D%20%7C%7C%20%7B%7D%0A%20%20)%3B%0A%0A%20%20const%20GLITCH_TEXT%20%3D%20OPTIONS.G_T%3B%0A%20%20const%20GLITCH_IMAGES%20%3D%20OPTIONS.G_I%3B%0A%20%20const%20MODE%20%3D%20OPTIONS.TURBO%20%3F%20MODES.TURBO%20%3A%20MODES.STANDARD%3B%0A%0A%20%20if%20(MODE%20%3D%3D%3D%20MODES.TURBO)%20%7B%0A%20%20%20%20window.__glitch_runs%20%3D%203%3B%0A%20%20%7D%0A%0A%20%20const%20transformTranspose%20%3D%20(header%2C%20input%2C%20gap%20%3D%201)%20%3D%3E%20%7B%0A%20%20%20%20const%20idx%20%3D%20header%20%2B%20Math.floor(Math.random()%20*%20(input.length%20-%20header%20-%20gap))%3B%0A%20%20%20%20const%20tmp%20%3D%20input%5Bidx%5D%3B%0A%20%20%20%20input%5Bidx%5D%20%3D%20input%5Bidx%20%2B%20gap%5D%3B%0A%20%20%20%20input%5Bidx%20%2B%20gap%5D%20%3D%20tmp%3B%0A%20%20%20%20return%20input%3B%0A%20%20%7D%3B%0A%0A%20%20const%20transformSubstitute%20%3D%20(header%2C%20input)%20%3D%3E%20%7B%0A%20%20%20%20const%20by%20%3D%20Math.floor(Math.random()%20*%20256)%3B%0A%20%20%20%20const%20idx%20%3D%20header%20%2B%20Math.floor(Math.random()%20*%20(input.length%20-%20header))%3B%0A%20%20%20%20input%5Bidx%5D%20%3D%20by%3B%0A%20%20%20%20return%20input%3B%0A%20%20%7D%3B%0A%0A%20%20const%20transformText%20%3D%20str%20%3D%3E%20%7B%0A%20%20%20%20let%20bytes%20%3D%20new%20TextEncoder('utf-8').encode(str)%3B%0A%20%20%20%20const%20errors%20%3D%20Math.random()%20*%20(0.05%20*%20str.length)%3B%0A%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%20errors%3B%20i%20%2B%3D%201)%20%7B%0A%20%20%20%20%20%20bytes%20%3D%20Math.random()%20%3E%200.5%0A%20%20%20%20%20%20%20%20%3F%20transformSubstitute(0%2C%20bytes)%0A%20%20%20%20%20%20%20%20%3A%20transformTranspose(0%2C%20bytes%2C%20Math.floor(Math.random()%20*%20str.length%20-%201)%20%2B%201)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20const%20string%20%3D%20new%20TextDecoder('utf-8').decode(bytes)%3B%0A%20%20%20%20return%20string%3B%0A%20%20%7D%3B%0A%0A%20%20const%20glitchImage%20%3D%20image%20%3D%3E%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20image.onload%20%3D%20()%20%3D%3E%20%7B%7D%3B%0A%20%20%20%20%20%20image.style.backgroundColor%20%3D%20'%23262626'%3B%0A%20%20%20%20%20%20const%20canvas%20%3D%20document.createElement('canvas')%3B%0A%20%20%20%20%20%20const%20context%20%3D%20canvas.getContext('2d')%3B%0A%20%20%20%20%20%20canvas.width%20%3D%20image.naturalWidth%3B%0A%20%20%20%20%20%20canvas.height%20%3D%20image.naturalHeight%3B%0A%20%20%20%20%20%20context.drawImage(image%2C%200%2C%200)%3B%0A%0A%20%20%20%20%20%20const%20data%20%3D%20canvas.toBlob(blob%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20const%20fileReader%20%3D%20new%20FileReader()%3B%0A%20%20%20%20%20%20%20%20fileReader.onload%20%3D%20event%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20data%20%3D%20blob.size%20%3D%3D%3D%20event.target.result.byteLength%0A%20%20%20%20%20%20%20%20%20%20%20%20%3F%20new%20Uint8Array(event.target.result)%0A%20%20%20%20%20%20%20%20%20%20%20%20%3A%20null%3B%0A%0A%20%20%20%20%20%20%20%20%20%20image.onerror%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20image.src%20%3D%20URL.createObjectURL(blob)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchOnce%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20errors%20%3D%20Math.random()%20*%2010%20*%20window.__glitch_runs%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20corrupted%20%3D%20data.slice(0)%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%20errors%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20corrupted%20%3D%20Math.random()%20%3E%200.5%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3F%20transformTranspose(100%2C%20corrupted)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3A%20transformSubstitute(100%2C%20corrupted)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20corruptBlob%20%3D%20new%20Blob(%5Bcorrupted%5D%2C%20%7B%20type%3A%20'image%2Fpng'%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20corruptSrc%20%3D%20URL.createObjectURL(corruptBlob)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20image.src%20%3D%20corruptSrc%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchImageRaf%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchOnce()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20window.requestAnimationFrame(glitchImageRaf)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20const%20glitchImageTimeout%20%3D%20(max%20%3D%20300)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchOnce()%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20window.setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20glitchImageTimeout(max)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%20Math.random()%20*%20max%20%2F%202%20%2B%20Math.random()%20*%20max%20%2F%202)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20%20%20if%20(MODE%20%3D%3D%3D%20MODES.STANDARD)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchImageTimeout()%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%20else%20if%20(MODE%20%3D%3D%3D%20MODES.TURBO)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20glitchImageRaf()%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%3B%0A%0A%20%20%20%20%20%20%20%20fileReader.readAsArrayBuffer(blob)%3B%0A%20%20%20%20%20%20%7D%2C%20'image%2Fjpeg')%3B%0A%20%20%20%20%7D%20catch%20(e)%20%7B%0A%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%7D%0A%20%20%7D%3B%0A%0A%20%20const%20glitchText%20%3D%20n%20%3D%3E%20%7B%0A%20%20%20%20const%20original%20%3D%20n.textContent%3B%0A%0A%20%20%20%20const%20glitchText%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20n.textContent%20%3D%20transformText(original).replace(%2F%EF%BF%BD%2Fg%2C%20'')%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20glitchTextTimeout%20%3D%20(max%20%3D%201000)%20%3D%3E%20%7B%0A%20%20%20%20%20%20glitchText()%3B%0A%20%20%20%20%20%20window.setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20glitchTextTimeout(max)%3B%0A%20%20%20%20%20%20%7D%2C%20Math.random()%20*%20max%20%2F%202%20%2B%20Math.random()%20*%20max%20%2F%202)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20glitchTextRaf%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20glitchText()%3B%0A%20%20%20%20%20%20window.requestAnimationFrame(glitchTextRaf)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20glitchTextTimeout()%3B%0A%20%20%7D%3B%0A%0A%20%20const%20textNodesUnder%20%3D%20el%20%3D%3E%20%7B%0A%20%20%20%20let%20n%3B%0A%20%20%20%20const%20a%20%3D%20%5B%5D%3B%0A%20%20%20%20const%20walk%20%3D%20document.createTreeWalker(%0A%20%20%20%20%20%20el%2C%0A%20%20%20%20%20%20NodeFilter.SHOW_TEXT%2C%0A%20%20%20%20%20%20null%2C%0A%20%20%20%20%20%20false%0A%20%20%20%20)%3B%0A%0A%20%20%20%20while%20((n%20%3D%20walk.nextNode()))%20%7B%0A%20%20%20%20%20%20a.push(n)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20a%3B%0A%20%20%7D%3B%0A%0A%20%20const%20setupGlitch%20%3D%20()%20%3D%3E%20%7B%0A%20%20%20%20if%20(GLITCH_IMAGES)%20%7B%0A%20%20%20%20%20%20const%20images%20%3D%20document.querySelectorAll('img')%3B%0A%20%20%20%20%20%20images.forEach(i%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20i.complete%0A%20%20%20%20%20%20%20%20%20%20%3F%20glitchImage(i)%0A%20%20%20%20%20%20%20%20%20%20%3A%20(i.onload%20%3D%20event%20%3D%3E%20glitchImage(event.target))%3B%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20if%20(GLITCH_TEXT)%20%7B%0A%20%20%20%20%20%20const%20textNodes%20%3D%20textNodesUnder(document.body).filter(%0A%20%20%20%20%20%20%20%20n%20%3D%3E%20n.textContent%20%26%26%20n.textContent.length%20%3E%200%20%26%26%20n.textContent.trim()%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20textNodes.forEach(glitchText)%3B%0A%20%20%20%20%7D%0A%20%20%7D%3B%0A%0A%20%20if%20(document.readyState%20%3D%3D%3D%20'complete')%20%7B%0A%20%20%20%20setupGlitch()%3B%0A%20%20%7D%20else%20%7B%0A%20%20%20%20document.body.addEventListener('load'%2C%20setupGlitch)%3B%0A%20%20%7D%0A%7D)()%3B%7D)()%3B" onclick="glitch.js">glitch.js</a> - Oh lord! Ive been hacked!
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20var%20canvas%20%3D%20document.createElement('canvas')%3B%0A%20%20canvas.width%20%3D%20window.innerWidth%3B%0A%20%20canvas.height%20%3D%20window.innerHeight%3B%0A%20%20canvas.style.position%20%3D%20'fixed'%3B%0A%20%20canvas.style.top%20%3D%20'0'%3B%0A%20%20canvas.style.left%20%3D%20'0'%3B%0A%20%20canvas.style.pointerEvents%20%3D%20'none'%3B%0A%20%20document.body.appendChild(canvas)%3B%0A%20%20var%20ctx%20%3D%20canvas.getContext('2d')%3B%0A%20%20var%20centerX%20%3D%20canvas.width%20%2F%202%3B%0A%20%20var%20centerY%20%3D%20canvas.height%20%2F%202%3B%0A%20%20var%20angle%20%3D%200%3B%0A%20%20var%20radius%20%3D%2010%3B%0A%20%20var%20lineWidth%20%3D%202%3B%0A%20%20var%20colors%20%3D%20%5B'%23FF5733'%2C%20'%2333FF57'%2C%20'%235733FF'%2C%20'%23FFFF33'%2C%20'%2333FFFF'%5D%3B%0A%20%20var%20colorIndex%20%3D%200%3B%0A%0A%20%20function%20drawSpiral()%20%7B%0A%20%20%20%20ctx.strokeStyle%20%3D%20colors%5BcolorIndex%5D%3B%0A%20%20%20%20ctx.lineWidth%20%3D%20lineWidth%3B%0A%20%20%20%20ctx.beginPath()%3B%0A%20%20%20%20ctx.arc(centerX%2C%20centerY%2C%20radius%2C%200%2C%202%20*%20Math.PI)%3B%0A%20%20%20%20ctx.stroke()%3B%0A%20%20%20%20angle%20%2B%3D%200.1%3B%0A%20%20%20%20radius%20%2B%3D%200.1%3B%0A%20%20%20%20lineWidth%20%2B%3D%200.02%3B%0A%20%20%20%20colorIndex%20%3D%20(colorIndex%20%2B%201)%20%25%20colors.length%3B%0A%20%20%20%20requestAnimationFrame(drawSpiral)%3B%0A%20%20%7D%0A%0A%20%20drawSpiral()%3B%0A%7D)()%3B%7D)()%3B" onclick="roundPTSDthing.js">roundPTSDthing.js</a> - i dont even know.
+				</p>
+				<p>
+					<a class="link-effect bookmarklet" href="javascript:(function()%7Bjavascript%3A(function()%20%7B%0A%20%20%2F%2F%20Select%20all%20visible%20elements%20on%20the%20page%0A%20%20const%20elements%20%3D%20document.querySelectorAll('*%3Anot(script)%3Anot(style)%3Anot(link)')%3B%0A%0A%20%20%2F%2F%20Set%20the%20rotation%20angle%20for%20each%20element%20in%20the%20spiral%0A%20%20const%20rotationAngle%20%3D%2010%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%0A%20%20let%20currentAngle%20%3D%200%3B%0A%20%20let%20radius%20%3D%2010%3B%0A%0A%20%20%2F%2F%20Apply%20the%20spiral%20layout%20to%20each%20element%0A%20%20elements.forEach((element)%20%3D%3E%20%7B%0A%20%20%20%20const%20x%20%3D%20radius%20*%20Math.cos(currentAngle)%3B%0A%20%20%20%20const%20y%20%3D%20radius%20*%20Math.sin(currentAngle)%3B%0A%0A%20%20%20%20%2F%2F%20Apply%20CSS%20to%20position%20elements%0A%20%20%20%20element.style.transform%20%3D%20%60translate(%24%7Bx%7Dpx%2C%20%24%7By%7Dpx)%20rotate(%24%7BcurrentAngle%7Ddeg)%60%3B%0A%0A%20%20%20%20%2F%2F%20Increment%20the%20angle%20and%20radius%20for%20the%20next%20element%0A%20%20%20%20currentAngle%20%2B%3D%20rotationAngle%3B%0A%20%20%20%20radius%20%2B%3D%205%3B%20%2F%2F%20You%20can%20adjust%20this%20value%0A%20%20%7D)%3B%0A%7D)()%3B%7D)()%3B" onclick="messmakeer.js">messmaker.js</a> - rotates elements to create a visually appealing spiral effect.
+				</p>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+				$('#toggle').on('change', function() {
+					$('body').toggleClass('dark-mode');
+					var isDarkMode = $('body').hasClass('dark-mode');
+					localStorage.setItem('darkMode', isDarkMode);
+					// Update clock color based on dark mode
+					$('.clock').toggleClass('dark-mode', isDarkMode);
+				});
+			});
+			$(document).ready(function() {
+				// Check if dark mode preference is stored
+				var isDarkMode = localStorage.getItem('darkMode');
+				if (isDarkMode === 'true') {
+					$('body').addClass('dark-mode');
+				}
+				$('#toggle').on('change', function() {
+					$('body').toggleClass('dark-mode');
+					isDarkMode = $('body').hasClass('dark-mode');
+					localStorage.setItem('darkMode', isDarkMode);
+					// Update clock color based on dark mode
+					$('.clock').toggleClass('dark-mode', isDarkMode);
+				});
+			});
+		</script>
+		<script>
+			$(document).ready(function() {
+				$('#toggle').on('change', function() {
+					$('body').toggleClass('dark-mode');
+					var isDarkMode = $('body').hasClass('dark-mode');
+					localStorage.setItem('darkMode', isDarkMode);
+					// Update clock color based on dark mode
+					$('.clock').toggleClass('dark-mode', isDarkMode);
+				});
+				// Restore dark mode preference on page load
+				var isDarkModeStored = localStorage.getItem('darkMode') === 'true';
+				$('body').toggleClass('dark-mode', isDarkModeStored);
+				$('.clock').toggleClass('dark-mode', isDarkModeStored);
+				$('#toggle').prop('checked', isDarkModeStored);
+			});
+		</script>
+		<script>
+			const buttons = document.querySelectorAll('.content button');
+			buttons.forEach(button => {
+				button.addEventListener('mouseover', () => {
+					const buttonWidth = button.offsetWidth;
+					const buttonHeight = button.offsetHeight;
+					const x = Math.random() * (buttonWidth - 20) + 10;
+					const y = Math.random() * (buttonHeight - 20) + 10;
+					const span = document.createElement('span');
+					span.classList.add('effect');
+					span.style.left = `${x}px`;
+					span.style.top = `${y}px`;
+					button.appendChild(span);
+				});
+				button.addEventListener('mouseout', () => {
+					const spans = button.querySelectorAll('.effect');
+					spans.forEach(span => {
+						button.removeChild(span);
+					});
+				});
+			});
+		</script>
+		<script>
+			particlesJS("particles-js", {
+				particles: {
+					number: {
+						value: 100,
+						density: {
+							enable: true,
+							value_area: 800
+						}
+					},
+					color: {
+						value: "#ffffff"
+					},
+					shape: {
+						type: "circle",
+						stroke: {
+							width: 0,
+							color: "#000000"
+						},
+						polygon: {
+							nb_sides: 5
+						}
+					},
+					opacity: {
+						value: 0.7,
+						random: true,
+						anim: {
+							enable: true,
+							speed: 1,
+							opacity_min: 0.1,
+							sync: false
+						}
+					},
+					size: {
+						value: 2,
+						random: true,
+						anim: {
+							enable: false,
+							speed: 40,
+							size_min: 0.1,
+							sync: false
+						}
+					},
+					line_linked: {
+						enable: false,
+					},
+					move: {
+						enable: true,
+						speed: 0.5,
+						direction: "top",
+						random: true,
+						straight: false,
+						out_mode: "out",
+						bounce: false,
+						attract: {
+							enable: false,
+							rotateX: 600,
+							rotateY: 1200
+						}
+					}
+				},
+				interactivity: {
+					detect_on: "canvas",
+					events: {
+						onhover: {
+							enable: false,
+						},
+						onclick: {
+							enable: false,
+						},
+						resize: true
+					}
+				},
+				retina_detect: true
+			});
+		</script>
+		<script>
+			function updateClock() {
+				const now = new Date();
+				const hours = String(now.getHours()).padStart(2, '0');
+				const minutes = String(now.getMinutes()).padStart(2, '0');
+				const seconds = String(now.getSeconds()).padStart(2, '0');
+				const timeString = `${hours}:${minutes}:${seconds}`;
+				$('#clock-text').text(timeString);
+			}
+			// Initial call to update clock
+			updateClock();
+			// Update clock every second
+			setInterval(updateClock, 1000);
+		</script>
+		<script>
+			function toggleSection() {
+				const hiddenSection = document.getElementById('things');
+				hiddenSection.classList.toggle('hidden'); // Toggle the "hidden" class
+			}
+		</script>
+		</div>
+	</body>
 </html>
